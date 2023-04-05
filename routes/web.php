@@ -47,6 +47,9 @@ Route::controller(RoleController::class)->group(function(){
     Route::get('create-role','showCreateRoleForm')->name('CreateRoleForm');
     Route::post('roles','createRole')->name('create.role');
     Route::delete('roles/{id}','deleteRole')->name('role.delete');
+    Route::get('update-role/{id}','showRole')->name('update.role');
+    Route::put('/update-role/{id}','updateRole')->name('role.update');
+
 });
 Route::get('permissions',function(){
     return view('pages.permissions');

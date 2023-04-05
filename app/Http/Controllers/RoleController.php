@@ -43,4 +43,25 @@ class RoleController extends Controller
         $role->delete();
         return redirect()->route('roles')->with('success','role has been deleted succesfuly');
     }
+    public function showRole($id)
+    {
+        $role = Role::find($id);
+        $permissions = Permission::all();
+        $rolePermissions = $role->permissions()->pluck('name')->toArray();
+        return view('pages.update-role',compact('role','permissions','rolePermissions'));
+    }
+    public function updateRole(Request $request)
+    {
+        
+        $request->validate( [
+            'name' => 'required|min:3',
+        ]);
+
+        $role = Role::find($request->id);
+        $role->name = $request->name;
+        $role->syncPermissions($request->permission);
+        $role->save();
+
+        return redirect()->route('roles')->with('success','roles has been updated successfuly');
+    }
 }

@@ -219,3 +219,15 @@ if(form){
         }
     });
 }
+let formUpdate = document.getElementById('role-formupdate');
+if(formUpdate){
+    formUpdate.addEventListener('submit', function(e) {
+        let checkboxes = document.querySelectorAll('#permissions input[type="checkbox"]');
+        let checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+        if (checkedCheckboxes.length === 0) {
+            e.preventDefault();
+            document.getElementById('error-msgu').classList.add('block');
+            document.getElementById('error-msgu').classList.remove('hidden');
+        }
+    });
+}
