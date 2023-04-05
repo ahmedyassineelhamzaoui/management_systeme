@@ -27,12 +27,20 @@ class RoleController extends Controller
     }
     public function createRole(Request $request)
     {
-        
         $request->validate([
             'name' => 'required|unique:roles,name',
         ]);
         $role = Role::create(['name' => $request->name]);
         $role->syncPermissions($request->permission);
         return redirect()->route('roles')->with('success','role has been created successfuly');
+    }
+    public function deleteRole($id)
+    {
+        $role = Role::find($id);
+        if(!$role){
+            return redirect()->route('roles')->with('error','something wrong');
+        }
+        $role->delete();
+        return redirect()->route('roles')->with('success','role has been deleted succesfuly');
     }
 }
