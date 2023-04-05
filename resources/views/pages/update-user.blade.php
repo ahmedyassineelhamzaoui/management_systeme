@@ -51,7 +51,7 @@
                                     <label for="role" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">User Role</label>
                                     <select name="role_name" id="role" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
                                         @foreach ($roles as $role)
-                                        <option value="{{$role->name}}" {{$user->roles[0]->id == $role->id ? 'selected' : ''}}>{{$role->name}}</option>
+                                            <option value="{{$role->name}}" {{ (count($user->roles) > 0 && $user->roles[0]->id == $role->id) ? 'selected' : ''}}>{{$role->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>                         

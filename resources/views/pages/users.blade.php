@@ -82,7 +82,11 @@
                                         {{$user->name}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$user->roles[0]->name}}
+                                        @if ($user->roles->isNotEmpty())
+                                            {{$user->roles[0]->name}}
+                                        @else
+                                            No role assigned
+                                        @endif  
                                     </td>
                                     <td class="px-6 py-4">
                                         {{$user->email}}
