@@ -33,6 +33,10 @@
     --text-gray-color:rgb(51, 67, 78);
     --add-button-color:#677483;
     --add-button-background:rgb(34, 30, 30);
+    --modal-background:white;
+    --label-text-modal-color: rgb(11, 11, 52);
+    --color-bg-inputs:rgb(254, 251, 251);
+    --color-submit-button:black;
 }
 .dark-theme-variables {
     --color-background:#0f172a ;
@@ -53,6 +57,10 @@
     --text-green-200:rgb(187 247 208 / var(--tw-text-opacity));
     --add-button-color:#2a02cbde;
     --add-button-background:rgb(234, 234, 234);
+    --modal-background:#212732;
+    --label-text-modal-color: rgb(171, 171, 171);
+    --color-bg-inputs:#afb2b6;
+    --color-submit-button:white;
 }
 *{
     margin:0;
@@ -154,6 +162,18 @@ b{
 .add-button{
    color:var(--add-button-color);
    background:var(--add-button-background);
+}
+.modal-background{
+    background: var(--modal-background);
+}
+.label-text-modal{
+    color:var(--label-text-modal-color)
+}
+.inputs-bg{
+    background: var(--color-bg-inputs);
+}
+.submit-button{
+    color:var(--color-submit-button);
 }
 /* =============================================== asidebar ================================================ */
 aside{
@@ -308,7 +328,7 @@ aside .sidebar .message-count{
     -o-border-radius: var(--border-radius-1);
 }
 /*===================================== main ======================================*/
-.page-content nav{
+.page-content .nav{
     display: flex;
     justify-content: space-between;
     background: var(--color-white);
@@ -319,36 +339,36 @@ aside .sidebar .message-count{
     align-items: center;
     box-shadow: var(--boxshadow-2);
 }
-.page-content nav .dashboard-name{
+.page-content .nav .dashboard-name{
    display:flex;
    justify-content: center;
    align-items: center;
    padding-left: 16rem;
    color:var(--dashboard-nameColor)
 }
-.page-content nav .dashboard-name .menu{
+.page-content .nav .dashboard-name .menu{
    display: none;
 }
-.page-content nav .dashboard-name .return{
+.page-content .nav .dashboard-name .return{
     display:none;
 }
-.page-content nav .right-nav{
+.page-content .nav .right-nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width:15rem;
 }
-.page-content nav .right-nav .conected{
+.page-content .nav .right-nav .conected{
     display:flex;
     align-items:center;
     justify-content:space-around;
     width:8rem;
 }
-.page-content nav .right-nav .conected .user-profile{
+.page-content .nav .right-nav .conected .user-profile{
     width: 3rem;
     height: 3rem;
 }
- .page-content nav .right-nav .theme-mode{
+ .page-content .nav .right-nav .theme-mode{
     background: var(--color-light);
     display: flex;
     height: 1.6rem;
@@ -367,7 +387,7 @@ aside .sidebar .message-count{
     -ms-transition: 1s all;
     -o-transition: 1s all;
 }
-.page-content nav .right-nav .theme-mode span{
+.page-content .nav .right-nav .theme-mode span{
     font-size:1.2rem ;
     width:50%;
     height: 100%;
@@ -382,7 +402,7 @@ aside .sidebar .message-count{
     -o-transition: .3s;
 }
 
-.page-content nav .right-nav .theme-mode span.activeTo{
+.page-content .nav .right-nav .theme-mode span.activeTo{
     background: var(--color-primary);
     color: var(--color--white);
     border-radius: var(--border-radius-1);
@@ -553,7 +573,7 @@ main section .insights .progress .number{
     .page-content main{
         margin-left: 5rem ;
     }
-    .page-content nav .dashboard-name{
+    .page-content .nav .dashboard-name{
         padding-left: 5rem ;
     }
     aside .logo h2{
@@ -603,11 +623,11 @@ main section .insights .progress .number{
     main section .insights{
         grid-template-columns:1fr ;
     }
-    .page-content nav .dashboard-name h1{
+    .page-content .nav .dashboard-name h1{
         display: none ;
         padding-left: 5rem;
     }
-    .page-content nav .dashboard-name{
+    .page-content .nav .dashboard-name{
         padding-left: 5rem;
     }
     aside .sidebar a{
@@ -630,10 +650,10 @@ main section .insights .progress .number{
         width:"100vw";
         margin-left: 0 ;
     }
-    .page-content nav .dashboard-name{
+    .page-content .nav .dashboard-name{
         padding-left: 1rem ;
     }
-    .page-content nav .dashboard-name .menu{
+    .page-content .nav .dashboard-name .menu{
         display: block ;
     }
     .add-bottons{

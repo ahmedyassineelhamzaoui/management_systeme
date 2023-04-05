@@ -49,7 +49,7 @@
             <span class="material-icons-sharp">admin_panel_settings</span>
             <h3 class="hedding-h3">Roles</h3>
         </a>
-        <a href="#" class="my-pagesSidebar">
+        <a href="{{route('logout')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">logout</span>
             <h3 class="hedding-h3">logout</h3>
         </a>

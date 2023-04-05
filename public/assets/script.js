@@ -146,20 +146,17 @@ if (getTheme === 'darkMode') {
   });
 
 
-
-
-
-
-
 // delete modal
-let deleteButton=document.querySelector("#deleteButton")
+let deleteButton=document.querySelectorAll(".deleteButton")
 let deleteModal=document.querySelector("#delet-modal")
 let closeModal=document.querySelectorAll(".close-modal")
 if(deleteButton){
-    deleteButton.onclick=()=>{
-        deleteModal.classList.add('flex')
-        deleteModal.classList.remove('hidden')
-    }
+    deleteButton.forEach(element =>{
+        element.onclick=()=>{
+            deleteModal.classList.add('flex')
+            deleteModal.classList.remove('hidden')
+        }
+    })
 }
 if(closeModal){
     closeModal.forEach(element =>{
@@ -187,5 +184,25 @@ if(addUserButton){
     declineUser.onclick=()=>{
         addUser.classList.add('hidden')
         addUser.classList.remove('remove')
+    }
+}
+
+// add product
+addProduct=document.querySelector("#add-product")
+addProductForm=document.querySelector("#add-ProductForm");
+closeAddProduct=document.querySelector("#closeAdd-product");
+declineProduct=document.querySelector("#decline-product");
+if(addProduct){
+    addProduct.onclick=()=>{
+        addProductForm.classList.add('flex')
+        addProductForm.classList.remove('hidden')
+    }
+    closeAddProduct.onclick=()=>{
+        addProductForm.classList.add('hidden')
+        addProductForm.classList.remove('remove')
+    }
+    declineProduct.onclick=()=>{
+        addProductForm.classList.add('hidden')
+        addProductForm.classList.remove('remove')
     }
 }

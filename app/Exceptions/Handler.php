@@ -53,8 +53,6 @@ class Handler extends ExceptionHandler
         return response()->view('errors.404', [], 404);
     } elseif ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {
         return response()->view('errors.403', [], 403);
-    } elseif ($exception instanceof \Illuminate\Validation\ValidationException) {
-        return response()->view('errors.422', ['errors' => $exception->errors()], 422);
     } elseif ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
         return response()->view('errors.404', [], 404);
     } elseif ($exception instanceof \Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException) {

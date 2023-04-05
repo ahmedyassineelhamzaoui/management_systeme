@@ -1,4 +1,4 @@
-<nav>
+<nav class="nav">
     <div class="dashboard-name">
         <h1>Dashboard</h1>
         <span id="show-menu" class="material-icons-sharp menu">

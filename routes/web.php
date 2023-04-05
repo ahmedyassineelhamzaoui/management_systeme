@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductAjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,25 +15,32 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('forgotPassword',function(){
-    return view('auth.forgetPassword');
-})->name('forgot-password');
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login-page');
-Route::get('/index',function (){
- return view('pages.index');  
-});
-Route::get('change-password',function(){
-    return view('auth.changePassword');
-})->name('change-password');
+
 Route::get('500',function(){
     return view('errors.500');
 });
-Route::get('users',function(){
-    return view('pages.users');
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/','index');
+    Route::get('/login','index');
+    Route::post('/login','login')->name('login');
+    Route::get('/index','showDashboard')->name('dashboard')->middleware('auth');
+    Route::get('/logout','logout')->name('logout');
+    Route::get('/forgot-password','forgotPassword');
+    Route::post('/forgot-password','sendEmail')->name('reset');
+    Route::get('/change-password/{token}','showChangePassword')->name('view-changePassword');
+    Route::post('/change-password/{token}','changePassword')->name('change-password');
 });
+Route::controller(UserController::class)->group(function(){
+    Route::get('users','index')->name('users');
+    Route::post('create-user','createUser')->name('users.create');
+    Route::get('create-user','create');
+    Route::delete('users/{id}','deleteUser')->name('user.delete');
+    Route::put('users','updateUser')->name('users.update');
+    Route::get('update-user/{id}','showUser')->name('update.user');
+    Route::put('/update-user/{id}','updateUser')->name('user.update');
+});
+
 Route::get('permissions',function(){
     return view('pages.permissions');
 });

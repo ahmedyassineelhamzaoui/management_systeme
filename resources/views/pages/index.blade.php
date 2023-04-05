@@ -9,6 +9,10 @@
         
         <main id="main-page"> 
             <section id="my-section ">
+                
+                @if(session('name'))
+                    <h1 class="mt-2 ml-2">Welcome <span class="text-blue-800 "> {{session('name')}} </span> in your space </h1>
+                @endif
                 <div class="date">
                     <input type="date" >
                 </div>
