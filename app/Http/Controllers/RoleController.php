@@ -12,6 +12,13 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function showCreateRoleForm()
     {
         $permissions=Permission::all();
