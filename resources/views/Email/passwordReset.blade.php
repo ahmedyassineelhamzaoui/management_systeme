@@ -80,7 +80,7 @@
     <div>
       <form>
         <div>
-          <a href="{{'http://localhost:8000/change-password/'.$token}}">Update Password </a>
+          <a href="{{ route('view-changePassword', $token) }}" >Update Password </a>
         </div>
       </form>
       <div class="message-container">

@@ -12,7 +12,7 @@
         <meta name="format-detection" content="telephone=no">
         <title>Dashboard</title>
         @vite('resources/css/app.css')
-        <link rel="icon" href="images/logo.png">
-        <link href="css/style.css" rel="stylesheet">
+        <link rel="icon" href="../images/logo.png">
+        <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>

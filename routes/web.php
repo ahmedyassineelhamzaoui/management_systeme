@@ -22,14 +22,14 @@ Route::get('500',function(){
 });
 Route::controller(AuthController::class)->group(function(){
     Route::get('/','index');
-    Route::get('/login','index');
+    Route::get('/login','index')->name('login.page');
     Route::post('/login','login')->name('login');
     Route::get('/index','showDashboard')->name('dashboard')->middleware('auth');
     Route::get('/logout','logout')->name('logout');
     Route::get('/forgot-password','forgotPassword');
     Route::post('/forgot-password','sendEmail')->name('reset');
     Route::get('/change-password/{token}','showChangePassword')->name('view-changePassword');
-    Route::post('/change-password/{token}','changePassword')->name('change-password');
+    Route::post('/change-password','changePassword')->name('change-password');
 });
 Route::controller(UserController::class)->group(function(){
     Route::get('users','index')->name('users');

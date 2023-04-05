@@ -65,11 +65,21 @@ class AuthController extends Controller
     }
     public function showChangePassword($token)
     {
-        $user=User::where('remember_token',$token)->first();
-        if (!$user) {
-            return redirect()->route('view-changePassword')->with('error', 'Invalid token');
-        }
-        return view('auth.changePassword', compact('user'));
+        return view('auth.changePassword',  ['token' => $token]);
     }
-
+    public function changePassword(Request $request)
+    {
+    
+        $request->validate([
+            'password' => 'required|string|min:8',
+            'confirm_password' => 'required|string|min:8|same:password'
+        ]);
+        $updatePassword=User::where('remembre_token',$request->token)->first();
+        if(!$updatePassword){
+            return back()->with('error', 'Invalid opperation !');
+        }
+        $updatePassword->update(['password' => Hash::make($request->password)]);
+        
+        return redirect()->route('login.page')->with('success','your password has been changed succesfuly');
+    }
 }
