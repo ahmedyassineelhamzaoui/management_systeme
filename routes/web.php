@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoleController;
+
 use App\Http\Controllers\ProductAjaxController;
 
 /*
@@ -40,7 +42,9 @@ Route::controller(UserController::class)->group(function(){
     Route::get('update-user/{id}','showUser')->name('update.user');
     Route::put('/update-user/{id}','updateUser')->name('user.update');
 });
-
+Route::controller(RoleController::class)->group(function(){
+    Route::get('roles','getRoles')->name('roles');
+});
 Route::get('permissions',function(){
     return view('pages.permissions');
 });
@@ -49,7 +53,4 @@ Route::get('products',function(){
 });
 Route::get('categories',function(){
     return view('pages.categories');
-});
-Route::get('roles',function(){
-    return view('pages.roles');
 });
