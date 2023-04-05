@@ -206,3 +206,16 @@ if(addProduct){
         addProductForm.classList.remove('remove')
     }
 }
+
+let form = document.getElementById('role-form');
+if(form){
+    form.addEventListener('submit', function(e) {
+        let checkboxes = document.querySelectorAll('#permissions input[type="checkbox"]');
+        let checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+        if (checkedCheckboxes.length === 0) {
+            e.preventDefault();
+            document.getElementById('error-msg').classList.add('block');
+            document.getElementById('error-msg').classList.remove('hidden');
+        }
+    });
+}

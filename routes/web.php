@@ -44,6 +44,9 @@ Route::controller(UserController::class)->group(function(){
 });
 Route::controller(RoleController::class)->group(function(){
     Route::get('roles','getRoles')->name('roles');
+    Route::get('create-role','showCreateRoleForm')->name('CreateRoleForm');
+    Route::post('roles','createRole')->name('create.role');
+
 });
 Route::get('permissions',function(){
     return view('pages.permissions');
