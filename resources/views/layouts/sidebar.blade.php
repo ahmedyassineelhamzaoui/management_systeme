@@ -41,12 +41,12 @@
             <span class="material-icons-sharp">list_alt</span>
             <h3 class="hedding-h3">orders</h3>
         </a>
-        {{-- @can('role-list') --}}
+        @can('role-list')
         <a href="{{url('roles')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">admin_panel_settings</span>
             <h3 class="hedding-h3">Roles</h3>
         </a>
-        {{-- @endcan --}}
+        @endcan
         <a href="{{route('logout')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">logout</span>
             <h3 class="hedding-h3">logout</h3>

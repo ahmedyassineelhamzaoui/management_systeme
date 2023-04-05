@@ -72,10 +72,10 @@ class UserController extends Controller
             'confirm_password' => 'required|string|min:8|same:password'
         ]);
         $user=User::find($request->id);
-        if($request->has('name')){
-            $user->name=$request->name;
+        $user->name = $request->name;
+        if (!empty($request->password)) {
+            $user->password = Hash::make($request->password);
         }
-
         if($request->has('email')){
             $useremail=User::where('email',$request->email);
             if($useremail){
@@ -87,12 +87,10 @@ class UserController extends Controller
             }
             $user->email=$request->email;
         }
-        if($request->has('password')){
-            $user->password=Hash::make($request->password);
-        }
-        $user->role_id=$request->input('role_id');
-
-        $user->update();
+        $user->save();
+        if (!empty($request->role_name)) {
+            $user->syncRoles([$request->input('role_name')]);
+        }    
         return redirect()->route('users')->with('success','user updated succesfuly');
     }
 
