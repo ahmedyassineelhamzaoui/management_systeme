@@ -21,10 +21,12 @@
             <span class="material-icons-sharp">dashboard</span>
             <h3 class="hedding-h3">dashbord</h3>
         </a>
+        @can('user-list')
         <a href="{{url('users')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">group</span>
             <h3 class="hedding-h3">Users</h3>
         </a>
+        @endcan
         <a href="{{url('products')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">inventory</span>
             <h3 class="hedding-h3">Products</h3>

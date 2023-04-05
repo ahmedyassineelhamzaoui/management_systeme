@@ -9,6 +9,7 @@ use App\Models\Role_has_permissions;
 use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
@@ -83,7 +84,11 @@ class RoleController extends Controller
         $user=auth()->user();
         if($user->hasPermissionTo('role-edit')){
             $request->validate( [
-                'name' => 'required|min:3',
+                'name' => [
+                    'required',
+                    'min:3',
+                     Rule::unique('roles')->ignore($request->id),
+                ],
             ]);
     
             $role = Role::find($request->id);

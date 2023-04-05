@@ -19,6 +19,10 @@ class UserController extends Controller
     }
     public function index()
     {
+        $user=auth()->user();
+        if(!$user->hasPermissionTo('user-list')){
+            return view('errors.403');
+        }
         $roles = Role::all();
         $users=User::paginate(5);
         return view('pages.users',[
@@ -29,11 +33,19 @@ class UserController extends Controller
     }
     public function create()
     {
+        $user=auth()->user();
+        if(!$user->hasPermissionTo('user-create')){
+            return view('errors.403');
+        }
         $roles = Role::all();   
         return view('pages.create-user',compact('roles'));
     }
     public function createUser(Request $request)
     {
+        $user=auth()->user();
+        if(!$user->hasPermissionTo('user-create')){
+            return view('errors.403');
+        }
         $request->validate([
             'name' => 'required|string|max:255|min:3',
             'email' => 'required|string|email|max:255|unique:users',
@@ -50,6 +62,10 @@ class UserController extends Controller
     }
     public function deleteUser($id)
     {   
+        $user=auth()->user();
+        if(!$user->hasPermissionTo('user-delete')){
+            return view('errors.403');
+        }
         $user = User::find($id);
         if ($user) {
             $user->delete();
@@ -59,12 +75,20 @@ class UserController extends Controller
     }
     public function showUser($id)
     {
+        $user=auth()->user();
+        if(!$user->hasPermissionTo('user-edit')){
+            return view('errors.403');
+        }
         $user=User::where('id',$id)->first();
         $roles = Role::all();
         return view('pages.update-user',compact('user','roles'));
     }
     public function updateUser(Request $request)
     {
+        $user=auth()->user();
+        if(!$user->hasPermissionTo('user-edit')){
+            return view('errors.403');
+        }
         $request->validate([
             'name' => 'required|string|max:255|min:3',
             'email' => 'required|string|email|max:255',
