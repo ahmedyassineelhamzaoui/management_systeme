@@ -21,19 +21,38 @@ class RoleController extends Controller
 
     public function showCreateRoleForm()
     {
+        $user=auth()->user();
+        // if(!$user->hasPermissionTo('role-create')){
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'You dont have permission to show roles'
+        //     ], 200);
+        // }
         $permissions=Permission::all();
         return view('pages.create-role',compact('permissions'));
     }
 
     public function getRoles()
     {
-        $Permissions=Permission::all();
-        $rolesPermissions=Role_has_permissions::all();
-        $roles=Role::paginate(5);
-        return view('pages.roles',compact('roles','rolesPermissions','Permissions'));
+        $user=auth()->user();
+        
+        if($user->hasPermissionTo('role-list')){
+            $Permissions=Permission::all();
+            $rolesPermissions=Role_has_permissions::all();
+            $roles=Role::paginate(5);
+            return view('pages.roles',compact('roles','rolesPermissions','Permissions'));
+        }
+        
     }
     public function createRole(Request $request)
     {
+        $user=auth()->user();
+        // if(!$user->hasPermissionTo('role-create')){
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'You dont have permission to show roles'
+        //     ], 200);
+        // }
         $request->validate([
             'name' => 'required|unique:roles,name',
         ]);
@@ -43,6 +62,13 @@ class RoleController extends Controller
     }
     public function deleteRole($id)
     {
+        $user=auth()->user();
+        // if(!$user->hasPermissionTo('role-delete')){
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'You dont have permission to show roles'
+        //     ], 200);
+        // }
         $role = Role::find($id);
         if(!$role){
             return redirect()->route('roles')->with('error','something wrong');
@@ -52,6 +78,13 @@ class RoleController extends Controller
     }
     public function showRole($id)
     {
+        $user=auth()->user();
+        // if(!$user->hasPermissionTo('role-list')){
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'You dont have permission to show roles'
+        //     ], 200);
+        // }
         $role = Role::find($id);
         $permissions = Permission::all();
         $rolePermissions = $role->permissions()->pluck('name')->toArray();
@@ -59,16 +92,19 @@ class RoleController extends Controller
     }
     public function updateRole(Request $request)
     {
+        $user=auth()->user();
+        // if($user->hasPermissionTo('role-edit')){
+            $request->validate( [
+                'name' => 'required|min:3',
+            ]);
+    
+            $role = Role::find($request->id);
+            $role->name = $request->name;
+            $role->syncPermissions($request->permission);
+            $role->save();
+    
+            return redirect()->route('roles')->with('success','roles has been updated successfuly');
+        // }
         
-        $request->validate( [
-            'name' => 'required|min:3',
-        ]);
-
-        $role = Role::find($request->id);
-        $role->name = $request->name;
-        $role->syncPermissions($request->permission);
-        $role->save();
-
-        return redirect()->route('roles')->with('success','roles has been updated successfuly');
     }
 }

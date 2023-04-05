@@ -82,7 +82,7 @@
                                         {{$user->name}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$user->role_id}}
+                                        {{$user->roles[0]->name}}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{$user->email}}

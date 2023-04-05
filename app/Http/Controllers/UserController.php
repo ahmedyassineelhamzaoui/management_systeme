@@ -19,15 +19,18 @@ class UserController extends Controller
     }
     public function index()
     {
+        $roles = Role::all();
         $users=User::paginate(5);
         return view('pages.users',[
+            'roles' => $roles,
             'users' => $users,
             'links' => $users->links()
         ]);
     }
     public function create()
     {
-        return view('pages.create-user');
+        $roles = Role::all();   
+        return view('pages.create-user',compact('roles'));
     }
     public function createUser(Request $request)
     {
@@ -37,12 +40,12 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
             'confirm_password' => 'required|string|min:8|same:password'
         ]);
-        User::create([
+        $user=User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'role_id' => $request->input('role_id'),
             'password' => Hash::make($request->password),
         ]);
+        $user->assignRole($request->input('role_name'));
         return redirect()->route('users')->with('success','user created succesfuly');
     }
     public function deleteUser($id)
