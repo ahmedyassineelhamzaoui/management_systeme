@@ -32,7 +32,11 @@ class CreatePermissionSeeder extends Seeder
             'categorie-list',
             'categorie-create',
             'categorie-edit',
-            'categorie-delete',            
+            'categorie-delete',
+            'marque-list',
+            'marque-create',
+            'marque-edit',
+            'marque-delete',       
         ];
        
         foreach ($permissions as $permission) {

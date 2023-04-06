@@ -68,4 +68,5 @@ Route::controller(CategorieController::class)->group(function(){
 });
 Route::controller(MarqueController::class)->group(function(){
    Route::get('brand','index')->name('brand');
+   Route::post('brand','ajouterMarque')->name('create.marque');
 });

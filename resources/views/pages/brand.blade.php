@@ -109,7 +109,7 @@
                                         Ajouter une Marque
                                     </h3>
                                 </div>
-                                <form   method="post" >
+                                <form action="{{route('create.marque')}}"  method="post" >
                                     @csrf
                                     <div class="mx-4 mt-6 ">
                                         <div class="w-100">
