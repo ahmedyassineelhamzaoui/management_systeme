@@ -73,12 +73,8 @@
                                         {{$role->name}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        @foreach ($rolesPermissions as $rolesPermission)
-                                            @foreach ($Permissions as $Permission)
-                                                @if ($role->id === $rolesPermission->role_id && $rolesPermission->permission_id == $Permission->id)
-                                                <button class="px-2 py-1 bg-blue-700 rounded-md text-gray-300 my-1">{{ $Permission->name }}</button>
-                                                @endif                                            
-                                            @endforeach
+                                        @foreach ($role->permissions as $permission)
+                                            <button class="px-2 py-1 bg-blue-700 rounded-md text-gray-300 my-1">{{ $permission->name }}</button>
                                         @endforeach
                                     </td>
                                     <td class="px-6 py-4">

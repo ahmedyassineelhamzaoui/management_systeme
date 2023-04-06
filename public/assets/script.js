@@ -231,3 +231,72 @@ if(formUpdate){
         }
     });
 }
+
+// add category
+let addCategory=document.querySelector("#add-category")
+let fromCategory=document.querySelector("#form-category")
+let closeFormcategorieIcon=document.querySelector("#close-formcategorieIcon")
+let closeCtegoryButton=document.querySelector("#close-ctegoryButton")
+
+if(addCategory){
+    addCategory.addEventListener('click',()=>{
+        fromCategory.classList.add('flex')
+        fromCategory.classList.remove('hidden')
+    })
+    closeFormcategorieIcon.addEventListener('click',()=>{
+        fromCategory.classList.add('hidden')
+        fromCategory.classList.remove('flex')
+    })
+    closeCtegoryButton.addEventListener('click',()=>{
+        fromCategory.classList.add('hidden')
+        fromCategory.classList.remove('flex')
+    })
+}
+let nomCategory = document.getElementById("nom-category");
+let nomCategoryError = document.querySelector(".nomCategory-error")
+let createCategory = document.getElementById("create-category")
+let regex = /^[a-zA-Z0-9 ]{2,20}$/;
+
+if (createCategory) {
+    
+    nomCategory.onclick = () => {
+        if (nomCategoryError) {
+            nomCategoryError.classList.remove('block')
+            nomCategoryError.classList.add('hidden')
+        }
+    }
+
+    createCategory.addEventListener('click', (e) => {
+        let nomCategoryValue = nomCategory.value.trim();
+        if (!regex.test(nomCategoryValue)) {
+            e.preventDefault();
+            nomCategoryError.classList.add('block')
+            nomCategoryError.classList.remove('hidden')
+        }
+    })
+}
+
+let editCategory=document.querySelector("#edit-category")
+let formEditcategory=document.querySelector("#form-editcategory")
+let closeFormcategorieIconup=document.querySelector("#close-formcategorieIconup")
+let closeCategoryButtonUpdate=document.querySelector("#close-categoryButtonUpdate")
+function editCtageory(id,name){
+    let nomUpcategory=document.querySelector("#nom-upcategory")
+    let categoryId=document.querySelector("#category-id")
+    categoryId.value=id
+    nomUpcategory.value=name
+    formEditcategory.classList.add('flex');
+    formEditcategory.classList.remove('hidden');
+}
+if(closeFormcategorieIconup){
+    closeFormcategorieIconup.onclick=()=>{
+        formEditcategory.classList.add('hidden');
+        formEditcategory.classList.remove('flex');
+    }
+}
+if(closeCategoryButtonUpdate){
+    closeCategoryButtonUpdate.onclick=()=>{
+        formEditcategory.classList.add('hidden');
+        formEditcategory.classList.remove('flex');
+    }
+}

@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
-
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductAjaxController;
 
 /*
@@ -51,12 +52,19 @@ Route::controller(RoleController::class)->group(function(){
     Route::put('/update-role/{id}','updateRole')->name('role.update');
 
 });
+
+Route::controller(ProductController::class)->group(function(){
+    Route::get('products','index')->name('products');
+    Route::get('create-product','showProductForm')->name('create-product');
+    Route::post('create-product','createProduct')->name('product.create');
+});
+
+Route::controller(CategorieController::class)->group(function(){
+   Route::get('categories','index')->name('category');
+   Route::post('categories','createCategory')->name('create.category');
+   Route::put('categories','updateCategory')->name('update.category');
+});
+
 Route::get('permissions',function(){
     return view('pages.permissions');
-});
-Route::get('products',function(){
-    return view('pages.products');
-});
-Route::get('categories',function(){
-    return view('pages.categories');
 });

@@ -35,10 +35,8 @@ class RoleController extends Controller
         $user=auth()->user();
         
         if($user->hasPermissionTo('role-list')){
-            $Permissions=Permission::all();
-            $rolesPermissions=Role_has_permissions::all();
-            $roles=Role::paginate(5);
-            return view('pages.roles',compact('roles','rolesPermissions','Permissions'));
+            $roles = Role::paginate(5);
+            return view('pages.roles', compact('roles'));
         }
          return view('errors.403');
     }
