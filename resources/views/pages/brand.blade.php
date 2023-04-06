@@ -9,17 +9,8 @@
         
         <main id="main-page"> 
             <section id="my-section">
-                <div class="flex w-full justify-end">
-                    <button id="add-category" class="px-3 py-2 add-button rounded-md text-white flex items-center">
-                        <span class="mr-2"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
-                               </svg>
-                        </span>         
-                        <span > ajouté catégorie</span>               
-                    </button>
-                </div>
-                <div>
-                    <h2 class="font-bold text-green">catégories</h2>
+                <div class="mt-20">
+                    <h2 class="font-bold text-green">Les Marques</h2>
                 </div>
                 @if(session('error'))                  
                 <div id="alert-border-3" class="flex mt-2 p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 " role="alert">
@@ -61,91 +52,88 @@
                     </button>
                 </div>
                 @endif
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray uppercase table-bg ">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    id
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Nom
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-body-bg">
-                            @forelse ($categories as $category)
-                            <tr class="border-b text-tablecolor ">
-                                <th scope="row" class="px-6 py-4   whitespace-nowrap ">
-                                    {{$category->id}}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{$category->name}}
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <span class="text-green-500 cursor-pointer" title="edit" onclick="editCtageory({{$category->id}},'{{$category->name}}')">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                </svg>                                                      
-                                        </span>
-                                        <span class="text-red-600 cursor-pointer" title="delete" onclick="deleteCategory({{$category->id}})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                              </svg>                                                      
-                                        </span>
+                <div class="w-full grid brand-div  gap-1">
+                    <div>
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 ">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-gray uppercase table-bg ">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            id
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Nom
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body-bg">
+                                    {{-- @forelse ($categories as $category) --}}
+                                    <tr class="border-b text-tablecolor ">
+                                        <th scope="row" class="px-6 py-4   whitespace-nowrap ">
+                                            {{-- {{$category->id}} --}}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            {{-- {{$category->name}} --}}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                                <span class="text-green-500 cursor-pointer" title="edit" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                        </svg>                                                      
+                                                </span>
+                                                <span class="text-red-600 cursor-pointer" title="delete" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                    </svg>                                                      
+                                                </span>
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                    {{-- @empty --}}
+                                    <td colspan="3" class="text-center py-1"> aucune marque exist</td>
+                                    {{-- @endforelse --}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="w-full p-4 overflow-x-hidden overflow-y-auto"  data-modal-backdrop="static" tabindex="-1" aria-hidden="true" >
+                        <div class="relative w-full h-full  md:h-auto">
+                            <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
+                                <div class="flex justify-between p-4 border-b  dark:border-gray-600">
+                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                        Ajouter une Marque
+                                    </h3>
+                                </div>
+                                <form   method="post" >
+                                    @csrf
+                                    <div class="mx-4 mt-6 ">
+                                        <div class="w-100">
+                                            <label for="name_brand" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Nom du Marque</label>
+                                            <input type="text" name="name_brand"  id="name_brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name of user" required>
+                                        </div>
+                                        @error('name_brand')
+                                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                </td>
-                            </tr>
-                            @empty
-                               <td colspan="3" class="text-center py-1"> aucune catégorie exist</td>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+                                    <!-- Modal footer -->
+                                    <div class="flex items-center justify-end p-4 mt-4 space-x-2 border-t border-gray-200 rounded-b ">
+                                        <button  type="submit" class=" text-black border-2 hover:bg-green-500 border-green-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center font-sans">Créer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </section>
         </main>
     </div>
-    {{-- add catégorie --}}
-    <div id="form-category" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
-        <div class="relative md:w-[60%] sm:w-[90%] h-full  md:h-auto">
-            <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
-                <div class="flex justify-between p-4 border-b  dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Ajouté catégorie
-                    </h3>
-                    <button id="close-formcategorieIcon" class="text-gray-500 font-medium cursor-pointer close-modal" id="close-deletedModal"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </button>
-                </div>
-                <form action="{{route('create.category')}}"  method="post" >
-                    @csrf
-                    <div class="mx-4 mt-6 ">
-                        <div class="w-100">
-                            <label for="nom" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">nom du catégorie</label>
-                            <input type="text" name="nom"  id="nom-category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="nom du catégorie" required>
-                        </div>
-                        <div class="text-red-600 font-bold hidden nomCategory-error">
-                            invalid name
-                        </div>
-                        @error('nom')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror    
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="flex items-center justify-end p-4 mt-4 space-x-2 border-t border-gray-200 rounded-b ">
-                        <button id="create-category"  type="submit" class=" text-black border-2 hover:bg-green-500 border-green-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center font-sans">Create</button>
-                        <button id="close-ctegoryButton"  class=" text-black font-sans bg-gray-100 hover:bg-gray-300  border-2 border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Decline</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    {{-- edit catégorie --}}
+    
+    {{-- edit brand --}}
     <div id="form-editcategory" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
         <div class="relative md:w-[60%] sm:w-[90%] h-full  md:h-auto">
             <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
@@ -158,7 +146,7 @@
                       </svg>
                     </button>
                 </div>
-                <form action="{{route('update.category')}}" method="post" >
+                <form  method="post" >
                     @csrf
                     @method('PUT')
                     <div class="mx-4 mt-6 ">
@@ -180,7 +168,7 @@
             </div>
         </div>
     </div>
-    {{-- delete cateégorie  --}}
+    {{-- delete brand  --}}
     <div id="delet-categoryForm" class="fixed z-50 hidden top-0 left-0 w-full h-full  items-center justify-center" style="background-color: rgba(0,0,0,0.5);">
         <div class="relative rounded-lg p-6 bg-white">
             <div class="flex justify-between items-center">
@@ -194,7 +182,7 @@
                 <p>Voulez-vous vraiment supprimer cette catégorie ?</p>
             </div>
             <div class="flex justify-end mt-4">
-                <form method="post" action="{{route('delete.category')}}">
+                <form method="post" >
                     @csrf
                     @method('DELETE')
                     <input type="hidden"  name="id" id="deleted-idConfirm">

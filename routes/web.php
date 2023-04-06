@@ -67,6 +67,6 @@ Route::controller(CategorieController::class)->group(function(){
 
 });
 
-Route::get('permissions',function(){
-    return view('pages.permissions');
+Route::get('brand',function(){
+    return view('pages.brand');
 });
