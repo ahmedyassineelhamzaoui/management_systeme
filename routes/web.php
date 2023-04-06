@@ -7,7 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductAjaxController;
-
+use App\Http\Controllers\MarqueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,7 +66,6 @@ Route::controller(CategorieController::class)->group(function(){
    Route::delete('categories','deleteCategory')->name('delete.category');
 
 });
-
-Route::get('brand',function(){
-    return view('pages.brand');
+Route::controller(MarqueController::class)->group(function(){
+   Route::get('brand','index')->name('brand');
 });
