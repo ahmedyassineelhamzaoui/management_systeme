@@ -28,7 +28,7 @@ class CategorieController extends Controller
         ]);
         $categorie = Category::where('name', $request->nom)->first();
         if ($categorie) {
-           return redirect()->route('category')->with('errors','la catégorie que tu as entré existe déja');
+           return redirect()->route('category')->with('error','catégorie existe déja');
         } else {
            $categorie = Category::create([
               'name' => $request->nom 
@@ -44,12 +44,15 @@ class CategorieController extends Controller
             return view('errors.403');
         }
       $request->validate([
-         'name' => 'required|string'
+         'nom_update' => 'required|string'
       ]);
-      $categorie = Categorie::find($request->id);
-      dd($categorie);
+      $categorie = Category::find($request->id);
       if ($categorie) {
-         $categorie->name = $request->nom;
+         $categorie->name = $request->nom_update;
+          $mycategory = Category::where('name', $request->nom_update)->first();
+            if ($mycategory) {
+            return redirect()->route('category')->with('info','la catégorie que tu as entré existe déja');
+            }
          $categorie->save();
          return redirect()->route('category')->with('succès','catégorie a été mis à jour');
       }

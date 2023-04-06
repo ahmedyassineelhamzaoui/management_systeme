@@ -280,8 +280,10 @@ let editCategory=document.querySelector("#edit-category")
 let formEditcategory=document.querySelector("#form-editcategory")
 let closeFormcategorieIconup=document.querySelector("#close-formcategorieIconup")
 let closeCategoryButtonUpdate=document.querySelector("#close-categoryButtonUpdate")
+let nomUpcategory=document.querySelector("#nom-upcategory")
+let nomCategoryupdateError=document.querySelector(".nomCategoryupdate-error")
 function editCtageory(id,name){
-    let nomUpcategory=document.querySelector("#nom-upcategory")
+    
     let categoryId=document.querySelector("#category-id")
     categoryId.value=id
     nomUpcategory.value=name
@@ -298,5 +300,19 @@ if(closeCategoryButtonUpdate){
     closeCategoryButtonUpdate.onclick=()=>{
         formEditcategory.classList.add('hidden');
         formEditcategory.classList.remove('flex');
+    }
+}
+let updateCategory=document.querySelector("#update-category")
+if(updateCategory){
+    updateCategory.addEventListener('click',(e)=>{
+       if(nomUpcategory.value==''){
+         e.preventDefault();
+         nomCategoryupdateError.classList.add('block')
+         nomCategoryupdateError.classList.remove('hidden')
+       }
+    })
+    nomUpcategory.onclick=()=>{
+        nomCategoryupdateError.classList.add('hidden')
+        nomCategoryupdateError.classList.remove('block')
     }
 }
