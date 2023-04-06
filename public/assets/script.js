@@ -275,6 +275,7 @@ if (createCategory) {
         }
     })
 }
+// edit category
 
 let editCategory=document.querySelector("#edit-category")
 let formEditcategory=document.querySelector("#form-editcategory")
@@ -314,5 +315,27 @@ if(updateCategory){
     nomUpcategory.onclick=()=>{
         nomCategoryupdateError.classList.add('hidden')
         nomCategoryupdateError.classList.remove('block')
+    }
+}
+// delete category
+deletedIdConfirm=document.querySelector("#deleted-idConfirm")
+deletCategoryForm=document.querySelector("#delet-categoryForm")
+closeDeleteCategorydModal=document.querySelector("#close-deleteCategorydModal")
+cancelModalDelete=document.querySelector("#cancel-modalDelete")
+function deleteCategory(id){
+    deletedIdConfirm.value=id
+    deletCategoryForm.classList.add('flex');
+    deletCategoryForm.classList.remove('hidden');
+}
+if(closeDeleteCategorydModal){
+    closeDeleteCategorydModal.onclick=()=>{
+        deletCategoryForm.classList.add('hidden');
+        deletCategoryForm.classList.remove('flex');
+    }
+}
+if(cancelModalDelete){
+    cancelModalDelete.onclick=()=>{
+        deletCategoryForm.classList.add('hidden');
+        deletCategoryForm.classList.remove('flex');
     }
 }

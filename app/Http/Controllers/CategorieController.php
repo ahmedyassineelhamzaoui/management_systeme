@@ -43,19 +43,32 @@ class CategorieController extends Controller
         if(!$user->hasPermissionTo('categorie-edit')){
             return view('errors.403');
         }
-      $request->validate([
-         'nom_update' => 'required|string'
-      ]);
-      $categorie = Category::find($request->id);
-      if ($categorie) {
-         $categorie->name = $request->nom_update;
-          $mycategory = Category::where('name', $request->nom_update)->first();
-            if ($mycategory) {
-            return redirect()->route('category')->with('info','la catégorie que tu as entré existe déja');
-            }
-         $categorie->save();
-         return redirect()->route('category')->with('succès','catégorie a été mis à jour');
-      }
-         return  view('errors.404');
+        $request->validate([
+            'nom_update' => 'required|string'
+        ]);
+        $categorie = Category::find($request->id);
+        if ($categorie) {
+            $categorie->name = $request->nom_update;
+            $mycategory = Category::where('name', $request->nom_update)->first();
+                if ($mycategory) {
+                return redirect()->route('category')->with('info','la catégorie que tu as entré existe déja');
+                }
+            $categorie->save();
+            return redirect()->route('category')->with('succès','catégorie a été mis à jour');
+        }
+            return  view('errors.404');
+    }
+    public function deleteCategory(Request $request)
+    {
+        $user = auth()->user();
+        if(!$user->hasPermissionTo('categorie-delete')){
+            return view('errors.404');
+        }
+        $categorie = Category::find($request->id);
+        if ($categorie) {
+            $categorie->delete();
+            return redirect()->route('category')->with('succès','la catégorie a été supprimer');
+        } 
+            return redirect()->route('category')->with('error','categorie n\'existe pas');
     }
 }

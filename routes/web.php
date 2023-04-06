@@ -63,6 +63,8 @@ Route::controller(CategorieController::class)->group(function(){
    Route::get('categories','index')->name('category');
    Route::post('categories','createCategory')->name('create.category');
    Route::put('categories','updateCategory')->name('update.category');
+   Route::delete('categories','deleteCategory')->name('delete.category');
+
 });
 
 Route::get('permissions',function(){
