@@ -8,7 +8,7 @@
                     <h3 class="font-bold">Internal Server Error</h3>
                     <p class="font-bold mb-4">You do not have permission to view this resource</p>
                     <div>
-                        <a class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500" href="index.html">Back to Home</a>
+                        <a href="{{route('index')}}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500" href="index.html">Back to Home</a>
                     </div>
                 </div>
             </div>

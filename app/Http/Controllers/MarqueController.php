@@ -14,6 +14,9 @@ class MarqueController extends Controller
     public function index()
     {
         $user = auth()->user();
+        if(!$user){
+           return view('errors.404');
+        }
         if(!$user->hasPermissionTo('marque-list')){
            return view('errors.403');
         }
@@ -23,6 +26,9 @@ class MarqueController extends Controller
     public function ajouterMarque(Request $request)
     {
         $user = auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('marque-create')){
            return view('errors.403');
         }
@@ -37,6 +43,9 @@ class MarqueController extends Controller
     public function deleteBrand(Request $request)
     {
         $user = auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('marque-delete')){
            return view('errors.403');
         }

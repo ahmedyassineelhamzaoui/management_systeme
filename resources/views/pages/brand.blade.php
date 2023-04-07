@@ -103,9 +103,9 @@
                     </div>
                     <div class="w-full p-4 overflow-x-hidden overflow-y-auto"  data-modal-backdrop="static" tabindex="-1" aria-hidden="true" >
                         <div class="relative w-full h-full  md:h-auto">
-                            <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
-                                <div class="flex justify-between p-4 border-b  dark:border-gray-600">
-                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            <div class="bg-white rounded-lg shadow ">
+                                <div class="flex justify-between p-4 border-b  ">
+                                    <h3 class="text-xl font-semibold text-gray-900 ">
                                         Ajouter une Marque
                                     </h3>
                                 </div>
@@ -113,7 +113,7 @@
                                     @csrf
                                     <div class="mx-4 mt-6 ">
                                         <div class="w-100">
-                                            <label for="name_brand" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Nom du Marque</label>
+                                            <label for="name_brand" class="font-serif block mb-2 text-md font-bold text-gray-900 ">Nom du Marque</label>
                                             <input type="text" name="name_brand"  id="name_brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name of user" required>
                                         </div>
                                         @error('name_brand')
