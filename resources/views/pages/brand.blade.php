@@ -80,7 +80,7 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center">
-                                                <span class="text-green-500 cursor-pointer" title="edit" onclick="editMarque($brand->id,'{{$brand->name}}')" >
+                                                <span class="text-green-500 cursor-pointer" title="edit" onclick="editMarque({{$brand->id}},'{{$brand->name}}')" >
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                                         </svg>                                                      
@@ -134,35 +134,35 @@
     </div>
     
     {{-- edit brand --}}
-    <div id="form-editcategory" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
+    <div id="form-marque" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
         <div class="relative md:w-[60%] sm:w-[90%] h-full  md:h-auto">
             <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
                 <div class="flex justify-between p-4 border-b  dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Edit catégorie
+                        Modifié la marque
                     </h3>
-                    <button id="close-formcategorieIconup" class="text-gray-500 font-medium cursor-pointer close-modal" id="close-deletedModal"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <button id="close-marque" class="text-gray-500 font-medium cursor-pointer close-modal" id="close-deletedModal"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </button>
                 </div>
-                <form  method="post" >
+                <form action="{{route('update.marque')}}"  method="post" >
                     @csrf
                     @method('PUT')
                     <div class="mx-4 mt-6 ">
-                        <input type="hidden" name="id" id="category-id">
+                        <input type="hidden" name="id" id="marque-id">
                         <div class="w-100">
                             <label for="nom" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">nom du catégorie</label>
-                            <input type="text" name="nom_update"  id="nom-upcategory" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="nom du catégorie" required>
+                            <input type="text" name="nom"  id="nom-upmarque" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="nom du catégorie" required>
                         </div>
-                        <div class="text-red-600 font-bold hidden nomCategoryupdate-error">
+                        <div class="text-red-600 font-bold hidden nommarqueupdate-error">
                             invalid name
                         </div> 
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center justify-end p-4 mt-4 space-x-2 border-t border-gray-200 rounded-b ">
-                        <button id="update-category"  type="submit" class=" text-black border-2 hover:bg-yellow-500 border-yellow-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center font-sans">Update</button>
-                        <button id="close-categoryButtonUpdate"  class=" text-black font-sans bg-gray-100 hover:bg-gray-300  border-2 border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Decline</button>
+                        <button id="update-marque" type="submit" class=" text-black border-2 hover:bg-yellow-500 border-yellow-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center font-sans">Update</button>
+                        <button id="decline-marque"  class=" text-black font-sans bg-gray-100 hover:bg-gray-300  border-2 border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Decline</button>
                     </div>
                 </form>
             </div>

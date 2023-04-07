@@ -51,7 +51,7 @@ class CategorieController extends Controller
             $categorie->name = $request->nom_update;
             $mycategory = Category::where('name', $request->nom_update)->first();
                 if ($mycategory) {
-                return redirect()->route('category')->with('info','la catégorie que tu as entré existe déja');
+                      return redirect()->route('category')->with('info','la catégorie que tu as entré existe déja');
                 }
             $categorie->save();
             return redirect()->route('category')->with('succès','catégorie a été mis à jour');

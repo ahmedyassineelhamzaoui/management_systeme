@@ -56,4 +56,27 @@ class MarqueController extends Controller
         }
         return redirect()->back()->with('succès','la marque a été bien supprimer');
     }
+    public function updateMarque(Request $request)
+    {
+        $user= auth()->user();
+        if(!$user){
+            return view('errors.404');
+        }
+        if(!$user->hasPermissionTo('marque-edit')){
+            return view('errors.403');
+        }
+        $request->validate([
+            'nom' => 'required|string|min:2'
+        ]);
+        $marque = Marque::find($request->id);
+        if(!$marque){
+            return view('errors.404');
+        }
+        if($marque->name == $request->nom){
+            return redirect()->back()->with('info','marque existe déja');
+        }
+        $marque->name = $request->nom;
+        $marque->save();
+        return redirect()->back()->with('succès','la marque a été bien créer');
+    }
 }

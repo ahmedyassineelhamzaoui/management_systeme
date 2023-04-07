@@ -19,10 +19,6 @@ use App\Http\Controllers\MarqueController;
 |
 */
 
-
-Route::get('500',function(){
-    return view('errors.500');
-});
 Route::controller(AuthController::class)->group(function(){
     Route::get('/','index')->name('index');
     Route::get('/login','index')->name('login.page');
@@ -70,4 +66,5 @@ Route::controller(MarqueController::class)->group(function(){
    Route::get('brand','index')->name('brand');
    Route::post('brand','ajouterMarque')->name('create.marque');
    Route::delete('brand','deleteBrand')->name('delete.marque');
+   Route::put('brand','updateMarque')->name('update.marque');
 });

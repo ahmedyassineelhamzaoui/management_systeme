@@ -361,3 +361,39 @@ if(cancelModalmarque){
         deletMarqueForm.classList.add('hidden');
     }
 }
+// edit marque
+let formMarque=document.querySelector("#form-marque")
+let declineMarque=document.querySelector("#decline-marque")
+let closeMarque=document.querySelector("#close-marque")
+let marqueId=document.querySelector("#marque-id")
+let nomUpmarque=document.querySelector("#nom-upmarque")
+let updateMarque=document.querySelector("#update-marque")
+let nommarqueupdateError=document.querySelector(".nommarqueupdate-error")
+function editMarque(id,name){
+    formMarque.classList.add('flex')
+    formMarque.classList.remove('hidden')
+    marqueId.value=id
+    nomUpmarque.value=name
+}
+if(declineMarque){
+    declineMarque.onclick=()=>{
+        formMarque.classList.remove('flex')
+        formMarque.classList.add('hidden')
+    }
+}
+if(closeMarque){
+    closeMarque.onclick=()=>{
+        formMarque.classList.remove('flex')
+        formMarque.classList.add('hidden')
+    }
+}
+if(updateMarque){
+    updateMarque.addEventListener('click', (e) => {
+        let nomUpmarqueValue = nomUpmarque.value.trim();
+        if (!regex.test(nomUpmarqueValue)) {
+            e.preventDefault();
+            nommarqueupdateError.classList.add('block')
+            nommarqueupdateError.classList.remove('hidden')
+        }
+    })
+}
