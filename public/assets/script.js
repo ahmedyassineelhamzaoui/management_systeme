@@ -339,3 +339,25 @@ if(cancelModalDelete){
         deletCategoryForm.classList.remove('flex');
     }
 }
+// delete marque
+let deletedmarqueIdConfirm=document.getElementById('deletedmarque-idConfirm')
+let deletMarqueForm =document.getElementById('delet-marqueForm')
+let closeDeleteMarque=document.getElementById('close-deleteMarque')
+let cancelModalmarque=document.getElementById('cancel-modalmarque')
+function deletMarque(id){
+     deletedmarqueIdConfirm.value=id
+     deletMarqueForm.classList.add('flex');
+     deletMarqueForm.classList.remove('hidden');
+}
+if(closeDeleteMarque){
+    closeDeleteMarque.onclick=()=>{
+        deletMarqueForm.classList.remove('flex');
+        deletMarqueForm.classList.add('hidden');
+    }
+}
+if(cancelModalmarque){
+    cancelModalmarque.onclick=()=>{
+        deletMarqueForm.classList.remove('flex');
+        deletMarqueForm.classList.add('hidden');
+    }
+}

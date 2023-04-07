@@ -34,4 +34,17 @@ class MarqueController extends Controller
         ]);
         return redirect()->back()->with('succès','la marque a été bien ajouter');
     }
+    public function deleteBrand(Request $request)
+    {
+        $user = auth()->user();
+        if(!$user->hasPermissionTo('marque-delete')){
+           return view('errors.403');
+        }
+        $brand = Marque::find($request->id);
+        $brand->delete();
+        if(!$brand){
+            return redirect()->back()->with('error','quelque chose s\'est mal passé');
+        }
+        return redirect()->back()->with('succès','la marque a été bien supprimer');
+    }
 }

@@ -37,10 +37,12 @@
             <h3 class="hedding-h3">catégories</h3>
         </a>
         @endcan
+        @can('marque-list')
         <a href="{{url('brand')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">branding_watermark</span>
             <h3 class="hedding-h3">Marques</h3>
         </a>
+        @endcan
         <a href="#" class="my-pagesSidebar">
             <span class="material-icons-sharp">list_alt</span>
             <h3 class="hedding-h3">Commandes</h3>
