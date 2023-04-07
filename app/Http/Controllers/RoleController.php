@@ -23,6 +23,9 @@ class RoleController extends Controller
     public function showCreateRoleForm()
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('role-create')){
             return view('errors.403');
         }
@@ -33,7 +36,9 @@ class RoleController extends Controller
     public function getRoles()
     {
         $user=auth()->user();
-        
+        if(!$user){
+            return view('errors.404');
+         }
         if($user->hasPermissionTo('role-list')){
             $roles = Role::paginate(5);
             return view('pages.roles', compact('roles'));
@@ -43,6 +48,9 @@ class RoleController extends Controller
     public function createRole(Request $request)
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('role-create')){
             return view('errors.403');
         }
@@ -56,6 +64,9 @@ class RoleController extends Controller
     public function deleteRole($id)
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('role-delete')){
             return view('errors.403');
         }
@@ -69,6 +80,9 @@ class RoleController extends Controller
     public function showRole($id)
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('role-edit')){
             return view('errors.403');
         }
@@ -80,6 +94,9 @@ class RoleController extends Controller
     public function updateRole(Request $request)
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if($user->hasPermissionTo('role-edit')){
             $request->validate( [
                 'name' => [

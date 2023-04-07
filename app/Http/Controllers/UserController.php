@@ -20,6 +20,9 @@ class UserController extends Controller
     public function index()
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('user-list')){
             return view('errors.403');
         }
@@ -34,6 +37,9 @@ class UserController extends Controller
     public function create()
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('user-create')){
             return view('errors.403');
         }
@@ -43,6 +49,9 @@ class UserController extends Controller
     public function createUser(Request $request)
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('user-create')){
             return view('errors.403');
         }
@@ -63,6 +72,9 @@ class UserController extends Controller
     public function deleteUser($id)
     {   
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('user-delete')){
             return view('errors.403');
         }
@@ -76,6 +88,9 @@ class UserController extends Controller
     public function showUser($id)
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('user-edit')){
             return view('errors.403');
         }
@@ -86,6 +101,9 @@ class UserController extends Controller
     public function updateUser(Request $request)
     {
         $user=auth()->user();
+        if(!$user){
+            return view('errors.404');
+         }
         if(!$user->hasPermissionTo('user-edit')){
             return view('errors.403');
         }
