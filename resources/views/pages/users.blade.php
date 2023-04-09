@@ -92,7 +92,20 @@
                                         {{$user->email}}
                                     </td>
                                     <td>
-                                        Online
+                                        @if ($user->status == 'online')
+                                          <div class="flex items-center">
+                                            <div class="online-indicator">
+                                                <span class="blink"></span>
+                                            </div>
+                                            <span >en ligne</span>
+                                          </div>
+                                        @else
+                                        <div class="flex items-center">
+                                            <div class="bg-red-600 rounded-full w-[1.2em] h-[1.2em] border-2 border-red-400">
+                                            </div>                                           
+                                            <span class="ml-2">hors ligne</span>
+                                        </div>  
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">

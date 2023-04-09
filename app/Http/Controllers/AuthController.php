@@ -35,11 +35,13 @@ class AuthController extends Controller
         if (!$token) {
             return redirect()->back()->with('error','invalid email or password');
         }
-        $user=Auth::user();
+        Auth::user()->update(['status' => 'online']);
+        $user = Auth::user();
         return redirect()->route('dashboard')->with('name',$user->name);
     }
     public function logout()
     {
+        Auth::user()->update(['status' => 'offline']);  
         Auth::logout();
         return redirect()->route('logout');
     }
