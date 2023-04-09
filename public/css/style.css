@@ -37,6 +37,7 @@
     --label-text-modal-color: rgb(11, 11, 52);
     --color-bg-inputs:rgb(254, 251, 251);
     --color-submit-button:black;
+    --dashboard-bgColor:white;
 }
 .dark-theme-variables {
     --color-background:#0f172a ;
@@ -61,6 +62,7 @@
     --label-text-modal-color: rgb(171, 171, 171);
     --color-bg-inputs:#afb2b6;
     --color-submit-button:white;
+    --dashboard-bgColor:var(--color-white);
 }
 *{
     margin:0;
@@ -174,6 +176,16 @@ b{
 }
 .submit-button{
     color:var(--color-submit-button);
+}
+#dropdownDefaultButton{
+    color: var(--dashboard-nameColor);
+}
+#dropdown{
+    color: var(--dashboard-nameColor);
+    background: var(--dashboard-bgColor);
+}
+.dropdown-menu:hover{
+    background: var(--color-background);
 }
 /* =============================================== asidebar ================================================ */
 aside{
@@ -361,8 +373,7 @@ aside .sidebar .message-count{
 .page-content .nav .right-nav .conected{
     display:flex;
     align-items:center;
-    justify-content:space-around;
-    width:8rem;
+    justify-content:space-evenly;
 }
 .page-content .nav .right-nav .conected .user-profile{
     width: 3rem;

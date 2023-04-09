@@ -105,7 +105,7 @@
                         </table>
                         <div class="flex items-center justify-center ">
                             <div class="flex justify-center my-2">
-                                {{$roles->links()}}
+                                {{-- {{$roles->links()}} --}}
                             </div> 
                         </div>  
                     </div>

@@ -38,6 +38,8 @@ Route::controller(UserController::class)->group(function(){
     Route::put('users','updateUser')->name('users.update');
     Route::get('update-user/{id}','showUser')->name('update.user');
     Route::put('/update-user/{id}','updateUser')->name('user.update');
+    Route::get('/users-info', 'getUserInfo');
+    Route::post('/users-info/update', 'updateUserInfo')->name('users-info.update');
 });
 Route::controller(RoleController::class)->group(function(){
     Route::get('roles','getRoles')->name('roles');
@@ -46,8 +48,9 @@ Route::controller(RoleController::class)->group(function(){
     Route::delete('roles/{id}','deleteRole')->name('role.delete');
     Route::get('update-role/{id}','showRole')->name('update.role');
     Route::put('/update-role/{id}','updateRole')->name('role.update');
-
+   
 });
+
 
 Route::controller(ProductController::class)->group(function(){
     Route::get('products','index')->name('products');

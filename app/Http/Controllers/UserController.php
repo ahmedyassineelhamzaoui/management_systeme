@@ -135,5 +135,41 @@ class UserController extends Controller
         }    
         return redirect()->route('users')->with('success','user updated succesfuly');
     }
+    public function getUserInfo()
+    {
+        $user = auth()->user();
+        $roles =  Role::all();
+        if ($user) {
+            return response()->json([
+                'name' => $user->name,
+                'email' => $user->email,
+                'roles' => $roles,
+                'role_name' => $user->roles->first()->name,
+                'password' => $user->password
+            ]);
+        } 
+    }
+    
+    public function updateUserInfo(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:30|min:2',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+        
+        // Update the user info
+        $user = auth()->user();
+        $oldPasswordHash = $user->password; 
+        $user->name  = $request->name;
+        $user->email = $request->email; 
+        if($oldPasswordHash ==  $request->password){
+            $user->password = $oldPasswordHash;
+        }else{
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();  
+        return response()->json(['message' => 'les informations a été bien modifier']);
+    }
 
 }

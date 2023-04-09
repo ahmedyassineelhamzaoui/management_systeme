@@ -12,6 +12,7 @@
         <meta name="format-detection" content="telephone=no">
         <title>Dashboard</title>
         @vite('resources/css/app.css')
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="icon" href="../images/logo.png">
         <link href="../css/style.css" rel="stylesheet">
 </head>

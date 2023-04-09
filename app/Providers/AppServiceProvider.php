@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +24,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    
     public function boot()
     {
-        //
+        View::composer('*', function ($view) {
+            $roles = Role::all();
+            $view->with('roles', $roles);
+        });
     }
 }

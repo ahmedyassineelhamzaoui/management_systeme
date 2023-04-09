@@ -147,45 +147,45 @@ if (getTheme === 'darkMode') {
 
 
 // delete modal
-let deleteButton=document.querySelectorAll(".deleteButton")
-let deleteModal=document.querySelector("#delet-modal")
-let closeModal=document.querySelectorAll(".close-modal")
-if(deleteButton){
-    deleteButton.forEach(element =>{
-        element.onclick=()=>{
-            deleteModal.classList.add('flex')
-            deleteModal.classList.remove('hidden')
-        }
-    })
-}
-if(closeModal){
-    closeModal.forEach(element =>{
-        element.onclick = ()=>{
-            deleteModal.classList.remove('flex')
-            deleteModal.classList.add('hidden')
-        }
-    })
+// let deleteButton=document.querySelectorAll(".deleteButton")
+// let deleteModal=document.querySelector("#delet-modal")
+// let closeModal=document.querySelectorAll(".close-modal")
+// if(deleteButton){
+//     deleteButton.forEach(element =>{
+//         element.onclick=()=>{
+//             deleteModal.classList.add('flex')
+//             deleteModal.classList.remove('hidden')
+//         }
+//     })
+// }
+// if(closeModal){
+//     closeModal.forEach(element =>{
+//         element.onclick = ()=>{
+//             deleteModal.classList.remove('flex')
+//             deleteModal.classList.add('hidden')
+//         }
+//     })
     
-}
+// }
 // add user
-addUserButton=document.querySelector("#add-userButton")
-addUser=document.querySelector("#add-User");
-closeAddUser=document.querySelector("#closeAdd-user");
-declineUser=document.querySelector("#decline-user");
-if(addUserButton){
-    addUserButton.onclick=()=>{
-        addUser.classList.add('flex')
-        addUser.classList.remove('hidden')
-    }
-    closeAddUser.onclick=()=>{
-        addUser.classList.add('hidden')
-        addUser.classList.remove('remove')
-    }
-    declineUser.onclick=()=>{
-        addUser.classList.add('hidden')
-        addUser.classList.remove('remove')
-    }
-}
+// addUserButton=document.querySelector("#add-userButton")
+// addUser=document.querySelector("#add-User");
+// closeAddUser=document.querySelector("#closeAdd-user");
+// declineUser=document.querySelector("#decline-user");
+// if(addUserButton){
+//     addUserButton.onclick=()=>{
+//         addUser.classList.add('flex')
+//         addUser.classList.remove('hidden')
+//     }
+//     closeAddUser.onclick=()=>{
+//         addUser.classList.add('hidden')
+//         addUser.classList.remove('remove')
+//     }
+//     declineUser.onclick=()=>{
+//         addUser.classList.add('hidden')
+//         addUser.classList.remove('remove')
+//     }
+// }
 
 // add product
 addProduct=document.querySelector("#add-product")
@@ -397,3 +397,67 @@ if(updateMarque){
         }
     })
 }
+$(document).ready(function() {
+    $('#toggleModalButton').click(function() {
+      // get the user data from the server
+      $.ajax({
+        type: 'GET',
+        url: '/users-info', // replace with your Laravel route
+        success: function(response) {
+          // populate the form fields with the user data
+          $('#name').val(response.name);
+          $('#email').val(response.email);
+          // check if the role_name option exists in the dropdown
+          var role_name= response.role_name;
+          var roles = response.roles;
+          var select = $('#role');
+            select.empty();
+            $.each(roles, function(index, role) {
+                if(role_name == role.name ){
+                  select.append('<option selected value="' + role.id + '">' + role.name + '</option>');
+                }else{
+                  select.append('<option value="' + role.id + '">' + role.name + '</option>');
+                }
+            });
+          $('#password').val(response.password);
+        },
+        error: function(xhr, status, error) {
+          console.log(xhr.responseText); // log the error message
+        }
+      });
+    });
+  
+    $('#update-user-info-form').submit(function(event) {
+        $('.invalid-feedback').remove();
+        event.preventDefault();
+
+          var formData = $(this).serialize();
+          var url = $(this).attr('action');
+          $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                $('.message-success-updated').text(response.message);
+                $('#updated-success').addClass('flex'); 
+                $('#updated-success').removeClass('hidden')
+            },
+            error: function(xhr) {
+              var errors = xhr.responseJSON.errors;
+              // clear any existing error messages
+              $.each(errors, function(key, value) {
+                $('#' + key).after('<span class="text-red-500"><strong>' + value + '</strong></span>');
+            });
+            }
+          });
+      });
+});
+// close update user alert
+let closeUpdateUserbutton=document.querySelector("#close-updateUserbutton")
+let updatedSuccess=document.querySelector("#updated-success")
+  if(closeUpdateUserbutton){
+    closeUpdateUserbutton.onclick=()=>{
+        updatedSuccess.classList.add('hidden')
+        updatedSuccess.classList.remove('flex')
+    }
+  }
