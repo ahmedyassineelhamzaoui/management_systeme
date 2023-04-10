@@ -477,6 +477,37 @@ $(document).ready(function() {
             }
           });
       });
+
+      $('#toggleModalUpdate').click(function() {
+        // get the user data from the server
+        $.ajax({
+          type: 'GET',
+          url: '/product-info', // replace with your Laravel route
+          success: function(response) {
+            // populate the form fields with the user data
+            $('#reference').val(response.reference);
+            $('#nom').val(response.nom);
+
+            // check if the role_name option exists in the dropdown
+            var marque_id= response.marque_id;
+            var category_id= response.category_id;
+            var marques = response.marques;
+            var select = $('#category');
+              select.empty();
+              $.each(roles, function(index, role) {
+                  if(role_name == role.name ){
+                    select.append('<option selected value="' + role.id + '">' + role.name + '</option>');
+                  }else{
+                    select.append('<option value="' + role.id + '">' + role.name + '</option>');
+                  }
+              });
+            $('#password').val(response.password);
+          },
+          error: function(xhr, status, error) {
+            console.log(xhr.responseText); // log the error message
+          }
+        });
+      });
 });
 // close update user alert
 let closeUpdateUserbutton=document.querySelector("#close-updateUserbutton")

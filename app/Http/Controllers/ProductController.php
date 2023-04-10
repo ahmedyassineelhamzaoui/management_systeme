@@ -16,11 +16,11 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('marque', 'category')->paginate(5); // Eager load the Marques and Categories relationships
         $marques = Marque::all();
         $categories = Category::all();
-
-        return view('pages.products',compact('products','marques','categories'));
+    
+        return view('pages.products', compact('products', 'marques', 'categories'));
     }
     public function showProductForm()
     {

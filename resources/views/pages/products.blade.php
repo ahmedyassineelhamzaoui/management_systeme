@@ -73,33 +73,28 @@
                                 </tr>
                             </thead>
                             <tbody class="table-body-bg">
-                                {{-- @forelse ($users as $user) --}}
+                                @forelse ($products as $product)
                                 <tr class="border-b text-tablecolor ">
                                     <th scope="row" class="px-6 py-4  whitespace-nowrap ">
-                                        {{-- {{$user->id}} --}}
+                                        {{$product->reference}}
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{-- {{$user->name}} --}}
+                                        {{$product->nom}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{-- @if ($user->roles->isNotEmpty())
-                                            {{$user->roles[0]->name}}
-                                        @else
-                                            No role assigned
-                                        @endif   --}}
+                                        {{ $product->marque->name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{-- {{$user->email}} --}}
-                                    </td>
+                                        {{$product->Category->name}}                                    </td>
                                     <td class="px-6 py-4">
-                                        {{-- {{$user->email}} --}}
+                                        {{$product->quantite}}
                                     </td>
                                     <td>
-                                        {{-- Online --}}
+                                        {{$product->prix}}
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            <a  class="text-green-500 cursor-pointer">
+                                            <a id="toggleModalUpdate" class="text-green-500 cursor-pointer">
                                                 {{-- href="{{ url('/update-user/'.$user->id)}}" --}}
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -119,16 +114,16 @@
                                     </td>
                                     
                                 </tr>
-                                {{-- @empty --}}
+                                @empty
                                 <tr>
                                     <td colspan="7" class="text-center py-2">No Record Found</td>
                                 </tr>
-                                {{-- @endforelse --}}
+                                @endforelse
                             </tbody>
                         </table>
                         <div class="flex items-center justify-center ">
                             <div class="flex justify-center my-2">
-                                {{-- {{ $users->links() }} --}}
+                                {{ $products->links() }}
                             </div> 
                         </div>  
                     </div>
@@ -136,6 +131,7 @@
             </section>
         </main>
     </div>
+{{-- add product --}}
     <div id="large-modal" tabindex="-1" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
         <div class="relative w-full max-w-4xl max-h-full">
             <!-- Modal content -->
@@ -225,6 +221,96 @@
             </form>
         </div>
     </div>
-    @include('layouts.dashboardFooter')
+{{-- edit product --}}
+<div id="edit-productModal" tabindex="-1" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
+    <div class="relative w-full max-w-4xl max-h-full">
+        <!-- Modal content -->
+        <form id="create-product-form" action="{{route('product.update')}}"  method="post" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            @csrf
+            <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                    Modifier le Produit
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-hide="edit-productModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <div>
+                    <div id="update-product-success" class="hidden mx-4 mt-6 p-2 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 " >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>                          
+                        <div class="ml-3 text-sm font-medium flex items-center ">
+                          <strong>succès  </strong><p class="message-success-updateProduct"></p>
+                        </div>
+                        <button   type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex h-8 w-8 "   aria-label="Close">
+                          <span class="sr-only">Dismiss</span>
+                          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
+                    @csrf
+                    <div class="mx-4 mt-6 ">
+                        <div class="w-100">
+                            <label for="reference" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Réfrence du Produit</label>
+                            <input type="text" name="reference"  id="reference" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Réference" required>
+                        </div>
+                        @error('reference')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                        <div class="w-100 mt-2">
+                            <label for="nom" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">le nom du produit</label>
+                            <input type="text" name="nom"  id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="le nom du produit" required>
+                        </div>
+                        @error('nom')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                        
+                        <div class="w-100">
+                            <label for="marque_id" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Marque du Produit</label>
+                            <select name="marque_id" id="marque_id" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
+                                @foreach ($marques as $marque)
+                                <option value="{{$marque->id}}">{{$marque->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>   
+                        <div class="w-100">
+                            <label for="ctegory_id" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Category du produit</label>
+                            <select name="category_id" id="category_id" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
+                                @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>                         
+                        <div class="w-100">
+                            <label for="quantite" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Quantité du Produits</label>
+                            <input type="number" name="quantite" min="0" id="quantite" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2" placeholder="Quantité">
+                        </div>   
+                        @error('quantité')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                        <div class="w-100">
+                            <label for="prix" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Prix du Produit</label>
+                            <input type="number" min="0" name="prix"  id="prix" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2" placeholder="Prix">
+                        </div>   
+                        @error('prix')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <!-- Modal footer -->
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+                <button   type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">modifier</button>
+                <button data-modal-hide="edit-productModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Anuller</button>
+            </div>
+        </form>
+    </div>
+</div>
+@include('layouts.dashboardFooter')
 
 

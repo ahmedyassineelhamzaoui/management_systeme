@@ -10,4 +10,7 @@ class Marque extends Model
 {
     use HasFactory,softDeletes;
     protected $fillable=['name'];
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }
