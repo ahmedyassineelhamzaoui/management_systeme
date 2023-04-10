@@ -9,5 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable=['nom','réfrence','marque_id','categorie_id','quantité','prix'];
+    protected $fillable=['reference','nom','quantite','prix','marque_id','category_id'];
+
+    public function Marques(){
+        return $this->belongsTo(Marque::class);
+    }
+    public function Categories(){
+        return $this->belongsTo(Category::class);
+    }
+    
 }

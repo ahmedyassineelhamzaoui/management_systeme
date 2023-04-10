@@ -451,6 +451,32 @@ $(document).ready(function() {
             }
           });
       });
+
+
+      $('#create-product-form').submit(function(event) {
+        $('.invalid-feedback').remove();
+        event.preventDefault();
+
+          var formData = $(this).serialize();
+          var url = $(this).attr('action');
+          $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                $('.message-success-createProduct').text(response.message);
+                $('#create-product-success').addClass('flex'); 
+                $('#create-product-success').removeClass('hidden')
+            },
+            error: function(xhr) {
+              var errors = xhr.responseJSON.errors;
+              // clear any existing error messages
+              $.each(errors, function(key, value) {
+                $('#' + key).after('<span class="text-red-500"><strong>' + value + '</strong></span>');
+            });
+            }
+          });
+      });
 });
 // close update user alert
 let closeUpdateUserbutton=document.querySelector("#close-updateUserbutton")
@@ -461,3 +487,29 @@ let updatedSuccess=document.querySelector("#updated-success")
         updatedSuccess.classList.remove('flex')
     }
   }
+
+
+let displayDropdown=document.querySelector(".products-list")
+let hideProductsList=document.querySelector(".hideProducts-list")
+if(displayDropdown){
+    displayDropdown.addEventListener('click',()=>{
+        console.log("display")
+        document.querySelector('.product-dropDown').classList.add('block')
+        document.querySelector('.product-dropDown').classList.remove('hidden')
+        hideProductsList.classList.add('block')
+        hideProductsList.classList.remove('hidden')
+        displayDropdown.classList.add('hidden')
+        displayDropdown.classList.remove('block')
+   })
+}
+if(hideProductsList){
+    hideProductsList.addEventListener('click',()=>{
+        console.log("remove")
+        document.querySelector('.product-dropDown').classList.add('hidden')
+        document.querySelector('.product-dropDown').classList.remove('block')
+        displayDropdown.classList.add('block')
+        displayDropdown.classList.remove('hidden')
+        hideProductsList.classList.add('hidden')
+        hideProductsList.classList.remove('block')
+   })
+}

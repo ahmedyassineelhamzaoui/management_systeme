@@ -16,7 +16,9 @@
             keyboard_double_arrow_left
         </span>
     </div>
-    <div class="sidebar">
+    
+    <div class="sidebar ">
+        
         <a href="{{url('index')}}" class="my-pagesSidebar active" >
             <span class="material-icons-sharp">dashboard</span>
             <h3 class="hedding-h3">tableau de bord</h3>
@@ -27,10 +29,31 @@
             <h3 class="hedding-h3">Utilisateurs</h3>
         </a>
         @endcan
-        <a href="{{url('products')}}" class="my-pagesSidebar">
-            <span class="material-icons-sharp">inventory</span>
-            <h3 class="hedding-h3">Produits</h3>
-        </a>
+        <li class=" flex justify-between px-8 text-gray-500 cursor-pointer my-3">
+            <div class="flex">
+                <span class="material-icons-sharp">receipt_long</span>
+                <h3 class="hedding-h3 ml-2">Produits</h3>  
+            </div>
+            <div>
+                <span class="hideProducts-list hidden"><svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg></span>
+                <span class="products-list"><svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span>
+            </div>
+        </li>
+        <div class="product-dropDown  hidden pl-2">
+            <a href="{{url('products')}}" class="my-pagesSidebar ">  
+                    <span class="material-icons-sharp">inventory</span>
+                    <h3 class="hedding-h3">Stock Principale</h3>  
+            </a>
+            @foreach ($comercials as $key => $comercial)
+                @if($comercial->roles[0]->name == 'commercial')
+                    <a href="#" class="my-pagesSidebar ">        
+                        <span class="rounded-full w-[1em] h-[1em]  border-2 border-gray-400 flex items-center justify-center"><p class="text-gray-400 font-bold">{{$key + 1}}</p></span>  
+                        <h3 class="hedding-h3">{{$comercial->name}} Stock</h3>  
+                    </a> 
+                @endif
+            @endforeach     
+        </div>
+        
         @can('categorie-list')
         <a href="{{url('categories')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">keyboard_command_key</span>
@@ -53,9 +76,6 @@
             <h3 class="hedding-h3">Rôles</h3>
         </a>
         @endcan
-        <a href="{{route('logout')}}" class="my-pagesSidebar">
-            <span class="material-icons-sharp">logout</span>
-            <h3 class="hedding-h3">déconnexion</h3>
-        </a>
+
     </div>
 </aside>

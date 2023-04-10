@@ -27,11 +27,10 @@ class UserController extends Controller
             return view('errors.403');
         }
         $roles = Role::all();
-        $users=User::paginate(5);
+        $users=User::all();
         return view('pages.users',[
             'roles' => $roles,
             'users' => $users,
-            'links' => $users->links()
         ]);
     }
     public function create()
