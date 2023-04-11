@@ -30,6 +30,7 @@ class ProductController extends Controller
 
         if ($product) {
             return response()->json([
+                'product_id' => $product->id,
                 'categories' => $categories,
                 'marques' => $marques,
                 'reference_updated' => $product->reference,
@@ -41,10 +42,7 @@ class ProductController extends Controller
             ]);
         } 
     }
-    // public function showProductForm()
-    // {
-    //     return view('pages.create-product');
-    // }
+    
     public function createProduct(Request $request)
     {
         
@@ -64,5 +62,26 @@ class ProductController extends Controller
             'marque_id' => $request->marque_id
         ]);
         return response()->json(['message' => 'le produit a été bien créer']);
+    }
+    public function updateProductInfo(Request $request)
+    {
+
+        $request->validate([
+            'nom_updated' => 'required|max:20|min:2',
+            'reference_updated' => 'required|max:20|min:2',
+            'quantiteupdated' => 'required|numeric|min:0',
+            'prixupdated' => 'required|numeric|min:0',
+        ]);
+        $product =Product::find($request->product_formId);
+           
+            $product->reference = $request->reference_updated;
+            $product->nom =  $request->nom_updated;
+            $product->quantite = $request->quantiteupdated;
+            $product->prix = $request->prixupdated;
+            $product->category_id = $request->ctegory_idupdated;
+            $product->marque_id = $request->marque_idupdated;
+            $product->save();
+        
+        return response()->json(['message' => 'les informations a été bien modifier']);
     }
 }

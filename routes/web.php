@@ -56,7 +56,7 @@ Route::controller(ProductController::class)->group(function(){
     Route::get('products','index')->name('products');
     Route::post('create-product','createProduct')->name('product.create');
     Route::get('/product-info/{id}', 'getProductInfo');
-    Route::post('/product-info/update', 'updateProductInfo')->name('product.update');
+    Route::post('/product-info', 'updateProductInfo')->name('product.update');
 });
 
 Route::controller(CategorieController::class)->group(function(){

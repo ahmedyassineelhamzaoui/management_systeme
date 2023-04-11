@@ -485,7 +485,6 @@ $(document).ready(function() {
             editProductModal.classList.add('flex')
             editProductModal.classList.remove('hidden')
             var productId = $(this).data('product-id');
-
             $.ajax({
                 type: 'GET',
                 url: '/product-info/'+ productId,
@@ -502,7 +501,7 @@ $(document).ready(function() {
                   $('#nom_updated').val(response.nom_updated);
                   $('#quantiteupdated').val(response.quantiteupdated);
                   $('#prixupdated').val(response.prixupdated);
-
+                  $('#product_formId').val(response.product_id)
                     $.each(categories, function(index, category) {
                         if(category_name == category.name ){
                             selectCtagories.append('<option selected value="' + category.id + '">' + category.name + '</option>');
@@ -517,7 +516,6 @@ $(document).ready(function() {
                             selectMarques.append('<option value="' + marque.id + '">' + marque.name + '</option>');
                         }
                     });
-
                 },
                 error: function(xhr, status, error) {
                   console.log(xhr.responseText); // log the error message
@@ -529,17 +527,16 @@ $(document).ready(function() {
       $('#edit-product-form').submit(function(event) {
         $('.invalid-feedback').remove();
         event.preventDefault();
-
           var formData = $(this).serialize();
           var url = $(this).attr('action');
+          console.log(url)
           $.ajax({
             url: url,
             type: 'POST',
             data: formData,
             success: function(response) {
-                $('.message-success-updated').text(response.message);
-                $('#updated-success').addClass('flex'); 
-                $('#updated-success').removeClass('hidden')
+                var successUrl = window.location.href = '/products?successMessage=' + response.message;
+                window.location.href = successUrl;
             },
             error: function(xhr) {
               var errors = xhr.responseJSON.errors;
@@ -551,7 +548,19 @@ $(document).ready(function() {
           });
       });
 
-      
+      var urlParams = new URLSearchParams(window.location.search);
+      var successMessage = urlParams.get('successMessage');
+      if (successMessage) {
+        $('.message-success-updateProduct').text(successMessage);
+        $('#update-product-success').addClass('flex'); 
+        $('#update-product-success').removeClass('hidden');
+    }
+    $('#update-product-success button').click(function() {
+        // remove "successMessage" parameter from URL
+        var url = new URL(window.location.href);
+        url.searchParams.delete('successMessage');
+        window.history.replaceState({}, document.title, url);
+    })
 });
 // close update user alert
 let closeUpdateUserbutton=document.querySelector("#close-updateUserbutton")
