@@ -17,7 +17,7 @@
         </span>
     </div>
     
-    <div class="sidebar ">
+    <div class="sidebar">
         
         <a href="{{url('index')}}" class="my-pagesSidebar active" >
             <span class="material-icons-sharp">dashboard</span>
@@ -43,6 +43,10 @@
             <a href="{{url('products')}}" class="my-pagesSidebar ">  
                     <span class="material-icons-sharp">inventory</span>
                     <h3 class="hedding-h3">Stock Principale</h3>  
+            </a>
+            <a href="{{url('products')}}" class="my-pagesSidebar ">  
+                <span class="material-icons-sharp">inventory</span>
+                <h3 class="hedding-h3">Stock Principale</h3>  
             </a>
             @foreach ($comercials as $key => $comercial)
                 @if($comercial->roles[0]->name == 'commercial')

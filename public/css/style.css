@@ -271,8 +271,9 @@ aside .close{
     display: none;
 }
 aside .sidebar{
-
+    /* overflow-y: scroll; */
     display: flex;
+    height: full;
     flex-direction: column;
     /* height: 86vh; */
     position: relative;

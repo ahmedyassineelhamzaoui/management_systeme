@@ -427,7 +427,7 @@ $(document).ready(function() {
       });
     });
   
-    $('#update-user-info-form').submit(function(event) {
+      $('#update-user-info-form').submit(function(event) {
         $('.invalid-feedback').remove();
         event.preventDefault();
 
@@ -478,36 +478,80 @@ $(document).ready(function() {
           });
       });
 
-      $('#toggleModalUpdate').click(function() {
-        // get the user data from the server
-        $.ajax({
-          type: 'GET',
-          url: '/product-info', // replace with your Laravel route
-          success: function(response) {
-            // populate the form fields with the user data
-            $('#reference').val(response.reference);
-            $('#nom').val(response.nom);
+      let editButtons = document.querySelectorAll('.edit-productInfo');
+      let editProductModal=document.querySelector("#edit-productModal");
+      editButtons.forEach(button => {
+        $(button).click(function (){
+            editProductModal.classList.add('flex')
+            editProductModal.classList.remove('hidden')
+            var productId = $(this).data('product-id');
 
-            // check if the role_name option exists in the dropdown
-            var marque_id= response.marque_id;
-            var category_id= response.category_id;
-            var marques = response.marques;
-            var select = $('#category');
-              select.empty();
-              $.each(roles, function(index, role) {
-                  if(role_name == role.name ){
-                    select.append('<option selected value="' + role.id + '">' + role.name + '</option>');
-                  }else{
-                    select.append('<option value="' + role.id + '">' + role.name + '</option>');
-                  }
+            $.ajax({
+                type: 'GET',
+                url: '/product-info/'+ productId,
+                success: function(response) {
+                  let categories = response.categories;
+                  let marques = response.marques;
+                  let category_name = response.category_name;
+                  let marque_name = response.marque_name;
+                  let selectCtagories = $('#ctegory_idupdated')
+                  let selectMarques = $('#marque_idupdated')
+                  selectCtagories.empty();
+                  selectMarques.empty();
+                  $('#reference_updated').val(response.reference_updated);
+                  $('#nom_updated').val(response.nom_updated);
+                  $('#quantiteupdated').val(response.quantiteupdated);
+                  $('#prixupdated').val(response.prixupdated);
+
+                    $.each(categories, function(index, category) {
+                        if(category_name == category.name ){
+                            selectCtagories.append('<option selected value="' + category.id + '">' + category.name + '</option>');
+                        }else{
+                            selectCtagories.append('<option value="' + category.id + '">' + category.name + '</option>');
+                        }
+                    });
+                    $.each(marques, function(index, marque) {
+                        if(marque_name == marque.name ){
+                            selectMarques.append('<option selected value="' + marque.id + '">' + marque.name + '</option>');
+                        }else{
+                            selectMarques.append('<option value="' + marque.id + '">' + marque.name + '</option>');
+                        }
+                    });
+
+                },
+                error: function(xhr, status, error) {
+                  console.log(xhr.responseText); // log the error message
+                }
               });
-            $('#password').val(response.password);
-          },
-          error: function(xhr, status, error) {
-            console.log(xhr.responseText); // log the error message
-          }
         });
       });
+       
+      $('#edit-product-form').submit(function(event) {
+        $('.invalid-feedback').remove();
+        event.preventDefault();
+
+          var formData = $(this).serialize();
+          var url = $(this).attr('action');
+          $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                $('.message-success-updated').text(response.message);
+                $('#updated-success').addClass('flex'); 
+                $('#updated-success').removeClass('hidden')
+            },
+            error: function(xhr) {
+              var errors = xhr.responseJSON.errors;
+              // clear any existing error messages
+              $.each(errors, function(key, value) {
+                $('#' + key).after('<span class="text-red-500"><strong>' + value + '</strong></span>');
+            });
+            }
+          });
+      });
+
+      
 });
 // close update user alert
 let closeUpdateUserbutton=document.querySelector("#close-updateUserbutton")

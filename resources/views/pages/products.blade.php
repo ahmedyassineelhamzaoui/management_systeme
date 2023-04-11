@@ -62,10 +62,10 @@
                                         categories
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        prix
+                                        quantité
                                     </th>
                                     <th>
-                                        quantité
+                                        prix
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Action
@@ -85,7 +85,8 @@
                                         {{ $product->marque->name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$product->Category->name}}                                    </td>
+                                        {{$product->Category->name}} 
+                                    </td>
                                     <td class="px-6 py-4">
                                         {{$product->quantite}}
                                     </td>
@@ -94,7 +95,8 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            <a id="toggleModalUpdate" class="text-green-500 cursor-pointer">
+                                            <a data-product-id="{{ $product->id }}" data-modal-target="edit-productModal"
+                                                class="text-green-500 cursor-pointer edit-productInfo">
                                                 {{-- href="{{ url('/update-user/'.$user->id)}}" --}}
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -225,7 +227,7 @@
 <div id="edit-productModal" tabindex="-1" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
     <div class="relative w-full max-w-4xl max-h-full">
         <!-- Modal content -->
-        <form id="create-product-form" action="{{route('product.update')}}"  method="post" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <form id="edit-product-form" action="{{route('product.update')}}"  method="post" class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
             @csrf
             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
@@ -255,46 +257,42 @@
                     @csrf
                     <div class="mx-4 mt-6 ">
                         <div class="w-100">
-                            <label for="reference" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Réfrence du Produit</label>
-                            <input type="text" name="reference"  id="reference" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Réference" required>
+                            <label for="reference_updated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Réfrence du Produit</label>
+                            <input type="text" name="reference_updated"  id="reference_updated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Réference" required>
                         </div>
                         @error('reference')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                         <div class="w-100 mt-2">
-                            <label for="nom" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">le nom du produit</label>
-                            <input type="text" name="nom"  id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="le nom du produit" required>
+                            <label for="nom_updated" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">le nom du produit</label>
+                            <input type="text" name="nom_updated"  id="nom_updated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="le nom du produit" required>
                         </div>
                         @error('nom')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                         
                         <div class="w-100">
-                            <label for="marque_id" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Marque du Produit</label>
-                            <select name="marque_id" id="marque_id" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
-                                @foreach ($marques as $marque)
-                                <option value="{{$marque->id}}">{{$marque->name}}</option>
-                                @endforeach
+                            <label for="marque_idupdated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Marque du Produit</label>
+                            <select name="marque_idupdated" id="marque_idupdated" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
+                                
                             </select>
                         </div>   
                         <div class="w-100">
-                            <label for="ctegory_id" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Category du produit</label>
-                            <select name="category_id" id="category_id" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
-                                @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
+                            <label for="ctegory_idupdated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Category du produit</label>
+                            <select name="ctegory_idupdated" id="ctegory_idupdated" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
+                               
                             </select>
                         </div>                         
                         <div class="w-100">
-                            <label for="quantite" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Quantité du Produits</label>
-                            <input type="number" name="quantite" min="0" id="quantite" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2" placeholder="Quantité">
+                            <label for="quantiteupdated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Quantité du Produits</label>
+                            <input type="number" name="quantiteupdated" min="0" id="quantiteupdated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2" placeholder="Quantité">
                         </div>   
                         @error('quantité')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                         <div class="w-100">
-                            <label for="prix" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Prix du Produit</label>
-                            <input type="number" min="0" name="prix"  id="prix" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2" placeholder="Prix">
+                            <label for="prixupdated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Prix du Produit</label>
+                            <input type="number" min="0" name="prixupdated"  id="prixupdated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2" placeholder="Prix">
                         </div>   
                         @error('prix')
                             <span class="text-red-500 text-sm">{{ $message }}</span>

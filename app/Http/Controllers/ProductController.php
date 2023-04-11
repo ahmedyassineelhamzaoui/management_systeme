@@ -22,10 +22,29 @@ class ProductController extends Controller
     
         return view('pages.products', compact('products', 'marques', 'categories'));
     }
-    public function showProductForm()
+    public function getProductInfo($id)
     {
-        return view('pages.create-product');
+        $product = Product::find($id);
+        $categories = Category::all();
+        $marques = Marque::all();
+
+        if ($product) {
+            return response()->json([
+                'categories' => $categories,
+                'marques' => $marques,
+                'reference_updated' => $product->reference,
+                'nom_updated' => $product->nom,
+                'marque_name' => $product->marque->name,
+                'category_name' => $product->category->name,
+                'quantiteupdated' => $product->quantite,
+                'prixupdated' => $product->prix,
+            ]);
+        } 
     }
+    // public function showProductForm()
+    // {
+    //     return view('pages.create-product');
+    // }
     public function createProduct(Request $request)
     {
         

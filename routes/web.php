@@ -54,9 +54,8 @@ Route::controller(RoleController::class)->group(function(){
 
 Route::controller(ProductController::class)->group(function(){
     Route::get('products','index')->name('products');
-    Route::get('create-product','showProductForm')->name('create-product');
     Route::post('create-product','createProduct')->name('product.create');
-    Route::get('/product-info', 'getProductInfo');
+    Route::get('/product-info/{id}', 'getProductInfo');
     Route::post('/product-info/update', 'updateProductInfo')->name('product.update');
 });
 
