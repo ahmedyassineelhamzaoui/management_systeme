@@ -57,6 +57,7 @@ Route::controller(ProductController::class)->group(function(){
     Route::post('create-product','createProduct')->name('product.create');
     Route::get('/product-info/{id}', 'getProductInfo');
     Route::post('/product-info', 'updateProductInfo')->name('product.update');
+    Route::delete('/products','deleteProduct')->name('delete.product');
 });
 
 Route::controller(CategorieController::class)->group(function(){

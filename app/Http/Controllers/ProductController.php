@@ -84,4 +84,12 @@ class ProductController extends Controller
         
         return response()->json(['message' => 'les informations a été bien modifier']);
     }
+    public function deleteProduct(Request $request)
+    {
+        $product = Product::find($request->product_deletedId);
+        if($product){
+            $product->delete();
+            return redirect()->back()->with('succès','le produit a été bien supprimer');
+        }
+    }
 }

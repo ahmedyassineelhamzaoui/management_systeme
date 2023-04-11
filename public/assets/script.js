@@ -597,3 +597,7 @@ if(hideProductsList){
         hideProductsList.classList.remove('block')
    })
 }
+let  productDeletedId= document.querySelector("#product_deletedId")
+function deleteProduct(id){
+    productDeletedId.value=id
+}
