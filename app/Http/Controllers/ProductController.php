@@ -6,13 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Marque;
+use App\Exports\ExportProduct;
+use App\Imports\UploadProduct;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class ProductController extends Controller
 {
-    public function _construct()
+    public function __construct()
     {
-       $this->middleware('auth');   
+        $this->middleware('auth');
     }
     public function index()
     {
@@ -91,5 +97,28 @@ class ProductController extends Controller
             $product->delete();
             return redirect()->back()->with('succès','le produit a été bien supprimer');
         }
+    }
+
+    public function export() 
+    {
+        return Excel::download( new ExportProduct, 'products.xlsx');
+    }
+       
+    public function import() 
+    {
+        $file = request()->file('product_file');
+
+        if (!$file || $file->getSize() === 0) {
+            return redirect()->route('products')->with('error','The file is empty.');
+        }
+        try {
+            Excel::import(new UploadProduct, $file, null, \Maatwebsite\Excel\Excel::XLSX);
+        } catch (ValidationException $e) {
+            $errors = $e->errors();
+            return redirect()->route('products')->with('error', $errors['reference'][0]);
+        }
+        Excel::import(new UploadProduct, $file, null, \Maatwebsite\Excel\Excel::XLSX);
+    
+        return redirect()->route('products')->with('succès','The file is uploaded successfuly');    
     }
 }

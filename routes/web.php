@@ -58,6 +58,8 @@ Route::controller(ProductController::class)->group(function(){
     Route::get('/product-info/{id}', 'getProductInfo');
     Route::post('/product-info', 'updateProductInfo')->name('product.update');
     Route::delete('/products','deleteProduct')->name('delete.product');
+    Route::get('/products-download','export')->name('product.export');
+    Route::post('/products-upload','import')->name('import.product');
 });
 
 Route::controller(CategorieController::class)->group(function(){
