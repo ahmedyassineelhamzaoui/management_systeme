@@ -398,6 +398,17 @@ if(updateMarque){
     })
 }
 $(document).ready(function() {
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+        type : 'get',
+        url : 'search',
+        data:{'search':$value},
+        success:function(data){
+        $('tbody').html(data);
+        }
+        });
+    })        
     $('#toggleModalButton').click(function() {
       // get the user data from the server
       $.ajax({
@@ -599,5 +610,7 @@ if(hideProductsList){
 }
 let  productDeletedId= document.querySelector("#product_deletedId")
 function deleteProduct(id){
+ 
     productDeletedId.value=id
 }
+
