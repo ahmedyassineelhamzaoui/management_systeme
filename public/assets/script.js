@@ -572,6 +572,101 @@ $(document).ready(function() {
         url.searchParams.delete('successMessage');
         window.history.replaceState({}, document.title, url);
     })
+    var checkedRows = [];
+    if (checkAllRows) {
+        checkAllRows.addEventListener('change', function() {
+            $('.chack-one-row').prop('checked', this.checked);
+        
+            checkedRows = [];
+            $('.chack-one-row:checked').each(function() {
+                var row = $(this).closest('tr');
+                var reference = row.find('label').text();
+                var nom = row.find('td:eq(0)').text();
+                var marque = row.find('td:eq(1)').text();
+                var category = row.find('td:eq(2)').text();
+                var quantity = row.find('td:eq(3)').text();
+                var price = row.find('td:eq(4)').text();
+    
+                checkedRows.push({
+                    reference: reference,
+                    nom: nom,
+                    marque: marque,
+                    category: category,
+                    quantity: quantity,
+                    price: price
+                });
+            });
+            if($('.chack-one-row:checked').length > 0){
+                $('#show-selectproducts').addClass('block');
+                $('#show-selectproducts').removeClass('hidden');
+            }else{
+                $('#show-selectproducts').addClass('hidden');
+                $('#show-selectproducts').removeClass('block');
+            }
+        });
+    }
+    $('.chack-one-row').on('change', function() {
+        var row = $(this).closest('tr');
+
+        if ($(this).is(':checked')) {
+          // Get the row that contains the checked checkbox
+          
+          // Find the information you want to display in the console
+          var reference = row.find('label').text();
+          var nom = row.find('td:eq(0)').text();
+          var marque = row.find('td:eq(1)').text();
+          var category = row.find('td:eq(2)').text();
+          var quantity = row.find('td:eq(3)').text();
+          var price = row.find('td:eq(4)').text();
+          
+          checkedRows.push({
+            reference: reference,
+            nom: nom,
+            marque: marque,
+            category: category,
+            quantity: quantity,
+            price: price
+          });
+           console.log(checkedRows[reference])
+          $('#show-selectproducts').addClass('block')
+          $('#show-selectproducts').removeClass('hidden')
+        }else {
+            // If the checkbox is unchecked, remove the corresponding element from the checkedRows array
+            var reference = row.find('label').text();
+            for (var i = 0; i < checkedRows.length; i++) {
+              if (checkedRows[i].reference === reference) {
+                checkedRows.splice(i, 1);
+                console.log(checkedRows)
+                break;
+              }
+            }
+            if ($('.chack-one-row:checked').length === 0) {
+                $('#show-selectproducts').addClass('hidden')
+                $('#show-selectproducts').removeClass('block')
+            }
+        }
+    });
+
+
+    
+    $('#show-selectproducts').on('click', function() {
+    // Loop through the checkedRows array and display the information in the console
+    var tableRows = '';
+    for (var i = 0; i < checkedRows.length; i++) {
+    tableRows += '<tr class="border-b text-tablecolor">' +
+        '<td class="px-6 py-4">' + checkedRows[i].reference + '</td>' +
+        '<td class="px-6 py-4">' + checkedRows[i].nom + '</td>' +
+        '<td class="px-6 py-4">' + checkedRows[i].marque + '</td>' +
+        '<td class="px-6 py-4">' + checkedRows[i].category + '</td>' +
+        '<td class="px-6 py-4">' + checkedRows[i].price + '</td>' +
+        '<td class="px-6 py-4">' + '<input type="number" class="border-gray-200 text-start bg-transparent" value="' + parseFloat(checkedRows[i].quantity.replace(/[^\d.-]/g, '')) + '" min="0" step="1"></td>' +
+        '</tr>';
+    }
+
+    var tbody = document.getElementById('tbody-products');
+    tbody.innerHTML = tableRows;
+    });
+      
 });
 // close update user alert
 let closeUpdateUserbutton=document.querySelector("#close-updateUserbutton")
@@ -612,5 +707,50 @@ let  productDeletedId= document.querySelector("#product_deletedId")
 function deleteProduct(id){
  
     productDeletedId.value=id
+}
+
+
+let  checkAllRows = document.querySelector('#check-allRows');
+let  checkOneRow = document.querySelectorAll('.chack-one-row');
+
+// Add an event listener to the header checkbox to check/uncheck all row checkboxes
+// if(checkAllRows){
+//     checkAllRows.addEventListener('change', function() {
+//         document.querySelector('#show-selectproducts').classList.add('block')
+//         document.querySelector('#show-selectproducts').classList.add('hidden')
+//         for (let i = 0; i < checkOneRow.length; i++) {
+//             checkOneRow[i].checked = this.checked;
+//         }
+//     });
+// }
+
+let hideCxheckboxButtons =document.querySelector("#hide-checkboxButtons");
+let alementerStock=document.querySelector("#alementer-stock")
+
+if(alementerStock){
+    alementerStock.addEventListener('click',(e)=>{
+        hideCxheckboxButtons.classList.add('block')
+        hideCxheckboxButtons.classList.remove('hidden')
+        checkAllRows.classList.add('block')
+        checkAllRows.classList.remove('hidden')
+    
+        checkOneRow.forEach(element=>{
+            element.classList.add('block')
+            element.classList.remove('hidden')
+        })
+    })
+}
+
+if(hideCxheckboxButtons){
+    hideCxheckboxButtons.addEventListener('click',(e)=>{
+        hideCxheckboxButtons.classList.add('hidden')
+        hideCxheckboxButtons.classList.remove('block')
+        checkAllRows.classList.remove('block')
+        checkAllRows.classList.add('hidden')
+        checkOneRow.forEach(element=>{
+            element.classList.remove('block')
+            element.classList.add('hidden')
+        })
+    })
 }
 

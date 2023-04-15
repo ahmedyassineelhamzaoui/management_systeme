@@ -187,6 +187,9 @@ b{
 .dropdown-menu:hover{
     background: var(--color-background);
 }
+input[type="text"]:focus {
+    outline: none !important;
+  }
 /* =============================================== asidebar ================================================ */
 aside{
     height: 100%;
@@ -705,14 +708,14 @@ main section .insights .progress .number{
 #check-box:checked {
     background-color: #4000d4;
 }
-#check-box:checked:after {
+/* #check-box:checked:after {
     content: '\2713';
     color: white;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+} */
 #forget{
      background-color: red !important;
 }

@@ -19,6 +19,9 @@
                         <button data-modal-target="large-modal" data-modal-toggle="large-modal" class="block w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " type="button">
                             Ajouter Produit
                         </button>
+                        <button id="alementer-stock"  class="block w-full ml-2 md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " type="button">
+                            Alimenter le stock
+                        </button>
                     </div>
                     <div>
                         <h2 class="font-bold text-green">Produits</h2>
@@ -69,8 +72,9 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray uppercase table-bg ">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Réference
+                                    <th scope="col" class="px-6 py-3 flex items-center">
+                                        <input id="check-allRows" type="checkbox" class="hidden mr-2">
+                                        <label for="check-allRows">Réference</label> 
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Nom
@@ -95,8 +99,9 @@
                             <tbody class="table-body-bg">
                                 @forelse ($products as $product)
                                 <tr class="border-b text-tablecolor ">
-                                    <th scope="row" class="px-6 py-4  whitespace-nowrap ">
-                                        {{$product->reference}}
+                                    <th scope="row" class="px-6 py-4 flex items-center  whitespace-nowrap ">
+                                        <input id="check-{{$product->reference}}-row" type="checkbox" class="mr-2 hidden chack-one-row">
+                                        <label for="check-{{$product->reference}}-row">{{$product->reference}}</label> 
                                     </th>
                                     <td class="px-6 py-4">
                                         {{$product->nom}}
@@ -144,6 +149,14 @@
                                 {{ $products->links() }}
                             </div> 
                         </div>  
+                    </div>
+                    <div class="mt-2 flex items-center">
+                        <button id="hide-checkboxButtons"  class="hidden w-full  md:w-auto  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " type="button">
+                           Anuller la selection
+                        </button>
+                        <button  data-modal-target="products-selectedModal" data-modal-toggle="products-selectedModal" id="show-selectproducts"  class="hidden w-full ml-2 md:w-auto  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " type="button">
+                            suivant
+                         </button>
                     </div>
                 </div>
             </section>
@@ -362,6 +375,61 @@
         </div>
     </div>
 </div> 
+{{-- selected products --}}
+<div id="products-selectedModal" tabindex="-1" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
+    <div class="relative w-full max-w-7xl max-h-full">
+        <!-- Modal content -->
+        <form id="product-selectedForm" action=""  method="post" class="relative bg-white rounded-lg shadow">
+            <!-- Modal header -->
+            @csrf
+            <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                 les Produits selectionés
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-hide="products-selectedModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <div class="flex items-center justify-around ml-2">
+                    <table class="w-full text-sm text-left mr-2 text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray uppercase table-bg ">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 flex items-center">
+                                    Reférence
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Nom
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Marque
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    categories
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    prix
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    quantité
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-products" class="table-body-bg">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+                <button   type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Alimenter le stock</button>
+                <button   data-modal-hide="products-selectedModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Anuller</button>
+            </div>
+        </form>
+    </div>
+</div>
 @include('layouts.dashboardFooter')
 
 
