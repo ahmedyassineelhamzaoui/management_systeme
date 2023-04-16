@@ -16,14 +16,20 @@
                     </div>
                     <!-- Dropdown menu -->
                     <div id="opperations" class="z-10 hidden divide-y list-operation rounded-b-lg shadow w-44 ">
-                        <button data-modal-target="import-product" data-modal-toggle="import-product" class="block w-full  text-center  py-2 operation-menu" type="button">
-                            importer produits
+                        <button data-modal-target="import-product" data-modal-toggle="import-product" class="flex w-full justify-start items-center  py-2 operation-menu" type="button">
+                            <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-file-csv"></i></span>
+                            <span>importer produits</span> 
                         </button>
-                        <a class="w-full flex justify-center operation-menu py-2" href="{{ route('product.export') }}">Exporter les produits</a>
-                        <button data-modal-target="large-modal" data-modal-toggle="large-modal" class="block w-full text-center operation-menu  py-2" type="button">
+                        <a class="flex justify-start w-full operation-menu py-2 " href="{{ route('product.export') }}">
+                            <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-file-csv"></i></span>
+                            <span>Exporter les produits </span> 
+                        </a>
+                        <button data-modal-target="large-modal" data-modal-toggle="large-modal" class="flex w-full justify-start items-center operation-menu  py-2" type="button">
+                            <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-plus"></i></span>
                             Ajouter Produit
                         </button>
-                        <button id="alementer-stock"  class="block w-full text-center operation-menu  py-2" type="button">
+                        <button id="alementer-stock"  class="flex justify-start items-center w-full text-center operation-menu  py-2" type="button">
+                            <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-boxes-packing"></i></span>
                             Alimenter le stock
                         </button>
                     </div>
