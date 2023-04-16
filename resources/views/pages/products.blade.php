@@ -12,10 +12,10 @@
             <section id="my-section">
                 <div>
                     <div class="flex justify-end">
-                       <button id="listOf-operations" data-dropdown-toggle="opperations" class=" font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center button-operation" type="button">list des opération <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                       <button id="listOf-operations" data-dropdown-toggle="opperations" class="border-2 border-gray-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center button-operation" type="button">list des opération <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
                     </div>
                     <!-- Dropdown menu -->
-                    <div id="opperations" class="z-10 hidden divide-y list-operation rounded-b-lg shadow w-44 ">
+                    <div id="opperations" class="border-2 border-gray-300 z-10 hidden divide-y list-operation rounded-b-lg shadow w-44 ">
                         <button data-modal-target="import-product" data-modal-toggle="import-product" class="flex w-full justify-start items-center  py-2 operation-menu" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-file-csv"></i></span>
                             <span>importer produits</span> 
@@ -76,8 +76,13 @@
                     </div>
                    
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-                        <div class="flex items-center justify-end px-4 py-3">
-                            <input type="text" class="form-controller" id="search" name="search"></input>
+                        <div class="flex items-center justify-start px-4 py-3">
+                            <div class="relative ">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <input type="text" id="search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Chercher" required>
+                            </div>
                         </div>
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray uppercase table-bg ">
