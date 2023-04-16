@@ -398,45 +398,35 @@ if(updateMarque){
     })
 }
 $(document).ready(function() {
-    $('#search').on('keyup',function(){
-        $value=$(this).val();
+           
+        $('#toggleModalButton').click(function() {
+        // get the user data from the server
         $.ajax({
-        type : 'get',
-        url : 'search',
-        data:{'search':$value},
-        success:function(data){
-        $('tbody').html(data);
-        }
+            type: 'GET',
+            url: '/users-info', // replace with your Laravel route
+            success: function(response) {
+            // populate the form fields with the user data
+            $('#name').val(response.name);
+            $('#email').val(response.email);
+            // check if the role_name option exists in the dropdown
+            var role_name= response.role_name;
+            var roles = response.roles;
+            var select = $('#role');
+                select.empty();
+                $.each(roles, function(index, role) {
+                    if(role_name == role.name ){
+                    select.append('<option selected value="' + role.id + '">' + role.name + '</option>');
+                    }else{
+                    select.append('<option value="' + role.id + '">' + role.name + '</option>');
+                    }
+                });
+            $('#password').val(response.password);
+            },
+            error: function(xhr, status, error) {
+            console.log(xhr.responseText); // log the error message
+            }
         });
-    })        
-    $('#toggleModalButton').click(function() {
-      // get the user data from the server
-      $.ajax({
-        type: 'GET',
-        url: '/users-info', // replace with your Laravel route
-        success: function(response) {
-          // populate the form fields with the user data
-          $('#name').val(response.name);
-          $('#email').val(response.email);
-          // check if the role_name option exists in the dropdown
-          var role_name= response.role_name;
-          var roles = response.roles;
-          var select = $('#role');
-            select.empty();
-            $.each(roles, function(index, role) {
-                if(role_name == role.name ){
-                  select.append('<option selected value="' + role.id + '">' + role.name + '</option>');
-                }else{
-                  select.append('<option value="' + role.id + '">' + role.name + '</option>');
-                }
-            });
-          $('#password').val(response.password);
-        },
-        error: function(xhr, status, error) {
-          console.log(xhr.responseText); // log the error message
-        }
-      });
-    });
+        });
   
       $('#update-user-info-form').submit(function(event) {
         $('.invalid-feedback').remove();
@@ -684,7 +674,41 @@ $(document).ready(function() {
             }
         });
     });
-      
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+        type : 'get',
+        url : 'search',
+        data:{'search':$value},
+        success:function(response){
+            let tablelines = '';
+            for (var i = 0; i < response.data.length; i++) {
+                tablelines += '<tr class="border-b text-tablecolor">' +
+                '<td class="px-6 py-4">' + response.data[i].reference + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].nom + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].marque.name + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].category.name + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].quantite + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].prix +'</td>' +
+                '<td class="px-6 py-4">'+
+                    '<div class="flex items-center">'+
+                        '<button  data-product-id="'+response.data[i].id +'" data-modal-target="edit-productModal" class="text-green-500 cursor-pointer edit-productInfo">'+
+                            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>'+                                                      
+                        '</button>'+   
+                        '<button onclick="deleteProduct('+response.data[i].id +')" data-modal-target="delete-product" data-modal-toggle="delete-product"  class="text-red-600 cursor-pointer delete-product">'+
+                            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>'+                                                      
+                        '</button>'+
+                        '</form>'+
+                    '</div>'+
+            '</td>'+
+                '</tr>';
+            }
+        $('tbody').html(
+            tablelines
+        );
+        }
+        });
+    })     
 });
 // close update user alert
 let closeUpdateUserbutton=document.querySelector("#close-updateUserbutton")
@@ -723,8 +747,14 @@ if(hideProductsList){
 }
 let  productDeletedId= document.querySelector("#product_deletedId")
 function deleteProduct(id){
- 
+    document.querySelector("#delete-product").classList.add('flex')
+    document.querySelector("#delete-product").classList.remove('hidden')
     productDeletedId.value=id
+}
+function editProduct(id){
+    document.querySelector("#edit-productModal").classList.add('flex')
+    document.querySelector("#edit-productModal").classList.remove('hidden')
+    document.querySelector("#product_formId").value=id
 }
 
 
