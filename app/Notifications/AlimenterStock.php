@@ -37,7 +37,8 @@ class AlimenterStock extends Notification
     {
        return [
         'title' => 'a demandé l\'alimentation de son stock',
-        'user'  => auth()->user()->name
+        'user'  => auth()->user()->name,
+        'picture' => 'packages.png',
        ];
     }
 }

@@ -21,23 +21,7 @@ class ProductController extends Controller
     {
         $this->middleware('auth');
     }
-    public function allimenterStock(Request $request)
-    {
-        $references = $request->input('references');
-        $quantities = $request->input('quantity');
-
-        $user = User::find(1);
-        Notification::send($user, new AlimenterStock());
-
-        foreach ($references as $i => $reference) {
-            $product = Product::where('reference', $reference)->first();
-            if ($product) {
-                $product->quantite = $quantities[$i];
-                $product->save();
-            }
-        }
-        return response()->json(['message' => 'Products updated successfully.']);
-    }
+    
     public function index()
     {
         $products = Product::with('marque', 'category')->paginate(5); // Eager load the Marques and Categories relationships
@@ -190,22 +174,22 @@ class ProductController extends Controller
         }
     }
 
-    // public function allimenterStock(Request $request)
-    // {
-    //     $references = $request->input('references');
-    //     $quantities = $request->input('quantity');
+    public function allimenterStock(Request $request)
+    {
+        $references = $request->input('references');
+        $quantities = $request->input('quantity');
 
-    //     $user = User::find(1);
-    //     Notification::send($user, new allimenterStock());
+        $user = User::find(1);
+        Notification::send($user, new AlimenterStock());
 
-    //     foreach ($references as $i => $reference) {
-    //         $product = Product::where('reference', $reference)->first();
-    //         if ($product) {
-    //             $product->quantite = $quantities[$i];
-    //             $product->save();
-    //         }
-    //     }
-    //     return response()->json(['message' => 'Products updated successfully.']);
-    // }
+        foreach ($references as $i => $reference) {
+            $product = Product::where('reference', $reference)->first();
+            if ($product) {
+                $product->quantite = $quantities[$i];
+                $product->save();
+            }
+        }
+        return response()->json(['message' => 'Products updated successfully.']);
+    }
 
 }

@@ -14,11 +14,16 @@
             
                 <div id="dropdownHover" class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow  w-11/12 sm:w-96">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Dashboard</a>
+                    <li class="">
+                        <p class="block text-lg px-4 py-2">vous avez <span class="font-bold"> {{ auth()->user()->unreadNotifications->count()}}</span> notifcations non lu</p>
                     </li>
+                    @foreach (auth()->user()->unreadNotifications  as $notification)
                     <li>
-                        <a href="#" class="block px-4 py-2 text-center text-blue-700  ">Voir tout</a>
+                        <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 "><img class="w-10 h-10" src="images/{{$notification->data['picture'] }}" alt=""><span >{{$notification->data['user'] }} {{ $notification->data['title']}}</span></a>
+                    </li>
+                    @endforeach
+                    <li>
+                        <a href="#" class="block px-4 py-2 text-center text-blue-700 ">Voir tout</a>
                     </li>
                     </ul>
                 </div>   
