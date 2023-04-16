@@ -379,7 +379,7 @@
 <div id="products-selectedModal" tabindex="-1" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
     <div class="relative w-full max-w-7xl max-h-full">
         <!-- Modal content -->
-        <form id="product-selectedForm" action=""  method="post" class="relative bg-white rounded-lg shadow">
+        <form id="product-selectedForm" action="{{route('allimenter.stock')}}"  method="post" class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
             @csrf
             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">

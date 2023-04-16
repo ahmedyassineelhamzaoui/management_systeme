@@ -627,7 +627,6 @@ $(document).ready(function() {
             quantity: quantity,
             price: price
           });
-           console.log(checkedRows[reference])
           $('#show-selectproducts').addClass('block')
           $('#show-selectproducts').removeClass('hidden')
         }else {
@@ -636,7 +635,6 @@ $(document).ready(function() {
             for (var i = 0; i < checkedRows.length; i++) {
               if (checkedRows[i].reference === reference) {
                 checkedRows.splice(i, 1);
-                console.log(checkedRows)
                 break;
               }
             }
@@ -654,17 +652,37 @@ $(document).ready(function() {
     var tableRows = '';
     for (var i = 0; i < checkedRows.length; i++) {
     tableRows += '<tr class="border-b text-tablecolor">' +
-        '<td class="px-6 py-4">' + checkedRows[i].reference + '</td>' +
+        '<td class="px-6 py-4"><input type="hidden" name="references[]" value="' + checkedRows[i].reference + '">' + checkedRows[i].reference + '</td>' +
         '<td class="px-6 py-4">' + checkedRows[i].nom + '</td>' +
         '<td class="px-6 py-4">' + checkedRows[i].marque + '</td>' +
         '<td class="px-6 py-4">' + checkedRows[i].category + '</td>' +
         '<td class="px-6 py-4">' + checkedRows[i].price + '</td>' +
-        '<td class="px-6 py-4">' + '<input type="number" class="border-gray-200 text-start bg-transparent" value="' + parseFloat(checkedRows[i].quantity.replace(/[^\d.-]/g, '')) + '" min="0" step="1"></td>' +
+        '<td class="px-6 py-4">' + '<input type="number" class="border-gray-200 text-start bg-transparent" name="quantity[]" value="' + parseFloat(checkedRows[i].quantity.replace(/[^\d.-]/g, '')) + '" min="0" step="1"></td>' +
         '</tr>';
     }
 
     var tbody = document.getElementById('tbody-products');
     tbody.innerHTML = tableRows;
+    });
+    $('#product-selectedForm').on('submit', function(e) {
+        e.preventDefault(); // prevent the form from submitting normally
+    
+        var formData = $(this).serialize(); // get form data as serialized string
+    
+        // make AJAX call to update database
+        $.ajax({
+            url: '/alimenter-stock',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                // handle success
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // handle error
+                console.log(xhr.responseText);
+            }
+        });
     });
       
 });
@@ -713,16 +731,7 @@ function deleteProduct(id){
 let  checkAllRows = document.querySelector('#check-allRows');
 let  checkOneRow = document.querySelectorAll('.chack-one-row');
 
-// Add an event listener to the header checkbox to check/uncheck all row checkboxes
-// if(checkAllRows){
-//     checkAllRows.addEventListener('change', function() {
-//         document.querySelector('#show-selectproducts').classList.add('block')
-//         document.querySelector('#show-selectproducts').classList.add('hidden')
-//         for (let i = 0; i < checkOneRow.length; i++) {
-//             checkOneRow[i].checked = this.checked;
-//         }
-//     });
-// }
+
 
 let hideCxheckboxButtons =document.querySelector("#hide-checkboxButtons");
 let alementerStock=document.querySelector("#alementer-stock")
