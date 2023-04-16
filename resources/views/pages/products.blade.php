@@ -408,7 +408,7 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <div class="flex items-center justify-around ml-2">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
                     <table class="w-full text-sm text-left mr-2 text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray uppercase table-bg ">
                             <tr>
