@@ -187,6 +187,16 @@ b{
 .dropdown-menu:hover{
     background: var(--color-background);
 }
+.list-operation{
+    background: var(--color-background);
+    color: var(--dashboard-nameColor);
+}
+.operation-menu:hover{
+    background: var(--table-bg);
+}
+.button-operation{
+    color:var(--dashboard-nameColor);
+}
 input[type="text"]:focus {
     outline: none !important;
   }
