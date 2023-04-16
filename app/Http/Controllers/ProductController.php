@@ -11,14 +11,32 @@ use App\Imports\UploadProduct;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
-
-
+use App\Notifications\AlimenterStock;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+    public function allimenterStock(Request $request)
+    {
+        $references = $request->input('references');
+        $quantities = $request->input('quantity');
+
+        $user = User::find(1);
+        Notification::send($user, new AlimenterStock());
+
+        foreach ($references as $i => $reference) {
+            $product = Product::where('reference', $reference)->first();
+            if ($product) {
+                $product->quantite = $quantities[$i];
+                $product->save();
+            }
+        }
+        return response()->json(['message' => 'Products updated successfully.']);
     }
     public function index()
     {
@@ -172,18 +190,22 @@ class ProductController extends Controller
         }
     }
 
-    public function allimenterStock(Request $request)
-    {
-        $references = $request->input('references');
-        $quantities = $request->input('quantity');
-        foreach ($references as $i => $reference) {
-            $product = Product::where('reference', $reference)->first();
-            if ($product) {
-                $product->quantite = $quantities[$i];
-                $product->save();
-            }
-        }
-        return response()->json(['message' => 'Products updated successfully.']);
-    }
+    // public function allimenterStock(Request $request)
+    // {
+    //     $references = $request->input('references');
+    //     $quantities = $request->input('quantity');
+
+    //     $user = User::find(1);
+    //     Notification::send($user, new allimenterStock());
+
+    //     foreach ($references as $i => $reference) {
+    //         $product = Product::where('reference', $reference)->first();
+    //         if ($product) {
+    //             $product->quantite = $quantities[$i];
+    //             $product->save();
+    //         }
+    //     }
+    //     return response()->json(['message' => 'Products updated successfully.']);
+    // }
 
 }
