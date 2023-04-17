@@ -562,6 +562,13 @@ $(document).ready(function() {
         url.searchParams.delete('successMessage');
         window.history.replaceState({}, document.title, url);
     })
+    if(checkAllProductComande){
+        if (checkAllProductComande) {
+            checkAllProductComande.addEventListener('change', function() {
+                $('.check-one-rowComande').prop('checked', this.checked);
+            });
+        }
+    }
     var checkedRows = [];
     if (checkAllRows) {
         checkAllRows.addEventListener('change', function() {
@@ -685,8 +692,10 @@ $(document).ready(function() {
             type: 'POST',
             data: formData,
             success: function(response) {
-                // handle success
-                console.log(response);
+                // handle 
+                $('#success-commande').addClass('flex')
+                $('#success-commande').removeClass('hidden')
+                $('.add-commandeMessage').text(response.message);
             },
             error: function(xhr, status, error) {
                 // handle error
@@ -804,6 +813,8 @@ function editProduct(id){
 
 let  checkAllRows = document.querySelector('#check-allRows');
 let  checkOneRow = document.querySelectorAll('.chack-one-row');
+let checkAllProductComande=document.querySelector("#check-allProductComande")
+let checkOneRowComande=document.querySelectorAll(".check-one-rowComande")
 
 
 
