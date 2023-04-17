@@ -524,7 +524,55 @@ $(document).ready(function() {
               });
         });
       });
-       
+    
+
+      let editCommande = document.querySelectorAll('.edit-commande');
+      let editCommandeModal=document.querySelector('#edit-commandeModal');
+
+      editCommande.forEach(button => {
+        $(button).click(function (){
+            editCommandeModal.classList.add('flex')
+            editCommandeModal.classList.remove('hidden')
+            var commandeId = $(this).data('commande-id');
+            document.querySelector("#comande-updatedId").value=commandeId
+            let commandeStatus=$('#commande-status')
+            $.ajax({
+                type: 'GET',
+                url: '/commande-info/'+commandeId ,
+                success: function(response) {
+                  let status = response.commande_status;
+                commandeStatus.empty();
+                commandeStatus.append('<option ' + (status == "en cours" ? 'selected' : '') + ' value="en cours" >en cours</option>');
+                commandeStatus.append('<option ' + (status == "Livré" ? 'selected' : '') + ' value="Livré" >Livré</option>');
+
+                },
+                error: function(xhr, status, error) {
+                  console.log(xhr.responseText); // log the error message
+                }
+              });
+        });
+      });
+      $('#edit-commande-form').submit(function(event) {
+        event.preventDefault();
+          var formData = $(this).serialize();
+          var url = $(this).attr('action');
+          $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(xhr) {
+              var errors = xhr.responseJSON.errors;
+              // clear any existing error messages
+              $.each(errors, function(key, value) {
+                $('#' + key).after('<span class="text-red-500"><strong>' + value + '</strong></span>');
+            });
+            }
+          });
+      });
+
       $('#edit-product-form').submit(function(event) {
         $('.invalid-feedback').remove();
         event.preventDefault();
@@ -850,3 +898,4 @@ if(hideCxheckboxButtons){
 function deleteCommande(id){
     document.querySelector("#commande_deletedId").value=id
 }
+

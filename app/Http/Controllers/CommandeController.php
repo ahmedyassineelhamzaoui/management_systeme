@@ -60,4 +60,23 @@ class CommandeController extends Controller
             return redirect()->back()->with('succès','la commande a été bien supprimer');
         }
     }
+    public function updateCommande(Request $request)
+    {
+
+        
+        $commande =Commande::find($request->comande_updatedId);
+            $commande->status = $request->commande_status;
+            $commande->save();
+        
+        return redirect()->back()->with('succès','la commande a été bien modifier');
+    }
+    public function getCommande($id)
+    {
+        $commande = Commande::find($id);
+        if ($commande) {
+            return response()->json([
+                'commande_status' => $commande->status,
+            ]);
+        } 
+    }
 }
