@@ -78,14 +78,16 @@
                             </tr>
                         </thead>
                         <tbody class="table-body-bg">
+                            @forelse($commandes as $commande)
                             <tr class="border-b text-tablecolor ">
                                 <th scope="row" class="px-6 py-4   whitespace-nowrap ">
+                                    {{$commande->id}}
                                 </th>
                                 <td class="px-6 py-4">
-                                    
+                                    {{$commande->user_name}}
                                 </td>
                                 <td class="px-6 py-4">
-                                    
+                                    {{$commande->status}}
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
@@ -102,11 +104,16 @@
                                     </div>
                                 </td>
                             </tr>
-                            {{-- @empty --}}
-                               {{-- <td colspan="3" class="text-center py-1"> aucune catégorie exist</td> --}}
-                            {{-- @endforelse --}}
+                            @empty
+                               <td colspan="4" class="text-center py-1"> aucune catégorie exist</td>
+                            @endforelse
                         </tbody>
                     </table>
+                    <div class="flex items-center justify-center ">
+                        <div class="flex justify-center my-2">
+                            {{ $commandes->links() }}
+                        </div> 
+                    </div>  
                 </div>
             </section>
         </main>

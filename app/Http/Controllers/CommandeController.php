@@ -16,7 +16,8 @@ class CommandeController extends Controller
         $products = Product::with('marque', 'category')->paginate(5); // Eager load the Marques and Categories relationships
         $marques = Marque::all();
         $categories = Category::all();
-        return view('pages.commande', compact('products', 'marques', 'categories'));
+        $commandes = Commande::paginate(4);
+        return view('pages.commande', compact('products', 'marques', 'categories','commandes'));
     }
     public function CreateCommande(Request $request)
     {
