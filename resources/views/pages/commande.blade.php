@@ -167,20 +167,24 @@
                             @forelse ($products as $product)
                             <tr class="border-b text-tablecolor ">
                                 <th scope="row" class="px-6 py-4 flex items-center  whitespace-nowrap ">
-                                    <input id="check-{{$product->reference}}-product" type="checkbox" class="mr-2 chack-one-row">
+                                    <input id="{{$product->reference}}" name="items[]" value="{{ $product->reference }}"  type="checkbox" class="mr-2 chack-one-row">
                                     <input type="hidden" name="references[]" value="{{$product->reference}}">
-                                    <label for="check-{{$product->reference}}-product">{{$product->reference}}</label> 
+                                    <label for="{{$product->reference}}">{{$product->reference}}</label> 
                                 </th>
                                 <td class="px-6 py-4">
+                                    <input type="hidden" name="nom[]" value="{{$product->nom}}">
                                     {{$product->nom}}
                                 </td>
                                 <td class="px-6 py-4">
+                                    <input type="hidden" name="marques[]" value="{{ $product->marque->name }}">
                                     {{ $product->marque->name }}
                                 </td>
                                 <td class="px-6 py-4">
+                                    <input type="hidden" name="categories[]" value="{{$product->Category->name}}">
                                     {{$product->Category->name}} 
                                 </td>
                                 <td>
+                                    <input type="hidden" name="prix[]" value="{{$product->prix}}">
                                     {{$product->prix}}
                                 </td>
                                 <td class="px-6 py-4">

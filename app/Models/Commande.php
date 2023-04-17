@@ -9,4 +9,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Commande extends Model
 {
     use HasFactory,softDeletes;
+    protected $fillable =['user_name','status','data'];
 }
