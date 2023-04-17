@@ -847,4 +847,6 @@ if(hideCxheckboxButtons){
         })
     })
 }
-
+function deleteCommande(id){
+    document.querySelector("#commande_deletedId").value=id
+}

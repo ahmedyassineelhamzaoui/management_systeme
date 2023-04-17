@@ -52,4 +52,12 @@ class CommandeController extends Controller
 
         return response()->json(['message' => 'Commande created successfully.']);
     }
+    public function deleteCommande(Request $request)
+    {
+        $commande = Commande::find($request->commande_deletedId);
+        if($commande){
+            $commande->delete();
+            return redirect()->back()->with('succès','la commande a été bien supprimer');
+        }
+    }
 }
