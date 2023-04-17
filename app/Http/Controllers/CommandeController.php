@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Marque;
 use App\Models\Commande;
-
+use Dompdf\Dompdf;
 
 class CommandeController extends Controller
 {
@@ -78,5 +78,36 @@ class CommandeController extends Controller
                 'commande_status' => $commande->status,
             ]);
         } 
+    }
+    public function downloadCommande(Request $request)
+    {
+        $commande  = Commande::find($request->id);
+
+        $data = json_decode($commande->data);
+        $prixtotale = 0;
+        foreach($data as $items){
+            $prixtotale +=$items->prix * $items->quantity;
+        }
+        
+        // dd($data);
+        $dompdf = new Dompdf();
+    
+        // Render the view as HTML
+        $html = view('pages.commandepdf', compact('commande','data','prixtotale'))->render();
+        
+        // Load the HTML into dompdf
+        $dompdf->loadHtml($html);
+        
+        // Set the paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+        
+        // Render the PDF
+        $dompdf->render();
+        $output = $dompdf->output();
+        return response($output, 200)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="commande.pdf"');
+        return redirect()->back()->with('succès','votre commande a été bien télecharger');
+        
     }
 }

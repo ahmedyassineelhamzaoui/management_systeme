@@ -200,6 +200,14 @@ b{
 input[type="text"]:focus {
     outline: none !important;
   }
+  /* table {
+    border-collapse: collapse;
+  }
+  
+  td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  } */
 /* =============================================== asidebar ================================================ */
 aside{
     height: 100%;

@@ -85,4 +85,5 @@ Route::controller(CommandeController::class)->group(function(){
     Route::delete('/delete-commande','deleteCommande')->name('delete.commande');
     Route::get('/commande-info/{id}','getCommande');
     Route::post('/commande-info','updateCommande')->name('update.commande');
+    Route::post('/download-commande','downloadCommande')->name('users.downloadCommande');
 });
