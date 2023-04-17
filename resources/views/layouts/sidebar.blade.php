@@ -44,10 +44,6 @@
                     <span class="material-icons-sharp">inventory</span>
                     <h3 class="hedding-h3">Stock Principale</h3>  
             </a>
-            <a href="{{url('products')}}" class="my-pagesSidebar ">  
-                <span class="material-icons-sharp">inventory</span>
-                <h3 class="hedding-h3">Stock Principale</h3>  
-            </a>
             @foreach ($comercials as $key => $comercial)
                 @if($comercial->roles[0]->name == 'commercial')
                     <a href="#" class="my-pagesSidebar ">        
@@ -70,7 +66,7 @@
             <h3 class="hedding-h3">Marques</h3>
         </a>
         @endcan
-        <a href="#" class="my-pagesSidebar">
+        <a href="{{url('Commande')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">list_alt</span>
             <h3 class="hedding-h3">Commandes</h3>
         </a>

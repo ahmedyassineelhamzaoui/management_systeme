@@ -207,6 +207,7 @@ aside{
     background: var(--color-white);
     width:16rem;
     z-index: 49;
+    /* overflow-y: scroll; */
 }
 aside .top{
     display: flex;
@@ -284,11 +285,8 @@ aside .close{
     display: none;
 }
 aside .sidebar{
-    /* overflow-y: scroll; */
     display: flex;
-    height: full;
     flex-direction: column;
-    /* height: 86vh; */
     position: relative;
     top: 3rem;
 }
@@ -391,8 +389,9 @@ aside .sidebar .message-count{
     justify-content:space-evenly;
 }
 .page-content .nav .right-nav .conected .user-profile{
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
 }
  .page-content .nav .right-nav .theme-mode{
     background: var(--color-light);
@@ -448,7 +447,7 @@ aside .sidebar .message-count{
 main section{
     margin-top: 4rem ;
     width:100%; 
-    padding:0 1rem;
+    padding:0 1rem   ;
 }
 /* nav bar */
 .table-bg{
@@ -731,6 +730,25 @@ main section .insights .progress .number{
 }
 
 /* user status style */
+div.notification {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background-color: #df0ba3;
+    border-radius: 50%;
+    position: absolute;
+    top:0;
+    right:0;
+}
+span.notification-blink {
+    display: block;
+    width: 9px;
+    height: 9px;
+    background-color: #df0ba3;
+    opacity: 0.7;
+    border-radius: 50%;
+    animation: blink 1s linear infinite;
+  } 
 div.online-indicator {
     display: inline-block;
     width: 15px;
@@ -741,7 +759,7 @@ div.online-indicator {
     border-radius: 50%;
     
     position: relative;
-  }
+}
   span.blink {
     display: block;
     width: 15px;

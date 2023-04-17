@@ -7,11 +7,18 @@
     </div>
     <div class="right-nav">
         <div class="mr-2">
-            <span id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" >
+            <div class="relative">
+            @if(auth()->user()->unreadNotifications->count()>0) 
+            <div class="notification">
+                <span class="notification-blink "></span>
+            </div>
+            @endif
+            <span id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="button-operation">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                 </svg>    
-            
+            </span>
+            </div>
                 <div id="dropdownHover" class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow  w-11/12 sm:w-96">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                     <li class="">
@@ -33,7 +40,7 @@
             <span class="material-icons-sharp">dark_mode</span>
         </div>
         <div class="conected">
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center " type="button">yassine <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center " type="button">{{auth()->user()->name}}<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
             <!-- Dropdown menu -->
             <div id="dropdown" class="z-10 hidden divide-y  rounded-b-lg shadow w-44 ">
                 <ul class="py-2 text-sm " aria-labelledby="dropdownDefaultButton">
@@ -48,7 +55,7 @@
                 </ul>
             </div>
             <div class="ml-1">
-                <img class="user-profile" src="images/profile.png" alt="">
+                <img class="user-profile" src="images/user.png" alt="">
             </div>
         </div>
     </div>

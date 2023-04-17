@@ -30,6 +30,7 @@ class ProductController extends Controller
     
         return view('pages.products', compact('products', 'marques', 'categories'));
     }
+    
     public function getProductInfo($id)
     {
         $product = Product::find($id);

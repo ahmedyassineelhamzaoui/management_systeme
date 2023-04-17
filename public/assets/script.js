@@ -708,6 +708,30 @@ $(document).ready(function() {
         );
         }
         });
+    }) 
+    $('#searchProduct').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+        type : 'get',
+        url : 'search',
+        data:{'search':$value},
+        success:function(response){
+            let tablelines = '';
+            for (var i = 0; i < response.data.length; i++) {
+                tablelines += '<tr class="border-b text-tablecolor">' +
+                '<td class="px-6 py-4">' + response.data[i].reference + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].nom + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].marque.name + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].category.name + '</td>' +
+                '<td class="px-6 py-4">' + response.data[i].prix +'</td>' + 
+                '<td class="px-6 py-4">' + response.data[i].quantite + '</td>' +
+                '</tr>';
+            }
+        $('#tbodyProductForm').html(
+            tablelines
+        );
+        }
+        });
     })     
 });
 // close update user alert

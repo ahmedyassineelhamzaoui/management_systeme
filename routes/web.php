@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\MarqueController;
+use App\Http\Controllers\CommandeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,7 +63,6 @@ Route::controller(ProductController::class)->group(function(){
     Route::post('/products-upload','import')->name('import.product');
     Route::get('/search','search')->name('products.search');
     Route::post('/alimenter-stock','allimenterStock')->name('allimenter.stock');
-
 });
 
 Route::controller(CategorieController::class)->group(function(){
@@ -77,4 +77,8 @@ Route::controller(MarqueController::class)->group(function(){
    Route::post('brand','ajouterMarque')->name('create.marque');
    Route::delete('brand','deleteBrand')->name('delete.marque');
    Route::put('brand','updateMarque')->name('update.marque');
+});
+
+Route::controller(CommandeController::class)->group(function(){
+    Route::get('Commande','index')->name('Commande');
 });
