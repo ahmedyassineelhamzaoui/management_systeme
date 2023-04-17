@@ -674,6 +674,26 @@ $(document).ready(function() {
             }
         });
     });
+    $('#product-selectedFormCommande').on('submit', function(e) {
+        e.preventDefault(); // prevent the form from submitting normally
+    
+        var formData = $(this).serialize(); // get form data as serialized string
+    
+        // make AJAX call to update database
+        $.ajax({
+            url: '/create-commande',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                // handle success
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // handle error
+                console.log(xhr.responseText);
+            }
+        });
+    });
     $('#search').on('keyup',function(){
         $value=$(this).val();
         $.ajax({

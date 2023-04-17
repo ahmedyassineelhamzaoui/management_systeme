@@ -81,4 +81,6 @@ Route::controller(MarqueController::class)->group(function(){
 
 Route::controller(CommandeController::class)->group(function(){
     Route::get('Commande','index')->name('Commande');
+    Route::post('/create-commande','CreateCommande')->name('create.commande');
+
 });
