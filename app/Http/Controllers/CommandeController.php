@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Category;
 use App\Models\Marque;
 use App\Models\Commande;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\CreateCommandeNotification;
 
 class CommandeController extends Controller
 {
@@ -49,8 +52,10 @@ class CommandeController extends Controller
             'status' => 'en cours',
             'data' => json_encode($data),
         ]);
-
-        return response()->json(['message' => 'Commande created successfully.']);
+        $user = User::find(1);
+        $userAuth =  auth()->user()->name;
+        Notification::send($user, new CreateCommandeNotification($userAuth));
+        return response()->json(['message' => 'La Commande a été bien créer created .']);
     }
     public function deleteCommande(Request $request)
     {

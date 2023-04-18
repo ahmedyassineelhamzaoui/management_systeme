@@ -9,6 +9,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\NotificationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -86,4 +87,7 @@ Route::controller(CommandeController::class)->group(function(){
     Route::get('/commande-info/{id}','getCommande');
     Route::post('/commande-info','updateCommande')->name('update.commande');
     Route::post('/download-commande','downloadCommande')->name('users.downloadCommande');
+});
+Route::controller(NotificationController::class)->group(function(){
+    Route::get('notifications','index')->name('Notification');
 });

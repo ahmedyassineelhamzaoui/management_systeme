@@ -20,13 +20,19 @@
             </span>
             </div>
                 <div id="dropdownHover" class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow  w-11/12 sm:w-96">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-                    <li class="">
-                        <p class="block text-lg px-4 py-2">vous avez <span class="font-bold"> {{ auth()->user()->unreadNotifications->count()}}</span> notifcations non lu</p>
-                    </li>
+                    <ul class="text-sm " aria-labelledby="dropdownHoverButton">
+                    <div class="text-lg  bg-blue-600 ">
+                        <div class="flex items-center justify-between px-4 pt-2">
+                        <p class="text-white font-bold pt-2"> Notifications </p>
+                        <button class="bg-yellow-500 txet-black text-sm font-bold rounded-lg py-2 px-4">
+                            Marquer Comme lu
+                        </button>
+                        </div>
+                        <p class="text-white text-sm pl-4 py-2">vous avez <span class="font-bold"> {{ auth()->user()->unreadNotifications->count()}}</span> notifcations non lu</p>
+                    </div>
                     @foreach (auth()->user()->unreadNotifications  as $notification)
                     <li>
-                        <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 "><img class="w-10 h-10" src="images/{{$notification->data['picture'] }}" alt=""><span >{{$notification->data['user'] }} {{ $notification->data['title']}}</span></a>
+                        <a href="#" class="flex items-center px-4 py-2 "><img class="w-6 h-6 mr-1" src="images/{{$notification->data['picture'] }}" alt=""><span >{{$notification->data['user'] }} {{ $notification->data['title']}}</span></a>
                     </li>
                     @endforeach
                     <li>

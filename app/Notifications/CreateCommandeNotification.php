@@ -7,17 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\User;
-class AlimenterStock extends Notification
+class CreateCommandeNotification extends Notification
 {
     use Queueable;
-    private $details;
+    private $user;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
+        $this->user =  $user;
     }
 
     /**
@@ -36,12 +37,12 @@ class AlimenterStock extends Notification
     public function toDatabase($notifiable)
     {
        return [
-        'accept' => 'yes',
-        'link'  => 'products',
-        'pages' => 'Produits',
-        'title' => 'a demandé l\'alimentation de son stock',
-        'user'  => auth()->user()->name,
-        'picture' => 'packages.png',
+        'accept' => 'no',
+        'link'  => 'Commande',
+        'pages' => 'Commandes',
+        'title' => 'a créer une comande',
+        'user'  => $this->user,
+        'picture' => 'commande.png',
        ];
     }
 }

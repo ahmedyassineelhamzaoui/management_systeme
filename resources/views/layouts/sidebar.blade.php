@@ -66,6 +66,10 @@
             <h3 class="hedding-h3">Marques</h3>
         </a>
         @endcan
+        <a href="{{url('notifications')}}" class="my-pagesSidebar">
+            <span class="material-icons-sharp">notifications</span>
+            <h3 class="hedding-h3">Notifications</h3>
+        </a>
         <a href="{{url('Commande')}}" class="my-pagesSidebar">
             <span class="material-icons-sharp">list_alt</span>
             <h3 class="hedding-h3">Commandes</h3>
