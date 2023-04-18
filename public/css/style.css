@@ -215,6 +215,9 @@ aside{
     background: var(--color-white);
     width:16rem;
     z-index: 49;
+    
+    /* overflow-y: auto !important; */
+    /* background-color: #0fcc45;  */
     /* overflow-y: scroll; */
 }
 aside .top{

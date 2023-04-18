@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\NotificationController;
+use App\models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +44,10 @@ Route::controller(UserController::class)->group(function(){
     Route::get('/users-info', 'getUserInfo');
     Route::post('/users-info/update', 'updateUserInfo')->name('users-info.update');
 });
+
+
+
+
 Route::controller(RoleController::class)->group(function(){
     Route::get('roles','getRoles')->name('roles');
     Route::get('create-role','showCreateRoleForm')->name('CreateRoleForm');
@@ -64,6 +69,12 @@ Route::controller(ProductController::class)->group(function(){
     Route::post('/products-upload','import')->name('import.product');
     Route::get('/search','search')->name('products.search');
     Route::post('/alimenter-stock','allimenterStock')->name('allimenter.stock');
+    $users = User::all();
+    foreach ($users as $user) {
+        if($user->roles[0]->name == 'commercial'){
+            Route::get($user->name.'-Stock', 'userStock');
+        }
+    }
 });
 
 Route::controller(CategorieController::class)->group(function(){

@@ -165,5 +165,9 @@ class ProductController extends Controller
         }
         return response()->json(['message' => 'Products updated successfully.']);
     }
+    public function userStock(Request $request)
+    {
+      return view('pages.userStock');
+    }
 
 }
