@@ -23,4 +23,13 @@ class NotificationController extends Controller
         $notifications->markAsRead();
         return redirect()->back();
     }
+    public function deleteNotification(Request $request)
+    {
+        $user = auth()->user();
+        $notification = $user->notifications()->where('id', $request->notification_deletedId)->first();
+        if ($notification) {
+            $notification->delete();
+            return redirect()->back()->with('succès','la notification a été bien supprimer');
+        }
+    }
 }

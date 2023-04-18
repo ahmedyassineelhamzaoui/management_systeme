@@ -899,3 +899,9 @@ function deleteCommande(id){
     document.querySelector("#commande_deletedId").value=id
 }
 
+function  deleteNotification(id)
+{
+    document.querySelector("#delete-notification").classList.add('flex')
+    document.querySelector("#delete-notification").classList.remove('hidden')
+    document.querySelector("#notification_deletedId").value=id
+}
