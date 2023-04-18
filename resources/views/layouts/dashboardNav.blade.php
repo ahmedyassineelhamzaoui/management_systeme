@@ -24,9 +24,9 @@
                     <div class="text-lg  bg-blue-600 ">
                         <div class="flex items-center justify-between px-4 pt-2">
                         <p class="text-white font-bold pt-2"> Notifications </p>
-                        <button class="bg-yellow-500 txet-black text-sm font-bold rounded-lg py-2 px-4">
+                        <a href="MarqueAsread" class="bg-yellow-500 txet-black text-sm font-bold rounded-lg py-2 px-4">
                             Marquer Comme lu
-                        </button>
+                        </a>
                         </div>
                         <p class="text-white text-sm pl-4 py-2">vous avez <span class="font-bold"> {{ auth()->user()->unreadNotifications->count()}}</span> notifcations non lu</p>
                     </div>
@@ -36,7 +36,7 @@
                     </li>
                     @endforeach
                     <li>
-                        <a href="#" class="block px-4 py-2 text-center text-blue-700 ">Voir tout</a>
+                        <a href="notifications" class="hover:bg-gray-100 hover:text-blue-600 block px-4 py-2 text-center text-blue-700 ">Voir tout</a>
                     </li>
                     </ul>
                 </div>   

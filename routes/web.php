@@ -90,4 +90,5 @@ Route::controller(CommandeController::class)->group(function(){
 });
 Route::controller(NotificationController::class)->group(function(){
     Route::get('notifications','index')->name('Notification');
+    Route::get('MarqueAsread','marqueAllasread');
 });
