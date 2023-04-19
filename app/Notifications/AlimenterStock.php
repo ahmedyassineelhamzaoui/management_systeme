@@ -11,14 +11,16 @@ class AlimenterStock extends Notification
 {
     use Queueable;
     private $product;
+    private $user_id;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($product)
+    public function __construct($product,$user_id)
     {
         $this->product = $product;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -44,6 +46,7 @@ class AlimenterStock extends Notification
         'title' => 'a demandé l\'alimentation de son stock',
         'user'  => auth()->user()->name,
         'picture' => 'packages.png',
+        'user_id' => $this->user_id
        ];
     }
 }

@@ -24,10 +24,12 @@
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-file-csv"></i></span>
                             <span>Exporter les produits </span> 
                         </a>
+                        @can('role-list')
                         <button data-modal-target="large-modal" data-modal-toggle="large-modal" class="flex w-full justify-start items-center operation-menu  py-2" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-plus"></i></span>
                             Ajouter Produit
                         </button>
+                        @endcan
                         @if(count($products)>0)
                         <button id="alementer-stock"  class="flex justify-start items-center w-full text-center operation-menu  py-2" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-boxes-packing"></i></span>

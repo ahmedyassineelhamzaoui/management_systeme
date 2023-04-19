@@ -172,9 +172,10 @@ class ProductController extends Controller
                 $product->user_id = json_encode($userData);
                 $changedProducts[] = $product;
                 $product->save();
+                $user_id = auth()->user()->id;
             }
         }
-        Notification::send($user, new AlimenterStock($changedProducts));
+        Notification::send($user, new AlimenterStock($changedProducts,$user_id));
         return response()->json(['message' => 'Nous informons que cette opération doit être validée par l\'admin']);
     }
     
@@ -184,28 +185,38 @@ class ProductController extends Controller
     $user = $id;
     $data =  Product::all();
     $products = [];
-    foreach($data as $i => $items){
-            if($id == json_decode($items->data)[$i]->user_id &&  json_decode($items->data)[$i]->status== 'accepted'){
-                foreach(json_decode($items->user_id) as $prod){
-                    if($prod->id == $id){
-                        $products[] = $items;
-                    }
+    $quantity = [];
+    foreach ($data as $items) {
+        if($items->user_id){
+            $decodedData = json_decode($items->data);
+            foreach ($decodedData as $i => $item) {
+                $mydata = json_decode($items->data);
+                if ($mydata[$i]->user_id == $id && $item->status == 'accepted') {
+                    $quantity[] = $mydata[$i]->quantity;
+                    $products[] = $items;
                 }
-            } 
+            }
+        }
+       
     }
-    return view('pages.userStock', compact('user', 'products'));       
+    return view('pages.userStock', compact('user', 'products','quantity'));       
     }
     public function acceptOperation(Request $request)
     {
         $notification = DB::table('notifications')->where('notifiable_id', $request->notifId)->first();
          if($notification){
             foreach (json_decode($notification->data)->product  as $i => $items) {
+                // dd(json_decode($notification->data)->user_id);
                 $product = Product::find($items->id);
                 $productData = json_decode($product->data, true);
-                $productData[0]['status'] =  'accepted';
-                $product->quantite -= json_decode($items->data)[0]->quantity;
-                $product->data = json_encode($productData); 
-                $product->save();
+                foreach($productData as $key=>$value ){
+                    if($value['user_id'] == json_decode($notification->data)->user_id ){
+                        $productData[$key]['status'] =  'accepted';
+                        $product->quantite -= json_decode($items->data)[0]->quantity;
+                        $product->data = json_encode($productData); 
+                        $product->save();
+                    }
+                }
             }
          }
          $user = auth()->user();

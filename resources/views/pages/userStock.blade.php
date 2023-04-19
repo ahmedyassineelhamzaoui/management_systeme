@@ -88,7 +88,7 @@
                             </tr>
                         </thead>
                         <tbody class="table-body-bg">
-                            @forelse ($products as $product)
+                            @forelse ($products as $i => $product)
                             <tr class="border-b text-tablecolor ">
                                 <th scope="row" class="px-6 py-4 flex items-center  whitespace-nowrap ">
                                     {{$product->reference}}
@@ -103,7 +103,7 @@
                                     {{$product->Category->name}} 
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{json_decode($product->data)[0]->quantity}}
+                                    {{$quantity[$i]}}
                                 </td>
                                 <td>
                                     {{$product->prix}}
