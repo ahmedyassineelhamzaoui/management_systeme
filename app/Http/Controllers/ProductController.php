@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Notifications\AlimenterStock;
+use App\Notifications\FeedAccept;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -212,6 +213,8 @@ class ProductController extends Controller
                 foreach($productData as $key=>$value ){
                     if($value['user_id'] == json_decode($notification->data)->user_id ){
                         $productData[$key]['status'] =  'accepted';
+                        $usernotify = User::find($value['user_id']);
+                        // dd($usernotify);
                         $product->quantite -= json_decode($items->data)[0]->quantity;
                         $product->data = json_encode($productData); 
                         $product->save();
@@ -221,6 +224,7 @@ class ProductController extends Controller
          }
          $user = auth()->user();
          $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
+         Notification::send($usernotify, new FeedAccept());
          $notification->delete();
          return redirect()->back()->with('succès','le stock a été alimenter ');
     }

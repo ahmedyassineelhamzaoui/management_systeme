@@ -11,9 +11,11 @@ class NotificationController extends Controller
 {
     public function index()
     {
-        $notifications = DB::table('notifications')
+        $user = auth()->user();
+        $notifications = $user->notifications()->orderBy('created_at', 'desc')  
         ->orderBy('created_at', 'desc')
         ->get();
+    
         return view('pages.notifications',compact('notifications'));
     }
     public function marqueAllasread(Request $request)
