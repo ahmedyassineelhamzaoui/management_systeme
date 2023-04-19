@@ -155,6 +155,7 @@ class ProductController extends Controller
         $changedProducts = [];
         $user = User::find(1);
         foreach ($references as $i => $reference) {
+            
             $product = Product::where('reference', $reference)->first();
             if ($product) {
                 $data = [
@@ -162,9 +163,15 @@ class ProductController extends Controller
                     'user_id'  => auth()->user()->id,
                     'status'   => 'pending'
                 ];
-                $product->data = [$data];
-                $product->save();
+                $userAuth = [ 'id' => auth()->user()->id];
+                $productData = json_decode($product->data, true);
+                $userData = json_decode($product->user_id, true);
+                $productData[] = $data;
+                $userData[] = $userAuth;
+                $product->data = json_encode($productData);
+                $product->user_id = json_encode($userData);
                 $changedProducts[] = $product;
+                $product->save();
             }
         }
         Notification::send($user, new AlimenterStock($changedProducts));
@@ -172,18 +179,32 @@ class ProductController extends Controller
     }
     
    
-    public function userStock($name)
+    public function userStock($id)
     {
-      $user = $name;
-      return view('pages.userStock',compact('user'));
+    $user = $id;
+    $data =  Product::all();
+    $products = [];
+    foreach($data as $i => $items){
+            if($id == json_decode($items->data)[$i]->user_id &&  json_decode($items->data)[$i]->status== 'accepted'){
+                foreach(json_decode($items->user_id) as $prod){
+                    if($prod->id == $id){
+                        $products[] = $items;
+                    }
+                }
+            } 
+    }
+    return view('pages.userStock', compact('user', 'products'));       
     }
     public function acceptOperation(Request $request)
     {
         $notification = DB::table('notifications')->where('notifiable_id', $request->notifId)->first();
          if($notification){
-            foreach (json_decode($notification->data)->product as $items) {
+            foreach (json_decode($notification->data)->product  as $i => $items) {
                 $product = Product::find($items->id);
-                $product->quantite -= $items->data[0]->quantity;
+                $productData = json_decode($product->data, true);
+                $productData[0]['status'] =  'accepted';
+                $product->quantite -= json_decode($items->data)[0]->quantity;
+                $product->data = json_encode($productData); 
                 $product->save();
             }
          }

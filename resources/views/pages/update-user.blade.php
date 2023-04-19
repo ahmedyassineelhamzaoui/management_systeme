@@ -72,8 +72,8 @@
                             </div>
                             <!-- Modal footer -->
                             <div class="flex items-center justify-end p-4 mt-4 space-x-2 border-t border-gray-200 rounded-b ">
-                                <button  type="submit" class=" text-black border-2 hover:bg-yellow-500 border-yellow-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center font-sans">Update</button>
-                                <a href='{{url('users')}}'  class=" text-black font-sans bg-gray-100 hover:bg-gray-300  border-2 border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Back</a>
+                                <button  type="submit" class=" text-black border-2 hover:bg-yellow-500 border-yellow-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center font-sans">Modifier</button>
+                                <a href='{{url('users')}}'  class=" text-black font-sans bg-gray-100 hover:bg-gray-300  border-2 border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Retour</a>
                             </div>
                         </form>
                     </div>

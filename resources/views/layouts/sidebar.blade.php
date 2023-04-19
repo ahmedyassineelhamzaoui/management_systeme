@@ -44,18 +44,18 @@
                     <span class="material-icons-sharp">inventory</span>
                     <h3 class="hedding-h3">Stock Principale</h3>  
             </a>
-            @foreach ($comercials as $key => $comercial)
-                <a href="Stock/{{$comercial->name}}" class="my-pagesSidebar ">     
-                    <span class="rounded-full w-[1em] h-[1em]  border-2 border-gray-400 flex items-center justify-center"><p class="text-gray-400 font-bold">{{$key + 1}}</p></span>  
-                    <h3 class="hedding-h3">
-                        @if(auth()->user()->roles[0]->name == 'admin' || auth()->user()->roles[0]->name == 'user' || (auth()->user()->roles[0]->name == 'commercial' && auth()->user()->name != $comercial->name) )
-                        {{$comercial->name}} Stock
-                        @else
-                        Mon Stock
-                        @endif
-                    </h3>  
-                </a> 
-            @endforeach     
+                @foreach ($comercials as $key => $comercial)
+                    <a href="{{ url('Stock', $comercial->id) }}" class="my-pagesSidebar ">     
+                        <span class="rounded-full w-[1em] h-[1em]  border-2 border-gray-400 flex items-center justify-center"><p class="text-gray-400 font-bold">{{$key + 1}}</p></span>  
+                        <h3 class="hedding-h3">
+                            @if(auth()->user()->roles[0]->name == 'admin' || auth()->user()->roles[0]->name == 'user' || (auth()->user()->roles[0]->name == 'commercial' && auth()->user()->name != $comercial->name) )
+                            {{$comercial->name}} Stock
+                            @else
+                            Mon Stock
+                            @endif
+                        </h3>  
+                    </a> 
+                @endforeach     
         </div>
         
         @can('categorie-list')
