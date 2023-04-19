@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Notifications\AlimenterStock;
+use App\Notifications\FeedDecline;
 use App\Notifications\FeedAccept;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -232,7 +233,8 @@ class ProductController extends Controller
     {
         $user = auth()->user();
         $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
-        
+        $usernotify  = User::find($notification->data['user_id']);
+        Notification::send($usernotify, new FeedDecline());
          if($notification){
             $notification->delete();
          }
