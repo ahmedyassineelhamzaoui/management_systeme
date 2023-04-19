@@ -15,7 +15,7 @@ class NotificationController extends Controller
         $notifications = $user->notifications()->orderBy('created_at', 'desc')  
         ->orderBy('created_at', 'desc')
         ->get();
-    
+        $notifications->markAsRead();
         return view('pages.notifications',compact('notifications'));
     }
     public function marqueAllasread(Request $request)
