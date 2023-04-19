@@ -30,7 +30,7 @@
                         </div>
                         <p class="text-white text-sm pl-4 py-2">vous avez <span class="font-bold"> {{ auth()->user()->unreadNotifications->count()}}</span> notifcations non lu</p>
                     </div>
-                    @foreach (auth()->user()->unreadNotifications  as $notification)
+                    @foreach (auth()->user()->unreadNotifications()->orderBy('created_at', 'desc')->take(4)->get()  as $notification)
                     <li>
                         <a href="#" class="flex items-center px-4 py-2 "><img class="w-6 h-6 mr-1" src="images/{{$notification->data['picture'] }}" alt=""><span >{{$notification->data['user'] }} {{ $notification->data['title']}}</span></a>
                     </li>

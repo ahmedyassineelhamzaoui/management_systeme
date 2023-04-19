@@ -28,10 +28,12 @@
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-plus"></i></span>
                             Ajouter Produit
                         </button>
+                        @if(count($products)>0)
                         <button id="alementer-stock"  class="flex justify-start items-center w-full text-center operation-menu  py-2" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-boxes-packing"></i></span>
                             Alimenter le stock
                         </button>
+                        @endif
                     </div>
                     <div>
                         <h2 class="font-bold text-green">Produits</h2>
@@ -200,7 +202,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>                          
                         <div class="ml-3 text-sm font-medium flex items-center ">
-                            <strong>succès  </strong><p class="message-success-createProduct"></p>
+                            <strong class="mr-2">succès  </strong><p class="message-success-createProduct"></p>
                         </div>
                         <button   type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex h-8 w-8 "   aria-label="Close">
                             <span class="sr-only">Dismiss</span>

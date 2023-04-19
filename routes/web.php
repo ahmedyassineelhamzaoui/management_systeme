@@ -70,11 +70,7 @@ Route::controller(ProductController::class)->group(function(){
     Route::get('/search','search')->name('products.search');
     Route::post('/alimenter-stock','allimenterStock')->name('allimenter.stock');
     $users = User::all();
-    foreach ($users as $user) {
-        if($user->roles[0]->name == 'commercial'){
-            Route::get($user->name.'-Stock', 'userStock');
-        }
-    }
+    Route::get('Stock/{name}', 'userStock');
 });
 
 Route::controller(CategorieController::class)->group(function(){

@@ -10,14 +10,15 @@ use App\Models\User;
 class AlimenterStock extends Notification
 {
     use Queueable;
-    private $details;
+    private $product;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($product)
     {
+        $this->product = $product;
     }
 
     /**
@@ -38,6 +39,7 @@ class AlimenterStock extends Notification
        return [
         'accept' => 'yes',
         'link'  => 'products',
+        'product' => $this->product,
         'pages' => 'Produits',
         'title' => 'a demandé l\'alimentation de son stock',
         'user'  => auth()->user()->name,

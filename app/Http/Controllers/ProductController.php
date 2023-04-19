@@ -27,7 +27,6 @@ class ProductController extends Controller
         $products = Product::with('marque', 'category')->paginate(5); // Eager load the Marques and Categories relationships
         $marques = Marque::all();
         $categories = Category::all();
-    
         return view('pages.products', compact('products', 'marques', 'categories'));
     }
     
@@ -152,22 +151,31 @@ class ProductController extends Controller
     {
         $references = $request->input('references');
         $quantities = $request->input('quantity');
-
+        
         $user = User::find(1);
-        Notification::send($user, new AlimenterStock());
 
         foreach ($references as $i => $reference) {
             $product = Product::where('reference', $reference)->first();
             if ($product) {
-                $product->quantite = $quantities[$i];
+                Notification::send($user, new AlimenterStock($product));
+                $data = [
+                    'quantity' => $quantities[$i],
+                    'user_id'  => auth()->user()->id,
+                    'status'   => 'pending'
+                ];
+                $product->data = $data;
                 $product->save();
             }
+
         }
-        return response()->json(['message' => 'Products updated successfully.']);
+        return response()->json(['message' => 'Nous informons que cette opération doit être validée par l\'admin']);
     }
-    public function userStock(Request $request)
+    
+   
+    public function userStock($name)
     {
-      return view('pages.userStock');
+      $user = $name;
+      return view('pages.userStock',compact('user'));
     }
 
 }

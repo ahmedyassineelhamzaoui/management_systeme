@@ -62,8 +62,14 @@
                             <div class="flex items-center"> <img class="w-10 h-10 mr-2" src="images/{{ json_decode($notification->data)->picture }}" alt=""> <p>{{ json_decode($notification->data)->user }} {{ json_decode($notification->data)->title }}</p> <a class="text-blue-600 ml-2" href="{{ json_decode($notification->data)->link }}"> voir les {{ json_decode($notification->data)->pages }}</a> </div> 
                             <div class="flex items-center mt-2 ">
                                 @if(json_decode($notification->data)->accept == 'yes')
-                                <button class="mr-2 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white">accepter</button>
-                                <button class="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white">Refuser</button>
+                                <form action="">
+                                    <input type="text" value="{{json_decode($notification->data)->product}}" name="product_id">
+                                    <button  type="submit" class="mr-2 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white">accepter</button>
+                                </form>
+                                <form action="">
+                                    <input type="text" value="{{json_decode($notification->data)->product}}" name="product_id">
+                                    <button type="submit" class="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white">Refuser</button>
+                                </form>
                                 @endif
                             </div>
                           </div>

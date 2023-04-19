@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('prix', 8, 2);
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('marque_id')->constrained('marques');
+            $table->text('data')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
