@@ -69,8 +69,9 @@ Route::controller(ProductController::class)->group(function(){
     Route::post('/products-upload','import')->name('import.product');
     Route::get('/search','search')->name('products.search');
     Route::post('/alimenter-stock','allimenterStock')->name('allimenter.stock');
-    $users = User::all();
     Route::get('Stock/{name}', 'userStock');
+    Route::post('accept-operation','acceptOperation')->name('accept.operation');
+    Route::post('decline-operation','declineOperation')->name('decline.operation');
 });
 
 Route::controller(CategorieController::class)->group(function(){

@@ -13,6 +13,7 @@ use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Notifications\AlimenterStock;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
 class ProductController extends Controller
@@ -151,23 +152,22 @@ class ProductController extends Controller
     {
         $references = $request->input('references');
         $quantities = $request->input('quantity');
-        
+        $changedProducts = [];
         $user = User::find(1);
-
         foreach ($references as $i => $reference) {
             $product = Product::where('reference', $reference)->first();
             if ($product) {
-                Notification::send($user, new AlimenterStock($product));
                 $data = [
                     'quantity' => $quantities[$i],
                     'user_id'  => auth()->user()->id,
                     'status'   => 'pending'
                 ];
-                $product->data = $data;
+                $product->data = [$data];
                 $product->save();
+                $changedProducts[] = $product;
             }
-
         }
+        Notification::send($user, new AlimenterStock($changedProducts));
         return response()->json(['message' => 'Nous informons que cette opération doit être validée par l\'admin']);
     }
     
@@ -176,6 +176,31 @@ class ProductController extends Controller
     {
       $user = $name;
       return view('pages.userStock',compact('user'));
+    }
+    public function acceptOperation(Request $request)
+    {
+        $notification = DB::table('notifications')->where('notifiable_id', $request->notifId)->first();
+         if($notification){
+            foreach (json_decode($notification->data)->product as $items) {
+                $product = Product::find($items->id);
+                $product->quantite -= $items->data[0]->quantity;
+                $product->save();
+            }
+         }
+         $user = auth()->user();
+         $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
+         $notification->delete();
+         return redirect()->back()->with('succès','le stock a été alimenter ');
+    }
+    public function declineOperation(Request $request)
+    {
+        $user = auth()->user();
+        $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
+        
+         if($notification){
+            $notification->delete();
+         }
+         return redirect()->back()->with('succès','l\'alimentation de stock a été refuser');
     }
 
 }

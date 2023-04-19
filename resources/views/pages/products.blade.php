@@ -398,6 +398,7 @@
         <!-- Modal content -->
         <form id="product-selectedForm" action="{{route('allimenter.stock')}}"  method="post" class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
+            
             @csrf
             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-medium text-gray-900 dark:text-white">
@@ -409,6 +410,18 @@
                 </button>
             </div>
             <!-- Modal body -->
+            <div id="alimenter-stock-success" class="hidden mx-4 mt-6 p-2 mb-4 text-yellow-800 border-t-4 border-yellow-300 bg-green-50 " >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>                          
+                <div class="ml-3 text-sm font-medium flex items-center ">
+                    <strong class="mr-2">succès  </strong><p class="message-success-alimenter"></p>
+                </div>
+                <button id="alimenter-stockhidden"  type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 "   aria-label="Close">
+                    <span class="sr-only">Dismiss</span>
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
             <div class="p-6 space-y-6">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
                     <table class="w-full text-sm text-left mr-2 text-gray-500 dark:text-gray-400">

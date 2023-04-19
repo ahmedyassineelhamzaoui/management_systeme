@@ -721,6 +721,9 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 // handle success
+                $('#alimenter-stock-success').addClass('flex')
+                $('#alimenter-stock-success').removeClass('hidden')
+                $('.message-success-alimenter').text(response.message)
                 console.log(response);
             },
             error: function(xhr, status, error) {
@@ -904,4 +907,12 @@ function  deleteNotification(id)
     document.querySelector("#delete-notification").classList.add('flex')
     document.querySelector("#delete-notification").classList.remove('hidden')
     document.querySelector("#notification_deletedId").value=id
+}
+
+let alimenterStockhidden=document.querySelector("#alimenter-stockhidden");
+if(alimenterStockhidden){
+    alimenterStockhidden.addEventListener('click',()=>{
+        document.querySelector("#alimenter-stock-success").classList.add('hidden')
+        document.querySelector("#alimenter-stock-success").classList.remove('flex')
+    })
 }
