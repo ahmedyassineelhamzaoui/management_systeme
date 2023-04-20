@@ -160,16 +160,34 @@ class ProductController extends Controller
             
             $product = Product::where('reference', $reference)->first();
             if ($product) {
-                $data = [
-                    'quantity' => $quantities[$i],
-                    'user_id'  => auth()->user()->id,
-                    'status'   => 'pending'
-                ];
+                
                 $userAuth = [ 'id' => auth()->user()->id];
                 $productData = json_decode($product->data, true);
                 $userData = json_decode($product->user_id, true);
-                $productData[] = $data;
-                $userData[] = $userAuth;
+                $count = 0;
+                if($userData ){
+                    foreach ($userData as $key => $value) {
+                        if($value['id'] == $userAuth['id']){
+                            $count++;
+                        }
+                    }
+                }
+                
+                if($count<=0){
+                    $userData[] = $userAuth;
+                    $data = [
+                        'quantity' => $quantities[$i],
+                        'user_id'  => auth()->user()->id,
+                        'status'   => 'pending'
+                    ];
+                    $productData[] = $data;
+                }else{
+                    foreach (json_decode($product->data) as $key => $value) {
+                        if($value->user_id == $userAuth['id']){
+                            $value->quantity += $quantities[$i] ;
+                        }
+                    }
+                }
                 $product->data = json_encode($productData);
                 $product->user_id = json_encode($userData);
                 $changedProducts[] = $product;
@@ -215,7 +233,6 @@ class ProductController extends Controller
                     if($value['user_id'] == json_decode($notification->data)->user_id ){
                         $productData[$key]['status'] =  'accepted';
                         $usernotify = User::find($value['user_id']);
-                        // dd($usernotify);
                         $product->quantite -= json_decode($items->data)[0]->quantity;
                         $product->data = json_encode($productData); 
                         $product->save();

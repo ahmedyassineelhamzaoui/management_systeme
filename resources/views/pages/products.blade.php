@@ -16,6 +16,7 @@
                     </div>
                     <!-- Dropdown menu -->
                     <div id="opperations" class="border-2 border-gray-300 z-10 hidden divide-y list-operation rounded-b-lg shadow w-44 ">
+                        @if(count($products)>0)
                         <button data-modal-target="import-product" data-modal-toggle="import-product" class="flex w-full justify-start items-center  py-2 operation-menu" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-file-csv"></i></span>
                             <span>importer produits</span> 
@@ -24,6 +25,7 @@
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-file-csv"></i></span>
                             <span>Exporter les produits </span> 
                         </a>
+                        @endif
                         @can('role-list')
                         <button data-modal-target="large-modal" data-modal-toggle="large-modal" class="flex w-full justify-start items-center operation-menu  py-2" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-plus"></i></span>
