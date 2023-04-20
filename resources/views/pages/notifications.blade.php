@@ -64,6 +64,7 @@
                                 @if($notification->data['accept'] == 'yes')
                                 <form method="post" action="{{route('accept.operation')}}">
                                     @csrf
+                                    <input type="hidden" value="{{$notification->notifiable_id}}" name="notifiable_id">
                                     <input type="hidden"  value="{{$notification->data['user_id']}}" name="notifId">
                                     <button id="accept_alimenter"  type="submit" class="mr-2 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white">accepter</button>
                                 </form>

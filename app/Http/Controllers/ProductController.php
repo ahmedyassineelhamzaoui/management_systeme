@@ -181,10 +181,17 @@ class ProductController extends Controller
         return response()->json(['message' => 'Nous informons que cette opération doit être validée par l\'admin']);
     }
     public function acceptOperation(Request $request) {
+        $user = auth()->user();
         $feedings = StockFeeding::where('user_id',$request->notifId)->get();
         foreach ($feedings as $key => $value) {
             $value->status = 'accepted';
             $value->save();
+            $usernotify = User::find($value->user_id);
+        }
+        $notification = $user->notifications()->where('notifiable_id', $request->notifiable_id)->first();
+        Notification::send($usernotify, new FeedAccept());
+        if($notification){
+            $notification->delete();
         }
         return redirect()->back()->with('succès','le stock a été alimenter ');
     }
