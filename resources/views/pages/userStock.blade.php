@@ -88,25 +88,25 @@
                             </tr>
                         </thead>
                         <tbody class="table-body-bg">
-                            @forelse ($products as $i => $product)
+                            @forelse ($products as $i => $item)
                             <tr class="border-b text-tablecolor ">
                                 <th scope="row" class="px-6 py-4 flex items-center  whitespace-nowrap ">
-                                    {{$product->reference}}
+                                    {{$item['product']->reference}}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{$product->nom}}
+                                    {{$item['product']->nom}}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $product->marque->name }}
+                                    {{ $item['product']->marque->name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{$product->Category->name}} 
+                                    {{$item['product']->Category->name}} 
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{$quantity[$i]}}
+                                    {{$item['quantity']}}
                                 </td>
                                 <td>
-                                    {{$product->prix}}
+                                    {{$item['product']->prix}}
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">                                      

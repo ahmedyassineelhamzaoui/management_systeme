@@ -696,14 +696,14 @@ $(document).ready(function() {
     // Loop through the checkedRows array and display the information in the console
     var tableRows = '';
     for (var i = 0; i < checkedRows.length; i++) {
-    tableRows += '<tr class="border-b text-tablecolor">' +
-        '<td class="px-6 py-4"><input type="hidden" name="references[]" value="' + checkedRows[i].reference + '">' + checkedRows[i].reference + '</td>' +
-        '<td class="px-6 py-4">' + checkedRows[i].nom + '</td>' +
-        '<td class="px-6 py-4">' + checkedRows[i].marque + '</td>' +
-        '<td class="px-6 py-4">' + checkedRows[i].category + '</td>' +
-        '<td class="px-6 py-4">' + checkedRows[i].price + '</td>' +
-        '<td class="px-6 py-4">' + '<input type="number" class="border-gray-200 text-start bg-transparent" name="quantity[]" value="' + parseFloat(checkedRows[i].quantity.replace(/[^\d.-]/g, '')) + '" min="0" step="1"></td>' +
-        '</tr>';
+        tableRows += '<tr class="border-b text-tablecolor">' +
+            '<td class="px-6 py-4"><input type="hidden" name="references[]" value="' + checkedRows[i].reference + '">' + checkedRows[i].reference + '</td>' +
+            '<td class="px-6 py-4">' + checkedRows[i].nom + '</td>' +
+            '<td class="px-6 py-4">' + checkedRows[i].marque + '</td>' +
+            '<td class="px-6 py-4">' + checkedRows[i].category + '</td>' +
+            '<td class="px-6 py-4">' + checkedRows[i].price + '</td>' +
+            '<td class="px-6 py-4">' + '<input type="number" class="border-gray-200 text-start bg-transparent" name="quantity[]" value="' + parseFloat(checkedRows[i].quantity.replace(/[^\d.-]/g, '')) + '" min="0" step="1"></td>' +
+            '</tr>';
     }
 
     var tbody = document.getElementById('tbody-products');

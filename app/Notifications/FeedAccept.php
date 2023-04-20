@@ -40,7 +40,6 @@ class FeedAccept extends Notification
         'link'  => 'products',
         'pages' => 'Produits',
         'title' => 'l\'admin à accepter l\'alimentaion de votre stock',
-        'user'  => '',
         'picture' => 'agreement.png',
        ];
     }

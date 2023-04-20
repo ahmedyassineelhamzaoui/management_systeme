@@ -41,7 +41,6 @@ class CreateCommandeNotification extends Notification
         'link'  => 'Commande',
         'pages' => 'Commandes',
         'title' => 'a créer une comande',
-        'user'  => $this->user,
         'picture' => 'commande.png',
        ];
     }

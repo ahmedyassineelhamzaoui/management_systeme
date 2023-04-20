@@ -118,7 +118,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-body-bg">
-                                @forelse ($products as $product)
+                                @forelse ($products as $i => $product)
                                 <tr class="border-b text-tablecolor ">
                                     <th scope="row" class="px-6 py-4 flex items-center  whitespace-nowrap ">
                                         <input id="check-{{$product->reference}}-row" type="checkbox" class="mr-2 hidden chack-one-row">
@@ -134,7 +134,11 @@
                                         {{$product->Category->name}} 
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$product->quantite}}
+                                        @if(isset($stock[$product->id]))
+                                            {{$product->quantite - $stock[$product->id]->total_quantity}}
+                                        @else
+                                            {{$product->quantite}}
+                                        @endif                                                                                          
                                     </td>
                                     <td>
                                         {{$product->prix}}
@@ -167,7 +171,7 @@
                         </table>
                         <div class="flex items-center justify-center ">
                             <div class="flex justify-center my-2">
-                                {{ $products->links() }}
+                                {{-- {{ $products->links() }} --}}
                             </div> 
                         </div>  
                     </div>

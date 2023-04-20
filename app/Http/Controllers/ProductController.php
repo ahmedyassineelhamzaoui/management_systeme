@@ -15,8 +15,11 @@ use App\Notifications\AlimenterStock;
 use App\Notifications\FeedDecline;
 use App\Notifications\FeedAccept;
 use App\Models\User;
+use App\Models\StockFeeding;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use App\Models\Stock;
+
 
 class ProductController extends Controller
 {
@@ -30,8 +33,16 @@ class ProductController extends Controller
         $products = Product::with('marque', 'category')->paginate(5); // Eager load the Marques and Categories relationships
         $marques = Marque::all();
         $categories = Category::all();
-        return view('pages.products', compact('products', 'marques', 'categories'));
+        
+        $stock = StockFeeding::where('status','accepted')
+                            ->selectRaw('product_id, sum(quantity) as total_quantity')
+                            ->groupBy('product_id')
+                            ->get()
+                            ->keyBy('product_id');
+
+        return view('pages.products', compact('stock', 'products', 'marques', 'categories'));
     }
+
     
     public function getProductInfo($id)
     {
@@ -150,112 +161,94 @@ class ProductController extends Controller
         }
     }
 
-    public function allimenterStock(Request $request)
-    {
-        $references = $request->input('references');
-        $quantities = $request->input('quantity');
-        $changedProducts = [];
-        $user = User::find(1);
-        foreach ($references as $i => $reference) {
-            
+    
+    public function allimenterStock(Request $request) {
+        $user = auth()->user();
+        $references = $request->get('references');
+        $quantities = $request->get('quantity');
+    
+        foreach ($references as $index => $reference) {
             $product = Product::where('reference', $reference)->first();
-            if ($product) {
-                
-                $userAuth = [ 'id' => auth()->user()->id];
-                $productData = json_decode($product->data, true);
-                $userData = json_decode($product->user_id, true);
-                $count = 0;
-                if($userData ){
-                    foreach ($userData as $key => $value) {
-                        if($value['id'] == $userAuth['id']){
-                            $count++;
-                        }
-                    }
-                }
-                
-                if($count<=0){
-                    $userData[] = $userAuth;
-                    $data = [
-                        'quantity' => $quantities[$i],
-                        'user_id'  => auth()->user()->id,
-                        'status'   => 'pending'
-                    ];
-                    $productData[] = $data;
-                }else{
-                    foreach (json_decode($product->data) as $key => $value) {
-                        if($value->user_id == $userAuth['id']){
-                            $value->quantity += $quantities[$i] ;
-                        }
-                    }
-                }
-                $product->data = json_encode($productData);
-                $product->user_id = json_encode($userData);
-                $changedProducts[] = $product;
-                $product->save();
-                $user_id = auth()->user()->id;
-            }
+    
+            $feeding = new StockFeeding();
+            $feeding->user_id = $user->id;
+            $feeding->product_id = $product->id;
+            $feeding->quantity = $quantities[$index];
+            $admin = User::role('admin')->first();
+            $feeding->save();
         }
-        Notification::send($user, new AlimenterStock($changedProducts,$user_id));
+        Notification::send($admin, new AlimenterStock($user->id));
         return response()->json(['message' => 'Nous informons que cette opération doit être validée par l\'admin']);
     }
-    
-   
+    public function acceptOperation(Request $request) {
+        $feedings = StockFeeding::where('user_id',$request->notifId)->get();
+        foreach ($feedings as $key => $value) {
+            $value->status = 'accepted';
+            $value->save();
+        }
+        return redirect()->back()->with('succès','le stock a été alimenter ');
+    }
     public function userStock($id)
     {
-    $user = $id;
-    $data =  Product::all();
-    $products = [];
-    $quantity = [];
-    foreach ($data as $items) {
-        if($items->user_id){
-            $decodedData = json_decode($items->data);
-            foreach ($decodedData as $i => $item) {
-                $mydata = json_decode($items->data);
-                if ($mydata[$i]->user_id == $id && $item->status == 'accepted') {
-                    $quantity[] = $mydata[$i]->quantity;
-                    $products[] = $items;
-                }
-            }
+        $stock = StockFeeding::where('user_id', $id)->get()->groupBy('product_id');
+        $products = [];
+        foreach ($stock as $productId => $feedings) {
+            $product = Product::findOrFail($productId);
+            $quantity = $feedings->sum('quantity');
+            $products[] = [
+                'product' => $product,
+                'quantity' => $quantity,
+            ];
         }
-       
+        // foreach($products as $items){
+        //     dd($items['product']->reference);
+
+        // }
+        return view('pages.userStock', compact('products'));
+        // $stock = StockFeeding::where('user_id',$id)->get();
+        // $products = [];
+        // $quantities = [];
+        // foreach($stock as $product){
+        //     $products [] =Product::find($product->product_id)->first();
+        //     $quantities [] = $product->quantity; 
+        // }
+        // return view('pages.userStock', compact('products','quantities'));       
     }
-    return view('pages.userStock', compact('user', 'products','quantity'));       
-    }
-    public function acceptOperation(Request $request)
-    {
-        $notification = DB::table('notifications')->where('notifiable_id', $request->notifId)->first();
-         if($notification){
-            foreach (json_decode($notification->data)->product  as $i => $items) {
-                // dd(json_decode($notification->data)->user_id);
-                $product = Product::find($items->id);
-                $productData = json_decode($product->data, true);
-                foreach($productData as $key=>$value ){
-                    if($value['user_id'] == json_decode($notification->data)->user_id ){
-                        $productData[$key]['status'] =  'accepted';
-                        $usernotify = User::find($value['user_id']);
-                        $product->quantite -= json_decode($items->data)[0]->quantity;
-                        $product->data = json_encode($productData); 
-                        $product->save();
-                    }
-                }
-            }
-         }
-         $user = auth()->user();
-         $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
-         Notification::send($usernotify, new FeedAccept());
-         $notification->delete();
-         return redirect()->back()->with('succès','le stock a été alimenter ');
-    }
-    public function declineOperation(Request $request)
-    {
-        $user = auth()->user();
-        $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
-        $usernotify  = User::find($notification->data['user_id']);
-        Notification::send($usernotify, new FeedDecline());
-         if($notification){
-            $notification->delete();
-         }
-         return redirect()->back()->with('succès','l\'alimentation de stock a été refuser');
-    }
+    // public function acceptOperation(Request $request)
+    // {
+    //     $notification = DB::table('notifications')->where('notifiable_id', $request->notifId)->first();
+    //      if($notification){
+    //         foreach (json_decode($notification->data)->product  as $i => $items) {
+    //             // dd(json_decode($notification->data)->user_id);
+    //             $product = Product::find($items->id);
+    //             $productData = json_decode($product->data, true);
+    //             foreach($productData as $key=>$value ){
+    //                 if($value['user_id'] == json_decode($notification->data)->user_id ){
+    //                     $productData[$key]['status'] =  'accepted';
+    //                     $usernotify = User::find($value['user_id']);
+    //                     $product->quantite -= json_decode($items->data)[0]->quantity;
+    //                     $product->data = json_encode($productData); 
+    //                     $product->save();
+    //                 }
+    //             }
+    //         }
+    //      }
+    //      $user = auth()->user();
+    //      $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
+    //      Notification::send($usernotify, new FeedAccept());
+    //      $notification->delete();
+    //      return redirect()->back()->with('succès','le stock a été alimenter ');
+    // }
+    // public function declineOperation(Request $request)
+    // {
+    //     $user = auth()->user();
+    //     $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
+    //     $usernotify  = User::find($notification->data['user_id']);
+    //     Notification::send($usernotify, new FeedDecline());
+    //      if($notification){
+    //         $notification->delete();
+    //      }
+    //      return redirect()->back()->with('succès','l\'alimentation de stock a été refuser');
+    // }
 
 }
