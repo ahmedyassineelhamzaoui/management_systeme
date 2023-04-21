@@ -37,8 +37,8 @@ class FeedAccept extends Notification
     {
        return [
         'accept' => 'no',
-        'user'   => $user->name,
-        'user_id' => $user->id,
+        'user'   => '',
+        'user_id' => '',
         'link'  => 'products',
         'pages' => 'Produits',
         'title' => 'l\'admin à accepter l\'alimentaion de votre stock',
