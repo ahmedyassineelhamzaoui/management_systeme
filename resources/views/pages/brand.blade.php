@@ -186,8 +186,8 @@
                     @csrf
                     @method('DELETE')
                     <input type="hidden"  name="id" id="deletedmarque-idConfirm">
-                    <button type="button"  class="px-4 py-2 mr-2 rounded-md text-white bg-gray-600" id="cancel-modalmarque" >Cancel</a>
-                    <button class="px-4 py-2 rounded-md text-white bg-red-600" type="submit" name="delete-marque">Delete</button>
+                    <button type="button"  class="px-4 py-2 mr-2 rounded-md text-white bg-gray-600" id="cancel-modalmarque" >Anuller</a>
+                    <button class="px-4 py-2 rounded-md text-white bg-red-600" type="submit" name="delete-marque">Supprimer</button>
                 </form>
             </div>
         </div>

@@ -301,10 +301,11 @@ if(closeFormcategorieIconup){
     }
 }
 if(closeCategoryButtonUpdate){
-    closeCategoryButtonUpdate.onclick=()=>{
+    closeCategoryButtonUpdate.addEventListener('click',(e)=>{
+        e.preventDefault();
         formEditcategory.classList.add('hidden');
         formEditcategory.classList.remove('flex');
-    }
+    })
 }
 let updateCategory=document.querySelector("#update-category")
 if(updateCategory){
