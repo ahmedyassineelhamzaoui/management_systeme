@@ -108,7 +108,7 @@
                         </div>                       
                         <div class="w-100">
                             <label for="password" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Mot de Pass</label>
-                            <input type="password" name="password"  id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2 " {{ auth()->user()->cannot('user-edit') ? 'readonly disabled' : ''}} >
+                            <input type="password" name="password"  id="current-password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2 " {{ auth()->user()->cannot('user-edit') ? 'readonly disabled' : ''}} >
                         </div>   
                         
                     </div>

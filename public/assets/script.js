@@ -726,10 +726,19 @@ $(document).ready(function() {
             type: 'POST',
             data: formData,
             success: function(response) {
-                // handle success
-                $('#alimenter-stock-success').addClass('flex')
-                $('#alimenter-stock-success').removeClass('hidden')
-                $('.message-success-alimenter').text(response.message)
+                if(response.error){
+                    $('#alimenter-stock-error').addClass('flex')
+                    $('#alimenter-stock-error').removeClass('hidden')
+                    $('.message-error-alimenter').text(response.error)
+                    $('#alimenter-stock-success').addClass('hidden')
+                    $('#alimenter-stock-success').removeClass('flex ')
+                }else{
+                    $('#alimenter-stock-error').addClass('hidden')
+                    $('#alimenter-stock-error').removeClass('flex')
+                    $('#alimenter-stock-success').addClass('flex')
+                    $('#alimenter-stock-success').removeClass('hidden')
+                    $('.message-success-alimenter').text(response.message)
+                }
                 console.log(response);
             },
             error: function(xhr, status, error) {
@@ -914,12 +923,20 @@ function  deleteNotification(id)
     document.querySelector("#delete-notification").classList.remove('hidden')
     document.querySelector("#notification_deletedId").value=id
 }
-
+// hide the feeding stock alert  message
 let alimenterStockhidden=document.querySelector("#alimenter-stockhidden");
 if(alimenterStockhidden){
     alimenterStockhidden.addEventListener('click',()=>{
         document.querySelector("#alimenter-stock-success").classList.add('hidden')
         document.querySelector("#alimenter-stock-success").classList.remove('flex')
+    })
+}
+// hide the feeding stock alert  message
+let alimenterStockErrorHidden=document.querySelector("#alimenter-stockErrorhidden");
+if(alimenterStockErrorHidden){
+    alimenterStockErrorHidden.addEventListener('click',()=>{
+        document.querySelector("#alimenter-stock-error").classList.add('hidden')
+        document.querySelector("#alimenter-stock-error").classList.remove('flex')
     })
 }
 // hide the create product message

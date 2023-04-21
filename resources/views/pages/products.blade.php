@@ -17,38 +17,40 @@
                     <!-- Dropdown menu -->
                     <div id="opperations" class="border-2 border-gray-300 z-10 hidden divide-y list-operation rounded-b-lg shadow w-44 ">
                         @if(count($products)>0)
-                        <button data-modal-target="import-product" data-modal-toggle="import-product" class="flex w-full justify-start items-center  py-2 operation-menu" type="button">
+                        <button data-modal-target="import-product" data-modal-toggle="import-product" class="flex w-full justify-start items-center text-white  py-2 bg-green-600 hover:bg-green-700" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-file-csv"></i></span>
                             <span>importer produits</span> 
                         </button>
-                        <a class="flex justify-start w-full operation-menu py-2 " href="{{ route('product.export') }}">
+                        <a class="flex justify-start w-full bg-red-600  hover:bg-red-700 py-2 text-white" href="{{ route('product.export') }}">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-file-csv"></i></span>
-                            <span>Exporter les produits </span> 
+                            <span>Exporter produits </span> 
                         </a>
                         @endif
                         @can('role-list')
-                        <button id="display-largeModal" class="flex w-full justify-start items-center operation-menu  py-2" type="button">
+                        <button id="display-largeModal" class="flex w-full justify-start items-center rounded-b hover:bg-blue-700 bg-blue-600  text-white py-2" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-plus"></i></span>
                             Ajouter Produit
                         </button>
                         @endcan
                         @if(count($products)>0)
-                        <button id="alementer-stock"  class="flex justify-start items-center w-full text-center operation-menu  py-2" type="button">
+                        @role('commercial')
+                        <button id="alementer-stock"  class="flex justify-start items-center w-full rouded-b text-center hover:bg-blue-700 bg-blue-600 text-white  py-2" type="button">
                             <span class="text-lg mr-2 pl-1"><i class="fa-solid fa-boxes-packing"></i></span>
                             Alimenter le stock
                         </button>
+                        @endrole
                         @endif
                     </div>
                     <div>
                         <h2 class="font-bold text-green">Produits</h2>
                     </div>
                     @if(session('error'))                  
-                    <div id="alert-border-4" class="flex p-4 mb-4 text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800" role="alert">
+                    <div id="alert-border-4" class="flex p-4 mb-4 text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50  " role="alert">
                         <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                         <div class="ml-3 text-sm font-medium">
                             <strong>Error  </strong>{{ session('error') }}
                         </div>
-                        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700" data-dismiss-target="#alert-border-4" aria-label="Close">
+                        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8" data-dismiss-target="#alert-border-4" aria-label="Close">
                           <span class="sr-only">Dismiss</span>
                           <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         </button>
@@ -85,12 +87,12 @@
                         <div class="flex items-center justify-start px-4 py-3">
                             <div class="relative ">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                                 </div>
-                                <input type="text" id="search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Chercher" required>
+                                <input type="text" id="search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Chercher" required>
                             </div>
                         </div>
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-sm text-left text-gray-500 ">
                             <thead class="text-xs text-gray uppercase table-bg ">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 flex items-center">
@@ -191,10 +193,10 @@
 <div id="large-modal" tabindex="-1" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
     <div class="relative w-full max-w-4xl max-h-full">
         <!-- Modal content -->
-        <form id="create-product-form" action="{{route('product.create')}}"  method="post" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <form id="create-product-form" action="{{route('product.create')}}"  method="post" class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+            <div class="flex items-center justify-between p-5 border-b rounded-t ">
+                <h3 class="text-xl font-medium text-gray-900">
                     Ajouter Produit
                 </h3>
                 <button id="close-largeModalProduct" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">
@@ -220,14 +222,14 @@
                     @csrf
                     <div class="mx-4 mt-6 ">
                         <div class="w-100">
-                            <label for="reference" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Réfrence du Produit</label>
+                            <label for="reference" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Réfrence du Produit</label>
                             <input type="text" name="reference"  id="reference" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Réference" required>
                         </div>
                         @error('reference')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                         <div class="w-100 mt-2">
-                            <label for="nom" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">le nom du produit</label>
+                            <label for="nom" class="font-serif block mb-2 text-md font-bold text-gray-900 ">le nom du produit</label>
                             <input type="text" name="nom"  id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="le nom du produit" required>
                         </div>
                         @error('nom')
@@ -243,7 +245,7 @@
                             </select>
                         </div>   
                         <div class="w-100">
-                            <label for="ctegory_id" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Category du produit</label>
+                            <label for="ctegory_id" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Category du produit</label>
                             <select name="category_id" id="category_id" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
                                 @foreach ($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
@@ -284,8 +286,8 @@
         <form id="edit-product-form" action="{{route('product.update')}}"  method="post" class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
             @csrf
-            <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+            <div class="flex items-center justify-between p-5 border-b rounded-t ">
+                <h3 class="text-xl font-medium text-gray-900 ">
                     Modifier le Produit
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-hide="edit-productModal">
@@ -300,14 +302,14 @@
                     <input type="hidden" name="product_formId" id="product_formId">
                     <div class="mx-4 mt-6 ">
                         <div class="w-100">
-                            <label for="reference_updated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Réfrence du Produit</label>
+                            <label for="reference_updated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Réfrence du Produit</label>
                             <input type="text" name="reference_updated"  id="reference_updated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Réference" required>
                         </div>
                         @error('reference')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                         <div class="w-100 mt-2">
-                            <label for="nom_updated" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">le nom du produit</label>
+                            <label for="nom_updated" class="font-serif block mb-2 text-md font-bold text-gray-900 ">le nom du produit</label>
                             <input type="text" name="nom_updated"  id="nom_updated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="le nom du produit" required>
                         </div>
                         @error('nom')
@@ -321,7 +323,7 @@
                             </select>
                         </div>   
                         <div class="w-100">
-                            <label for="ctegory_idupdated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Category du produit</label>
+                            <label for="ctegory_idupdated" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Category du produit</label>
                             <select name="ctegory_idupdated" id="ctegory_idupdated" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
                                
                             </select>
@@ -393,7 +395,7 @@
                         <input accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" type="file" name="product_file" id="product_file"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  " required>
                     </div>
                     
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600">importer</button>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">importer</button>
                     
                 </form>
             </div>
@@ -408,8 +410,8 @@
             <!-- Modal header -->
             
             @csrf
-            <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+            <div class="flex items-center justify-between p-5 border-b rounded-t ">
+                <h3 class="text-xl font-medium text-gray-900 ">
                  les Produits selectionés
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-hide="products-selectedModal">
@@ -430,9 +432,21 @@
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </button>
             </div>
+            <div id="alimenter-stock-error" class="hidden mx-4 mt-6 p-2 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 " >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>                          
+                <div class="ml-3 text-sm font-medium flex items-center ">
+                    <strong class="mr-2">Error  </strong><p class="message-error-alimenter"></p>
+                </div>
+                <button id="alimenter-stockErrorhidden"  type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 "   aria-label="Close">
+                    <span class="sr-only">Dismiss</span>
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
             <div class="p-6 space-y-6">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-                    <table class="w-full text-sm text-left mr-2 text-gray-500 dark:text-gray-400">
+                    <table class="w-full text-sm text-left mr-2 text-gray-500 ">
                         <thead class="text-xs text-gray uppercase table-bg ">
                             <tr>
                                 <th scope="col" class="px-6 py-3 flex items-center">

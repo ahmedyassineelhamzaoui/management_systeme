@@ -169,7 +169,9 @@ class ProductController extends Controller
     
         foreach ($references as $index => $reference) {
             $product = Product::where('reference', $reference)->first();
-    
+            if ($product->quantite < $quantities[$index]) {
+                return response()->json(['error' => 'La quantité demandée est supérieure à la quantité disponible en stock pour le produit '.$product->nom]);
+            }
             $feeding = new StockFeeding();
             $feeding->user_id = $user->id;
             $feeding->product_id = $product->id;
@@ -221,31 +223,7 @@ class ProductController extends Controller
         // }
         // return view('pages.userStock', compact('products','quantities'));       
     }
-    // public function acceptOperation(Request $request)
-    // {
-    //     $notification = DB::table('notifications')->where('notifiable_id', $request->notifId)->first();
-    //      if($notification){
-    //         foreach (json_decode($notification->data)->product  as $i => $items) {
-    //             // dd(json_decode($notification->data)->user_id);
-    //             $product = Product::find($items->id);
-    //             $productData = json_decode($product->data, true);
-    //             foreach($productData as $key=>$value ){
-    //                 if($value['user_id'] == json_decode($notification->data)->user_id ){
-    //                     $productData[$key]['status'] =  'accepted';
-    //                     $usernotify = User::find($value['user_id']);
-    //                     $product->quantite -= json_decode($items->data)[0]->quantity;
-    //                     $product->data = json_encode($productData); 
-    //                     $product->save();
-    //                 }
-    //             }
-    //         }
-    //      }
-    //      $user = auth()->user();
-    //      $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
-    //      Notification::send($usernotify, new FeedAccept());
-    //      $notification->delete();
-    //      return redirect()->back()->with('succès','le stock a été alimenter ');
-    // }
+  
     // public function declineOperation(Request $request)
     // {
     //     $user = auth()->user();
