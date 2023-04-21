@@ -473,6 +473,7 @@ $(document).ready(function() {
                 $('.message-success-createProduct').text(response.message);
                 $('#create-product-success').addClass('flex'); 
                 $('#create-product-success').removeClass('hidden')
+                $('#create-product-form')[0].reset();
             },
             error: function(xhr) {
               var errors = xhr.responseJSON.errors;
@@ -919,5 +920,37 @@ if(alimenterStockhidden){
     alimenterStockhidden.addEventListener('click',()=>{
         document.querySelector("#alimenter-stock-success").classList.add('hidden')
         document.querySelector("#alimenter-stock-success").classList.remove('flex')
+    })
+}
+// hide the create product message
+let createProductMessageHidden=document.querySelector("#create-product-message-hidden")
+if(createProductMessageHidden){
+    createProductMessageHidden.addEventListener('click',(e)=>{
+        document.querySelector("#create-product-success").classList.add('hidden')
+    })
+}
+
+// display large Modal
+let displayLargeModal=document.querySelector("#display-largeModal")
+if(displayLargeModal){
+    displayLargeModal.addEventListener('click',(e)=>{
+        document.querySelector("#large-modal").classList.add('flex')
+        document.querySelector("#large-modal").classList.remove('hidden')
+    })
+}
+// close large modal Product
+let closeLargeModalProduct=document.querySelector("#close-largeModalProduct")
+if(closeLargeModalProduct){
+    closeLargeModalProduct.addEventListener('click',(e)=>{
+        document.querySelector("#large-modal").classList.add('hidden')
+        document.querySelector("#large-modal").classList.remove('flex') 
+    })
+}
+// declie large modal Product
+let declineLargeModalProduct=document.querySelector("#decline-largeModalProduct")
+if(declineLargeModalProduct){
+    declineLargeModalProduct.addEventListener('click',(e)=>{
+        document.querySelector("#large-modal").classList.add('hidden')
+        document.querySelector("#large-modal").classList.remove('flex') 
     })
 }

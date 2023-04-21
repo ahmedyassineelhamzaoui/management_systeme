@@ -82,6 +82,10 @@ body{
     user-select: none;
     overflow-x: hidden;
 }
+#modalProduct-bodyHieght {
+    max-height: 75vh;
+    overflow-y: auto; 
+}
 .page-content{
     display:flex;
     width:100%;
