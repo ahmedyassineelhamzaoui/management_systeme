@@ -77,6 +77,6 @@ class MarqueController extends Controller
         }
         $marque->name = $request->nom;
         $marque->save();
-        return redirect()->back()->with('succès','la marque a été bien créer');
+        return redirect()->back()->with('succès','la marque a été bien Modifier');
     }
 }

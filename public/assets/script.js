@@ -380,10 +380,11 @@ function editMarque(id,name){
     nomUpmarque.value=name
 }
 if(declineMarque){
-    declineMarque.onclick=()=>{
+    declineMarque.addEventListener('click',(e)=>{
+        e.preventDefault();
         formMarque.classList.remove('flex')
         formMarque.classList.add('hidden')
-    }
+    })
 }
 if(closeMarque){
     closeMarque.onclick=()=>{
