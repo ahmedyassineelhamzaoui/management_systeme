@@ -1,7 +1,7 @@
 <aside id="aside-bar">
     <div class="top">
         <div class="logo">
-            <img src="images/logo.png" alt="siaf">
+            <img src="../images/logo.png" alt="siaf">
             <h2 class="">Siaf</h2>
         </div>
         <div class="close" id="close-btn">

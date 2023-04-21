@@ -61,7 +61,7 @@
                 </ul>
             </div>
             <div class="ml-1">
-                <img class="user-profile" src="images/user.png" alt="">
+                <img class="user-profile" src="../images/user.png" alt="">
             </div>
         </div>
     </div>
