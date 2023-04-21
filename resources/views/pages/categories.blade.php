@@ -120,7 +120,7 @@
                       </svg>
                     </button>
                 </div>
-                <form action="{{route('create.category')}}"  method="post" >
+                <form id="form-contentCategory" action="{{route('create.category')}}"  method="post" >
                     @csrf
                     <div class="mx-4 mt-6 ">
                         <div class="w-100">

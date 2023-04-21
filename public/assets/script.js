@@ -246,8 +246,11 @@ if(addCategory){
     closeFormcategorieIcon.addEventListener('click',()=>{
         fromCategory.classList.add('hidden')
         fromCategory.classList.remove('flex')
+        document.querySelector("#form-contentCategory").reset();
     })
-    closeCtegoryButton.addEventListener('click',()=>{
+    closeCtegoryButton.addEventListener('click',(event)=>{
+        event.preventDefault();
+         document.querySelector("#form-contentCategory").reset();
         fromCategory.classList.add('hidden')
         fromCategory.classList.remove('flex')
     })
