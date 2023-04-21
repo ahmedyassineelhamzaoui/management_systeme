@@ -975,3 +975,19 @@ if(declineLargeModalProduct){
         document.querySelector("#large-modal").classList.remove('flex') 
     })
 }
+// decline delete notification
+let declineDeleteNotification=document.querySelector("#decline-deleteNotification")
+if(declineDeleteNotification){
+    declineDeleteNotification.addEventListener('click',(e)=>{
+        document.querySelector("#delete-notification").classList.add('hidden')
+        document.querySelector("#delete-notification").classList.remove('flex')
+    })
+}
+// close delete notification
+let closeDeleteNotification=document.querySelector("#close-deleteNotification")
+if(closeDeleteNotification){
+    closeDeleteNotification.addEventListener('click',(e)=>{
+        document.querySelector("#delete-notification").classList.add('hidden')
+        document.querySelector("#delete-notification").classList.remove('flex')
+    })
+}

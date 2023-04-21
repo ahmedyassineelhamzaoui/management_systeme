@@ -224,16 +224,16 @@ class ProductController extends Controller
         // return view('pages.userStock', compact('products','quantities'));       
     }
   
-    // public function declineOperation(Request $request)
-    // {
-    //     $user = auth()->user();
-    //     $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
-    //     $usernotify  = User::find($notification->data['user_id']);
-    //     Notification::send($usernotify, new FeedDecline());
-    //      if($notification){
-    //         $notification->delete();
-    //      }
-    //      return redirect()->back()->with('succès','l\'alimentation de stock a été refuser');
-    // }
+    public function declineOperation(Request $request)
+    {
+        $user = auth()->user();
+        $notification = $user->notifications()->where('notifiable_id', $request->notifId)->first();
+        $usernotify  = User::find($notification->data['user_id']);
+        Notification::send($usernotify, new FeedDecline());
+         if($notification){
+            $notification->delete();
+         }
+         return redirect()->back()->with('succès','l\'alimentation de stock a été refuser');
+    }
 
 }

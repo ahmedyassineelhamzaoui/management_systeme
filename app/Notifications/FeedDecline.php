@@ -37,10 +37,12 @@ class FeedDecline extends Notification
     {
        return [
         'accept' => 'no',
+        'user'  => '',
+        'user_id' => '',
         'link'  => 'products',
         'pages' => 'Produits',
         'title' => 'l\'admin à refuser l\'alimentaion de votre stock',
-        'picture' => 'agreement.png',
+        'picture' => 'decline.png',
        ];
     }
 }

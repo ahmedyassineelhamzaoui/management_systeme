@@ -66,12 +66,12 @@
                                     @csrf
                                     <input type="hidden" value="{{$notification->notifiable_id}}" name="notifiable_id">
                                     <input type="hidden"  value="{{$notification->data['user_id']}}" name="notifId">
-                                    <button id="accept_alimenter"  type="submit" class="mr-2 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white">accepter</button>
+                                    <button   type="submit" class="mr-2 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white">accepter</button>
                                 </form>
                                 <form method="post" action="{{route('decline.operation')}}">
                                     @csrf
-                                    <input type="hidden" value="{{$notification->notifiable_id}}" name="notifId">
-                                    <button id="decline_alimenter" type="submit" class="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white">Refuser</button>
+                                    <input   type="hidden" value="{{$notification->notifiable_id}}" name="notifId">
+                                    <button  type="submit" class="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white">Refuser</button>
                                 </form>
                                 @endif
                             </div>
@@ -98,21 +98,21 @@
     <div class="relative rounded-lg p-6 bg-white">
         <div class="flex justify-between items-center">
             <h3 class="text-lg font-medium">Confirmation</h3>
-            <button  class="text-gray-500 font-medium cursor-pointer close-modal" id="close-deletedModal"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <button id="close-deleteNotification"  class="text-gray-500 font-medium cursor-pointer close-modal" id="close-deletedModal"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             </button>
         </div>
         <div class="mt-4">
-            <p>Voulez-vous vraiment supprimer cet utilisateur ?</p>
+            <p>Voulez-vous vraiment supprimer cet notification ?</p>
         </div>
         <div class="flex justify-end mt-4">
             <form method="post" action="{{route('delete.notification')}}">
                 @csrf
                 @method('delete')
                 <input type="hidden" name="notification_deletedId" id="notification_deletedId">
-                <button  type="button" class="px-4 py-2 rounded-md text-white bg-gray-600 close-modal"  >Cancel</button>
-                <button class="px-4 py-2 rounded-md text-white bg-red-600" type="submit" name="delete-category">Delete</button>
+                <button id="decline-deleteNotification" type="button" class="px-4 py-2 rounded-md text-white bg-gray-600 close-modal"  >Anuller</button>
+                <button  class="px-4 py-2 rounded-md text-white bg-red-600" type="submit" name="delete-category">Supprimer</button>
             </form>
         </div>
     </div>
