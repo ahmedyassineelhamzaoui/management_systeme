@@ -942,14 +942,18 @@ if(displayLargeModal){
 let closeLargeModalProduct=document.querySelector("#close-largeModalProduct")
 if(closeLargeModalProduct){
     closeLargeModalProduct.addEventListener('click',(e)=>{
+        window.location.href = '/products';
         document.querySelector("#large-modal").classList.add('hidden')
         document.querySelector("#large-modal").classList.remove('flex') 
+        document.querySelector("#create-product-form").reset();
     })
 }
 // declie large modal Product
 let declineLargeModalProduct=document.querySelector("#decline-largeModalProduct")
 if(declineLargeModalProduct){
     declineLargeModalProduct.addEventListener('click',(e)=>{
+        window.location.href = '/products';
+        document.querySelector("#create-product-form").reset();
         document.querySelector("#large-modal").classList.add('hidden')
         document.querySelector("#large-modal").classList.remove('flex') 
     })
