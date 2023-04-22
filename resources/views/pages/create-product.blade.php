@@ -14,7 +14,7 @@
                     <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
                         <div class="flex justify-between p-4 border-b  dark:border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                Ajouté Produit
+                                <span ><span class="mr-2"><i class="fa-solid fa-plus"></i></span> ajouté Produit</span>               
                             </h3>
                         </div>
                         <form action="{{route('product.create')}}"  method="post" >

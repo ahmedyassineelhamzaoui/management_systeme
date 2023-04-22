@@ -238,17 +238,18 @@ aside .top{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 1.4rem;
+    margin-top: .5rem;
 }
 aside .logo{
     display:flex;
+    align-items: center;
     gap:0.8rem;
     color:var(--dashboard-nameColor);
 }
 aside .logo  img{
     margin-left:10px ;
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
 }
 /* default style of icon */
 .defaultToggle-style{

@@ -14,7 +14,7 @@
                     <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
                         <div class="flex justify-between p-4 border-b  dark:border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                Update Role {{$role->name}}
+                                Modifier le Role {{$role->name}}
                             </h3>
                         </div>
                         <form id="role-formupdate" action="{{route('role.update',$role->id)}}"  method="post" >

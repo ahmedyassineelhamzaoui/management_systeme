@@ -13,7 +13,7 @@
                     <button id="add-category" class="px-3 py-2 add-button rounded-md text-white flex items-center">
                         <span class="mr-2">     
                         </span>         
-                        <span > ajouté catégorie</span>               
+                        <span ><span class="mr-2"><i class="fa-solid fa-plus"></i></span> ajouté catégorie</span>               
                     </button>
                 </div>
                 <div>

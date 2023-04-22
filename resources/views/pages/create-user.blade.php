@@ -14,7 +14,7 @@
                     <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
                         <div class="flex justify-between p-4 border-b  dark:border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                Add User
+                                Ajouté un Utilisateur
                             </h3>
                         </div>
                         <form action="{{route('users.create')}}"  method="post" >

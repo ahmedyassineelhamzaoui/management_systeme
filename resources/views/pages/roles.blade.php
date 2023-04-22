@@ -13,7 +13,7 @@
                     <div class="flex w-full justify-end">
                         <a href="{{route('CreateRoleForm')}}" id="add-userButton"  class="px-3 py-2 add-button rounded-md text-white flex items-center">
                             <span class="material-icons-sharp">admin_panel_settings</span>       
-                            <span > add Role</span>               
+                            <span > ajouté un Role</span>               
                         </a>
                     </div>
                     <div>
