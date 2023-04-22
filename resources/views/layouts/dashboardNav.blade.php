@@ -1,6 +1,6 @@
 <nav class="nav">
     <div class="dashboard-name">
-        <h1>Dashboard</h1>
+        <h1>tableau de bord</h1>
         <span id="show-menu" class="material-icons-sharp menu">
             menu
         </span>
@@ -32,7 +32,7 @@
                     </div>
                     @foreach (auth()->user()->unreadNotifications()->orderBy('created_at', 'desc')->take(4)->get()  as $notification)
                     <li>
-                        <a href="{{url('notifications')}}" class="flex items-center px-4 py-2 "><img src="../images/{{$notification->data['picture']}}" class="w-6 h-6 mr-1"  alt=""><span >{{$notification->data['user']}} {{ $notification->data['title']}}</span></a>
+                        <a href="{{url('notifications')}}" class="flex items-center px-4 py-2 "><img src="../images/{{$notification->data['picture']}}" class="w-6 h-6 mr-1"  alt=""><p class="text-black">{{$notification->data['user']}} {{ $notification->data['title']}}</p></a>
                     </li>
                     @endforeach
                     <li>
@@ -46,7 +46,7 @@
             <span class="material-icons-sharp">dark_mode</span>
         </div>
         <div class="conected">
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center " type="button">{{auth()->user()->name}}<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center " type="button">{{ \Illuminate\Support\Str::limit(auth()->user()->name, 6, '...') }}<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
             <!-- Dropdown menu -->
             <div id="dropdown" class="z-10 hidden divide-y  rounded-b-lg shadow w-44 ">
                 <ul class="py-2 text-sm " aria-labelledby="dropdownDefaultButton">
