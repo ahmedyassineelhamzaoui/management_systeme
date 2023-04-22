@@ -31,8 +31,10 @@
     --tw-text-opacity: 1;
     --text-green-200:rgb(16, 68, 34 );
     --text-gray-color:rgb(51, 67, 78);
-    --add-button-color:#677483;
-    --add-button-background:rgb(34, 30, 30);
+    --add-button-color:#ffffff;
+    --add-button-background:rgb(27, 108, 99);
+    --add-button-colorhover:#ffffff;
+    --add-button-backgroundhover:rgb(40, 144, 132);
     --modal-background:white;
     --label-text-modal-color: rgb(11, 11, 52);
     --color-bg-inputs:rgb(254, 251, 251);
@@ -56,8 +58,10 @@
     --text-colornotification:rgb(238, 238, 238);
     --text-gray-color:rgb(0, 122, 198);
     --text-green-200:rgb(187 247 208 / var(--tw-text-opacity));
-    --add-button-color:#2a02cbde;
-    --add-button-background:rgb(234, 234, 234);
+    --add-button-color:#005d5ede;
+    --add-button-background:rgb(255, 255, 255);
+    --add-button-color:#005d5ede;
+    --add-button-background:rgb(230, 226, 226);
     --modal-background:#212732;
     --label-text-modal-color: rgb(171, 171, 171);
     --color-bg-inputs:#afb2b6;
@@ -166,9 +170,15 @@ b{
     color: var(--text-green-200);
 }
 .add-button{
+   font-weight: bold;
    color:var(--add-button-color);
    background:var(--add-button-background);
 }
+.add-button:hover{
+    font-weight: bold;
+    color:var(--add-button-colorhover);
+    background:var(--add-button-backgroundhover);
+ }
 .modal-background{
     background: var(--modal-background);
 }
