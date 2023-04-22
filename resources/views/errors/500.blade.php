@@ -6,9 +6,9 @@
                 <div class="">
                     <h1 class="text-[130px] text-green-500">500</h1>
                     <h3 class="font-bold">Internal Server Error</h3>
-                    <p class="font-bold mb-4">You do not have permission to view this resource</p>
+                    <p class="font-bold mb-4">Internal Server Error: Please try again later.</p>
                     <div>
-                        <a href="{{route('index')}}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500" href="index.html">Back to Home</a>
+                        <a href="{{url('index')}}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500" >Back to Home</a>
                     </div>
                 </div>
             </div>

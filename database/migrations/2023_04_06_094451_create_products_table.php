@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('reference');
             $table->string('nom');
             $table->integer('quantite');
+            $table->integer('quantiteRelative');
             $table->decimal('prix', 8, 2);
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('marque_id')->constrained('marques');

@@ -8,7 +8,7 @@
                     <h3 class="font-bold">Service Unavailable</h3>
                     <p class="font-bold mb-4">Sorry, we are under maintenance!</p>
                     <div>
-                        <a href="{{route('index')}}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500" href="index.html">Back to Home</a>
+                        <a href="{{url('index')}}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500" >Back to Home</a>
                     </div>
                 </div>
             </div>

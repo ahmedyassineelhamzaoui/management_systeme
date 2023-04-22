@@ -32,11 +32,11 @@
                     </div>
                     @foreach (auth()->user()->unreadNotifications()->orderBy('created_at', 'desc')->take(4)->get()  as $notification)
                     <li>
-                        <a href="#" class="flex items-center px-4 py-2 "><img src="images/{{$notification->data['picture']}}" class="w-6 h-6 mr-1"  alt=""><span >{{$notification->data['user']}} {{ $notification->data['title']}}</span></a>
+                        <a href="{{url('notifications')}}" class="flex items-center px-4 py-2 "><img src="../images/{{$notification->data['picture']}}" class="w-6 h-6 mr-1"  alt=""><span >{{$notification->data['user']}} {{ $notification->data['title']}}</span></a>
                     </li>
                     @endforeach
                     <li>
-                        <a href="notifications" class="hover:bg-gray-100 hover:text-blue-600 block px-4 py-2 text-center text-blue-700 ">Voir tout</a>
+                        <a href="{{url('notifications')}}" class="hover:bg-gray-100 hover:text-blue-600 block px-4 py-2 text-center text-blue-700 ">Voir tout</a>
                     </li>
                     </ul>
                 </div>   
@@ -108,7 +108,7 @@
                         </div>                       
                         <div class="w-100">
                             <label for="password" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Mot de Pass</label>
-                            <input type="password" name="password"  id="current-password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2 " {{ auth()->user()->cannot('user-edit') ? 'readonly disabled' : ''}} >
+                            <input type="password" name="password"  id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2 " {{ auth()->user()->cannot('user-edit') ? 'readonly disabled' : ''}} >
                         </div>   
                         
                     </div>

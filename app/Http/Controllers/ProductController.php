@@ -79,6 +79,7 @@ class ProductController extends Controller
             'reference' => $request->reference,
             'nom' =>  $request->nom,
             'quantite' => $request->quantite,
+            'quantiteRelative' => $request->quantite,
             'prix' => $request->prix,
             'category_id' => $request->category_id,
             'marque_id' => $request->marque_id
@@ -99,6 +100,7 @@ class ProductController extends Controller
             $product->reference = $request->reference_updated;
             $product->nom =  $request->nom_updated;
             $product->quantite = $request->quantiteupdated;
+            $product->quantiteRelative += $request->quantiteupdated;
             $product->prix = $request->prixupdated;
             $product->category_id = $request->ctegory_idupdated;
             $product->marque_id = $request->marque_idupdated;
@@ -190,6 +192,21 @@ class ProductController extends Controller
             $value->save();
             $usernotify = User::find($value->user_id);
         }
+
+        $products = Product::all();
+        foreach($products as $product){
+            $product->quantite = $product->quantiteRelative;
+            $product->save();
+        }
+        $stockfeeding = StockFeeding::all();
+        foreach($stockfeeding as $value){
+            if($value->status =='accepted'){
+                $product = Product::find($value->product_id);
+                $product->quantite -= $value->quantity;
+                $product->save();
+            }
+        }
+
         $notification = $user->notifications()->where('notifiable_id', $request->notifiable_id)->first();
         Notification::send($usernotify, new FeedAccept());
         if($notification){
@@ -209,19 +226,7 @@ class ProductController extends Controller
                 'quantity' => $quantity,
             ];
         }
-        // foreach($products as $items){
-        //     dd($items['product']->reference);
-
-        // }
-        return view('pages.userStock', compact('products'));
-        // $stock = StockFeeding::where('user_id',$id)->get();
-        // $products = [];
-        // $quantities = [];
-        // foreach($stock as $product){
-        //     $products [] =Product::find($product->product_id)->first();
-        //     $quantities [] = $product->quantity; 
-        // }
-        // return view('pages.userStock', compact('products','quantities'));       
+        return view('pages.userStock', compact('products'));       
     }
   
     public function declineOperation(Request $request)

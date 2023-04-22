@@ -136,11 +136,12 @@
                                         {{$product->Category->name}} 
                                     </td>
                                     <td class="px-6 py-4">
-                                        @if(isset($stock[$product->id]))
+                                        {{$product->quantite}}
+                                        {{-- @if(isset($stock[$product->id]))
                                             {{$product->quantite - $stock[$product->id]->total_quantity}}
                                         @else
                                             {{$product->quantite}}
-                                        @endif                                                                                          
+                                        @endif                                                                                           --}}
                                     </td>
                                     <td>
                                         {{$product->prix}}

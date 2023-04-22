@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['reference', 'nom', 'quantite', 'prix', 'marque_id', 'category_id'];
+    protected $fillable = ['reference', 'nom', 'quantite','quantiteRelative', 'prix', 'marque_id', 'category_id'];
     
     public function marque()
     {

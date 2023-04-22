@@ -22,14 +22,14 @@
                             <div class="mx-4 mt-6 ">
                                 <div class="w-100">
                                     <label for="name" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">name of User</label>
-                                    <input type="text" name="name"  id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name of user" required>
+                                    <input type="text" name="name"  id="nameuser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name of user" required>
                                 </div>
                                 @error('name')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 <div class="w-100">
                                     <label for="email" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">email of User</label>
-                                    <input type="email" name="email"  id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="email of user" required>
+                                    <input type="email" name="email"  id="emailuser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="email of user" required>
                                 </div>
                                 @error('email')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -44,7 +44,7 @@
                                 </div>                         
                                 <div class="w-100">
                                     <label for="password" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">password</label>
-                                    <input type="password" name="password"  id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2 " placeholder="user password">
+                                    <input type="password" name="password"  id="passworduser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2 " placeholder="user password">
                                 </div>   
                                 @error('password')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
