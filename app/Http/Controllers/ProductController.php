@@ -143,7 +143,6 @@ class ProductController extends Controller
     {
         if($request->ajax())
         {
-        $output="";
         $search = $request->search;
         $products=Product::with('marque', 'category')->where('reference','LIKE','%'.$search."%")
         ->orWhere('nom', 'like', '%' . $search . '%')
@@ -162,8 +161,28 @@ class ProductController extends Controller
         }
         }
     }
-
-    
+    public function searchInStock(Request $request)
+    {
+        if ($request->ajax()) {
+            $search = $request->search_inStock;
+            $products=Product::with('marque', 'category')->where('reference','LIKE','%'.$search."%")
+            ->orWhere('nom', 'like', '%' . $search . '%')
+            ->orWhere('quantite', 'like', '%' . $search . '%')
+            ->orWhere('prix', 'like', '%' . $search . '%')
+                ->orWhereHas('marque', function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                })
+                ->orWhereHas('Category', function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                })
+            ->paginate(5);
+            if($products)
+            {
+            return Response($products);
+            }
+        }
+    }
+        
     public function allimenterStock(Request $request) {
         $user = auth()->user();
         $references = $request->get('references');

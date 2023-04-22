@@ -68,6 +68,7 @@ Route::controller(ProductController::class)->group(function(){
     Route::get('/products-download','export')->name('product.export');
     Route::post('/products-upload','import')->name('import.product');
     Route::get('/search','search')->name('products.search');
+    Route::get('/searchInStock','searchInStock');
     Route::post('/alimenter-stock','allimenterStock')->name('allimenter.stock');
     Route::get('Stock/{id}', 'userStock');
     Route::post('accept-operation','acceptOperation')->name('accept.operation');
