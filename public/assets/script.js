@@ -79,6 +79,7 @@ window.addEventListener("resize", ()=>{
         showMenu.style.display="none" ;
         mainPage.style.marginLeft="16rem";
         closeBtn.style.display = "none"
+        document.querySelector(".logo h2").style.display='block'
         dashboardName.style.paddingLeft="16rem";
         towOpttions.classList.remove("secondToggle-style")
         towOpttions.classList.add("defaultToggle-style")
