@@ -38,6 +38,8 @@ class CreateCommandeNotification extends Notification
     {
        return [
         'accept' => 'no',
+        'user'   => $this->user,
+        'user_id' => '',
         'link'  => 'Commande',
         'pages' => 'Commandes',
         'title' => 'a créer une comande',

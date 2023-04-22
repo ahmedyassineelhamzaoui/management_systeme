@@ -80,7 +80,7 @@ class CommandeController extends Controller
         $user = User::find(1);
         $userAuth =  auth()->user()->name;
         Notification::send($user, new CreateCommandeNotification($userAuth));
-        return response()->json(['message' => 'La Commande a été bien créer created .']);
+        return response()->json(['message' => 'La Commande a été bien créer .']);
     }
     public function deleteCommande(Request $request)
     {
