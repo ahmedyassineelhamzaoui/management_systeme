@@ -52,7 +52,7 @@ class CommandeController extends Controller
     }
     public function CreateCommande(Request $request)
     {
-    
+        $ids = $request->input('ids');
         $references = $request->input('references');
         $quantities = $request->input('quantity');
         $nom = $request->input('nom');
@@ -62,9 +62,20 @@ class CommandeController extends Controller
         $items = $request->items;
         $data = [];
         if(!$items){
-          return response()->json(['error' => 'vous avez créer une commande sans produits']);
+            return response()->json(['error' => 'vous avez créer une commande sans produits']);
         }
-        
+        foreach ($items as $i => $item) {
+    
+                $data[] = [
+                    'id'        => $ids[$i],
+                    'reference' => $references[$i],
+                    'quantity' => $quantities[$i],
+                    'nom' => $nom[$i],
+                    'prix' => $prix[$i],
+                    'marque' => $marques[$i],
+                    'categorie' => $categories[$i],
+                ];
+        }
         $comande = Commande::create([
             'user_name' => auth()->user()->name,
             'status' => 'en cours',
@@ -85,11 +96,24 @@ class CommandeController extends Controller
     }
     public function updateCommande(Request $request)
     {
-
-        
         $commande =Commande::find($request->comande_updatedId);
-            $commande->status = $request->commande_status;
-            $commande->save();
+        $commande->status = $request->commande_status;
+        $commande->save();
+        $data = json_decode($commande->data);    
+        if($commande->status === 'Livré'){
+            foreach($data as $item){
+                $user_id = auth()->user()->id;
+                $product_id = $item->id;
+                $quantity = $item->quantity;
+                $stock = StockFeeding::where('user_id', $user_id)
+                                    ->where('product_id', $product_id)
+                                    ->first();
+                if($stock){
+                    $stock->quantity -= $quantity;
+                    $stock->save();
+                }
+            }
+        }
         
         return redirect()->back()->with('succès','la commande a été bien modifier');
     }

@@ -9,6 +9,7 @@
         
         <main id="main-page"> 
             <section id="my-section">
+                @role('commercial')
                 <div class="flex w-full justify-end">
                     <button data-modal-target="products-Modal" data-modal-toggle="products-Modal" class="px-3 py-2 add-button rounded-md text-white flex items-center">
                         <span class="mr-2">     
@@ -16,8 +17,9 @@
                         <span > Creér une commande</span>               
                     </button>
                 </div>
-                <div>
-                    <h2 class="font-bold text-green">Commande</h2>
+                @endrole
+                <div class="ml-2">
+                    <h2 class="font-bold text-green ">Commande</h2>
                 </div>
                 @if(session('error'))                  
                 <div id="alert-border-3" class="flex mt-2 p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 " role="alert">
@@ -70,9 +72,11 @@
                                 <th scope="col" class="px-6 py-3">
                                     Status
                                 </th>
+                                @role('commercial')
                                 <th scope="col" class="px-6 py-3">
                                     Action
                                 </th>
+                                @endrole
                             </tr>
                         </thead>
                         <tbody class="table-body-bg">
@@ -87,6 +91,7 @@
                                 <td class="px-6 py-4">
                                     {{$commande->status}}
                                 </td>
+                                @role('commercial')
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
                                         <span class="text-green-500 cursor-pointer edit-commande" title="edit" data-modal-target="edit-commandeModal" data-commande-id="{{ $commande->id }}">
@@ -106,6 +111,7 @@
                                         </form>
                                     </div>
                                 </td>
+                                @endrole
                             </tr>
                             @empty
                                <td colspan="4" class="text-center py-1"> aucune catégorie exist</td>
@@ -200,6 +206,7 @@
                             @forelse ($products as $i => $product)
                             <tr class="border-b text-tablecolor ">
                                 <th scope="row" class="px-6 py-4 flex items-center  whitespace-nowrap ">
+                                    <input type="hidden" name="ids[]" value="{{$product->id}}" >
                                     <input id="{{$product->reference}}" name="items[]" value="{{ $product->reference }}"  type="checkbox" class="mr-2 check-one-rowComande">
                                     <input type="hidden" name="references[]" value="{{$product->reference}}">
                                     <label for="{{$product->reference}}">{{$product->reference}}</label> 
