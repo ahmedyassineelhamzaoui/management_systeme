@@ -750,7 +750,7 @@ $(document).ready(function() {
     });
     $('#product-selectedFormCommande').on('submit', function(e) {
         e.preventDefault(); // prevent the form from submitting normally
-    
+        
         var formData = $(this).serialize(); // get form data as serialized string
     
         // make AJAX call to update database
@@ -760,9 +760,20 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 // handle 
-                $('#success-commande').addClass('flex')
-                $('#success-commande').removeClass('hidden')
-                $('.add-commandeMessage').text(response.message);
+                if(response.error){
+                    $('#error-commande').addClass('flex')
+                    $('#error-commande').removeClass('hidden')
+                    $('.add-commandeError').text(response.error);
+                    $('#success-commande').addClass('hidden')
+                    $('#success-commande').removeClass('flex')
+                }else{
+                    $('#error-commande').addClass('hidden')
+                    $('#error-commande').removeClass('flex')
+                    $('#success-commande').addClass('flex')
+                    $('#success-commande').removeClass('hidden')
+                    $('.add-commandeMessage').text(response.message);
+                }
+               
             },
             error: function(xhr, status, error) {
                 // handle error

@@ -61,17 +61,10 @@ class CommandeController extends Controller
         $categories = $request->input('categories');
         $items = $request->items;
         $data = [];
-        foreach ($items as $i => $item) {
-    
-                $data[] = [
-                    'reference' => $references[$i],
-                    'quantity' => $quantities[$i],
-                    'nom' => $nom[$i],
-                    'prix' => $prix[$i],
-                    'marque' => $marques[$i],
-                    'categorie' => $categories[$i],
-                ];
+        if(!$items){
+          return response()->json(['error' => 'vous avez créer une commande sans produits']);
         }
+        
         $comande = Commande::create([
             'user_name' => auth()->user()->name,
             'status' => 'en cours',
