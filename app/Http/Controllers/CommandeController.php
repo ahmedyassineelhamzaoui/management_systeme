@@ -21,24 +21,34 @@ class CommandeController extends Controller
     }
     public function index()
     {
-        $stock = StockFeeding::where('user_id', auth()->user()->id)->get()->groupBy('product_id');
+        // $stock = StockFeeding::where('user_id', auth()->user()->id)->get();
+        // $quantite = [];
         // dd($stock);
-        $products = [];
-        foreach ($stock as $productId => $feedings) {
-            dd($feedings);  
-            $product = Product::findOrFail($feedings['product_id']);
-            dd($product);
-            $quantity = $feedings->sum('quantity');
-            $products[] = [
-                'product' => $product,
-                'quantity' => $quantity,
-            ];
+        // foreach($stock as $stoc){
+        //     $quantite= 0;
+        //     foreach($stock as $product){
+        //         $quantite +=$product->quantity; 
+        //     }
+        //     $quantité[] = $quantite;
+        // }
+         $stock = StockFeeding::where('user_id', auth()->user()->id)
+        ->groupBy('product_id')
+        ->selectRaw('sum(quantity) as total_quantity, product_id')
+        ->get();
+         $products = [];
+         foreach ($stock as $key => $value) {
+            $product = Product::find($value->product_id);
+            $products []=$product;
+         }
+        $quantities = [];
+        
+        foreach ($stock as $item) {
+            $quantities[$item->product_id] = $item->total_quantity;
         }
-        // dd($products);
         $marques = Marque::all();
         $categories = Category::all();
         $commandes = Commande::paginate(4);
-        return view('pages.commande', compact('products', 'marques', 'categories','commandes'));
+        return view('pages.commande', compact('products','quantities','marques','categories','commandes'));
     }
     public function CreateCommande(Request $request)
     {
@@ -51,7 +61,6 @@ class CommandeController extends Controller
         $categories = $request->input('categories');
         $items = $request->items;
         $data = [];
-        
         foreach ($items as $i => $item) {
     
                 $data[] = [

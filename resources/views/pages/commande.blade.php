@@ -189,7 +189,7 @@
                         </thead>
                         <tbody id="tbodyProductForm" class="table-body-bg">
                             @if($products)
-                            @forelse ($products as $product)
+                            @forelse ($products as $i => $product)
                             <tr class="border-b text-tablecolor ">
                                 <th scope="row" class="px-6 py-4 flex items-center  whitespace-nowrap ">
                                     <input id="{{$product->reference}}" name="items[]" value="{{ $product->reference }}"  type="checkbox" class="mr-2 check-one-rowComande">
@@ -213,7 +213,7 @@
                                     {{$product->prix}}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <input type="number" class="border-gray-200 text-start bg-transparent" name="quantity[]" value="{{$product->quantite}}" min="0" max="{{$product->quantite}}" step="1">
+                                    <input type="number" class="border-gray-200 text-start bg-transparent" name="quantity[]" value="{{$quantities[$product->id]}}" min="0" max="{{$quantities[$product->id  ]}}" step="1">
                                 </td>
                             </tr>
                             @empty
