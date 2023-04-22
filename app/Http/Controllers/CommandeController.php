@@ -11,12 +11,30 @@ use App\Models\Commande;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\CreateCommandeNotification;
+use App\Models\StockFeeding;
 
 class CommandeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        $products = Product::with('marque', 'category')->paginate(5); // Eager load the Marques and Categories relationships
+        $stock = StockFeeding::where('user_id', auth()->user()->id)->get()->groupBy('product_id');
+        // dd($stock);
+        $products = [];
+        foreach ($stock as $productId => $feedings) {
+            dd($feedings);  
+            $product = Product::findOrFail($feedings['product_id']);
+            dd($product);
+            $quantity = $feedings->sum('quantity');
+            $products[] = [
+                'product' => $product,
+                'quantity' => $quantity,
+            ];
+        }
+        // dd($products);
         $marques = Marque::all();
         $categories = Category::all();
         $commandes = Commande::paginate(4);
@@ -36,7 +54,6 @@ class CommandeController extends Controller
         
         foreach ($items as $i => $item) {
     
-            // if($request->has($items[$i])) {
                 $data[] = [
                     'reference' => $references[$i],
                     'quantity' => $quantities[$i],
@@ -45,7 +62,6 @@ class CommandeController extends Controller
                     'marque' => $marques[$i],
                     'categorie' => $categories[$i],
                 ];
-            // }
         }
         $comande = Commande::create([
             'user_name' => auth()->user()->name,

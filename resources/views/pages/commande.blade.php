@@ -188,6 +188,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbodyProductForm" class="table-body-bg">
+                            @if($products)
                             @forelse ($products as $product)
                             <tr class="border-b text-tablecolor ">
                                 <th scope="row" class="px-6 py-4 flex items-center  whitespace-nowrap ">
@@ -217,9 +218,14 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="text-center py-2">No Record Found</td>
+                                <td colspan="7" class="text-center py-2">aucun Produit exist</td>
                             </tr>
                             @endforelse
+                            @else
+                            <tr>
+                                <td colspan="7" class="text-center py-2">aucun Produit exist</td>
+                            </tr>
+                            @endif
                         </tbody> 
                     </table>
                 </div>
