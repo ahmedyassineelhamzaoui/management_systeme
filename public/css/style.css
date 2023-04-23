@@ -609,6 +609,7 @@ main section .insights .progress .number{
     -moz-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
+    /* background-color: rgba(38, 185, 154, 0.7); */
 }
 .brand-div{
     grid-template-columns: 2fr 1fr;

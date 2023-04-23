@@ -1,5 +1,7 @@
 import _ from 'lodash';
 window._ = _;
+import Chart from 'chart.js/auto';
+window.Chart = Chart;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

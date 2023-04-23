@@ -9,9 +9,9 @@
         
         <main id="main-page"> 
             <section id="my-section ">     
-                <h1 class="mt-2 ml-2 welcome-space">Bienvenue <span class="text-blue-600 "> {{auth()->user()->name}} </span> dans votre espace </h1>           
+                <h1 class="mt-2 ml-4 welcome-space">Bienvenue <span class="text-blue-600 "> {{auth()->user()->name}} </span> dans votre espace </h1>           
                 
-                <div class="insights">
+                <div class="insights ml-2">
                     <div class="sales">
                         <span class="material-icons-sharp bg-gray-400">
                             shopping_cart
@@ -100,8 +100,19 @@
                         </small>
                     </div>
                 </div>
+                    <div class="flex flex-col md:flex-row gap-1 mt-4 mb-4 ml-2">
+                        <div class="w-full md:w-5/12 h-64 md:h-auto border-2  bg-white  ">
+                            <div style="width:80%">
+                              {{ $chartjs2->render() }}
+                            </div>
+                        </div>
+                        <div class="w-full md:w-7/12 h-64 md:h-auto border-2  bg-white ">
+                            {!! $chartjs->render() !!}
+                        </div>
+                    </div>
                 
             </section>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @include('layouts.dashboardFooter')
