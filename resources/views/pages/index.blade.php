@@ -13,11 +13,13 @@
                 
                 <div class="insights">
                     <div class="sales">
-                        <span class="material-icons-sharp">analytics</span>
+                        <span class="material-icons-sharp bg-gray-400">
+                            shopping_cart
+                        </span>
                         <div class="middle">
                             <div class="left">
                                 <h3>Total Produits</h3>
-                                <h1></h1>
+                                <h1>{{$total_product}}</h1>
                             </div>
                             <div class="progress">
                                 <svg>
@@ -34,11 +36,13 @@
                     </div>
                     <!-- end of sales -->
                     <div class="expenses">
-                        <span class="material-icons-sharp">bar_chart</span>
+                        <span class="material-icons-sharp">
+                            receipt_long
+                        </span>
                         <div class="middle">
                             <div class="left">
-                                <h3>Total Express</h3>
-                                <h1>20,343$</h1>
+                                <h3>Commandes</h3>
+                                <h1>{{$total_commande}}</h1>
                             </div>
                             <div class="progress">
                                 <svg>
@@ -54,11 +58,13 @@
                         </small>
                     </div>
                     <div class="sales">
-                        <span class="material-icons-sharp">stacked_line_chart</span>
+                        <span class="material-icons-sharp bg-yellow-500">
+                            payments
+                        </span>
                         <div class="middle">
                             <div class="left">
-                                <h3>Total Income</h3>
-                                <h1>46,632$</h1>
+                                <h3>Total Prix</h3>
+                                <h1>{{$total_Price}} dh</h1>
                             </div>
                             <div class="progress">
                                 <svg>
@@ -74,11 +80,11 @@
                         </small>
                     </div>
                     <div class="income">
-                        <span class="material-icons-sharp">analytics</span>
+                        <span class="material-icons-sharp bg-blue-600">key</span>
                         <div class="middle">
                             <div class="left">
-                                <h3>Total Sales</h3>
-                                <h1>78,009$</h1>
+                                <h3>Permissions</h3>
+                                <h1>{{$total_permissions}}</h1>
                             </div>
                             <div class="progress">
                                 <svg>

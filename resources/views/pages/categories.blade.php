@@ -78,7 +78,7 @@
                                 <th scope="row" class="px-6 py-4   whitespace-nowrap ">
                                     {{$category->id}}
                                 </th>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 font-bold">
                                     {{$category->name}}
                                 </td>
                                 <td class="px-6 py-4">

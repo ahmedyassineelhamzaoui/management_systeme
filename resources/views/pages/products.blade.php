@@ -126,16 +126,16 @@
                                         <input id="check-{{$product->reference}}-row" type="checkbox" class="mr-2 hidden chack-one-row">
                                         <label for="check-{{$product->reference}}-row">{{$product->reference}}</label> 
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 font-bold">
                                         {{$product->nom}}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 font-bold">
                                         {{ $product->marque->name }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 font-bold">
                                         {{$product->Category->name}} 
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 font-bold">
                                         {{$product->quantite}}
                                         {{-- @if(isset($stock[$product->id]))
                                             {{$product->quantite - $stock[$product->id]->total_quantity}}
@@ -143,7 +143,7 @@
                                             {{$product->quantite}}
                                         @endif                                                                                           --}}
                                     </td>
-                                    <td>
+                                    <td class="font-bold">
                                         {{$product->prix}}
                                     </td>
                                     <td class="px-6 py-4">

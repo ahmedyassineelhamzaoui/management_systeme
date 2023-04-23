@@ -85,10 +85,10 @@
                                 <th scope="row" class="px-6 py-4   whitespace-nowrap ">
                                     {{$commande->id}}
                                 </th>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 font-bold">
                                     {{$commande->user_name}}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 font-bold">
                                     {{$commande->status}}
                                 </td>
                                 @role('commercial')

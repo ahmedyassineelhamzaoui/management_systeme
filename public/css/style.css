@@ -51,12 +51,12 @@
     --boxshadow-div:0 5px 5px green;
     --boxshadow-2:0 5px 5px  green;
     --dashboard-nameColor:white;
-    --table-bg:#212732;
+    --table-bg:#868687;
     --table-body-bg:#1f2937;
     --table-textColor:white;
     --color-notification:var(--table-body-bg);
     --text-colornotification:rgb(238, 238, 238);
-    --text-gray-color:rgb(0, 122, 198);
+    --text-gray-color:rgb(13, 13, 65);
     --text-green-200:rgb(187 247 208 / var(--tw-text-opacity));
     --add-button-color:#005d5ede;
     --add-button-background:rgb(255, 255, 255);
@@ -531,7 +531,6 @@ main section .insights >div:hover{
     box-shadow:none;
 }
 main section .insights >div span{
-    background: var(--color-primary);
     padding: 0.5rem;
     border-radius: 50%;
     -webkit-border-radius: 50%;

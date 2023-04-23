@@ -78,20 +78,20 @@
                                     <th scope="row" class="px-6 py-4  whitespace-nowrap ">
                                         {{$user->id}}
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 font-bold">
                                         {{$user->name}}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 font-bold">
                                         @if ($user->roles->isNotEmpty())
                                             {{$user->roles[0]->name}}
                                         @else
                                             No role assigned
                                         @endif  
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 font-bold">
                                         {{$user->email}}
                                     </td>
-                                    <td>
+                                    <td class="font-bold">
                                         @if ($user->status == 'online')
                                           <div class="flex items-center">
                                             <div class="online-indicator">

@@ -69,12 +69,12 @@
                                     <th scope="row" class="px-6 py-4  whitespace-nowrap ">
                                         {{$role->id}}
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 font-bold">
                                         {{$role->name}}
                                     </td>
                                     <td class="px-6 py-4">
                                         @foreach ($role->permissions as $permission)
-                                            <button class="px-2 py-1 bg-blue-700 rounded-md text-gray-300 my-1">{{ $permission->name }}</button>
+                                            <button class="px-2 py-1 bg-sky-900 rounded-md text-gray-300 my-1 ">{{ $permission->name }}</button>
                                         @endforeach
                                     </td>
                                     <td class="px-6 py-4">
