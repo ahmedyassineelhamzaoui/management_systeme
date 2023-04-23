@@ -9,7 +9,7 @@
         
         <main id="main-page"> 
             <section id="my-section ">     
-                <h1 class="mt-2 ml-2">Bienvenue <span class="text-blue-800 "> {{auth()->user()->name}} </span> dans votre espace </h1>           
+                <h1 class="mt-2 ml-2 welcome-space">Bienvenue <span class="text-blue-600 "> {{auth()->user()->name}} </span> dans votre espace </h1>           
                 
                 <div class="insights">
                     <div class="sales">
@@ -26,7 +26,7 @@
                                     <circle cx='38' cy='38' r='36'></circle>
                                 </svg>
                                 <div class="number">
-                                    <p>75%</p>
+                                    <p>100%</p>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                     <circle cx='38' cy='38' r='36'></circle>
                                 </svg>
                                 <div class="number">
-                                    <p>53%</p>
+                                    <p>100%</p>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                             payments
                         </span>
                         <div class="middle">
-                            <div class="left">
+                            <div class="left ">
                                 <h3>Total Prix</h3>
                                 <h1>{{$total_Price}} dh</h1>
                             </div>
@@ -71,7 +71,7 @@
                                     <circle cx='38' cy='38' r='36'></circle>
                                 </svg>
                                 <div class="number">
-                                    <p>33%</p>
+                                    <p>100%</p>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                     <circle cx='38' cy='38' r='36'></circle>
                                 </svg>
                                 <div class="number">
-                                    <p>75%</p>
+                                    <p>100%</p>
                                 </div>
                             </div>
                         </div>

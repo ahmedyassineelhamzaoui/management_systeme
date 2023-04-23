@@ -49,7 +49,7 @@
     --color-dark-variant:#a3bdcc;
     --color-light:rgba(0,0,0,0.4);
     --boxshadow-div:0 5px 5px green;
-    --boxshadow-2:0 5px 5px  green;
+    --boxshadow-2:0 5px 5px  rgb(97, 97, 97);
     --dashboard-nameColor:white;
     --table-bg:#868687;
     --table-body-bg:#1f2937;
@@ -209,6 +209,12 @@ b{
     background: var(--table-bg);
 }
 .button-operation{
+    color:var(--dashboard-nameColor);
+}
+.welcome-space{
+    color:var(--dashboard-nameColor);
+}
+.left{
     color:var(--dashboard-nameColor);
 }
 input[type="text"]:focus {
@@ -579,20 +585,20 @@ main section .insights svg circle{
     -moz-transform:translate(5px,5px);
     -ms-transform:translate(5px,5px);
     -o-transform:translate(5px,5px);
-    stroke-dasharray: 110;
-    stroke-dashoffset: 92;
+    stroke-dasharray: 0;
+    stroke-dashoffset: 360;
 }
 main section .insights .sales svg circle{
-    stroke-dashoffset:  -30;
-    stroke-dasharray: 200;
+    stroke-dashoffset:  100;
+    stroke-dasharray: 360;
 }
 main section .insights .expenses svg circle{
     stroke-dashoffset:  20;
-    stroke-dasharray: 80;
+    stroke-dasharray: 360;
 }
 main section .insights .incom svg circle{
     stroke-dashoffset: 110;
-    stroke-dasharray: 35;
+    stroke-dasharray: 360;
 }
 main section .insights .progress .number{
     position: absolute;
