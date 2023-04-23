@@ -11,9 +11,9 @@
             <section id="my-section">               
             <div id="add-User" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="w-full p-4 mb-4 overflow-x-hidden overflow-y-auto  ">
                 <div class="relative w-full h-full  md:h-auto">
-                    <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
-                        <div class="flex justify-between p-4 border-b  dark:border-gray-600">
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <div class="bg-white rounded-lg shadow  w-full">
+                        <div class="flex justify-between p-4 border-b  ">
+                            <h3 class="text-xl font-semibold text-gray-900">
                                 Modifier le Role {{$role->name}}
                             </h3>
                         </div>
@@ -22,14 +22,14 @@
                             @method('PUT')
                             <div class="mx-4 mt-6 ">
                                 <div class="w-100">
-                                    <label for="name" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">name of Role</label>
+                                    <label for="name" class="font-serif block mb-2 text-md font-bold text-gray-900 ">nom du Role</label>
                                     <input type="text" name="name" value="{{$role->name}}"  id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name of user" required>
                                 </div>
                                 @error('name')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 <div class="w-100">
-                                    <label for="permission" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">Permissions</label>
+                                    <label for="permission" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Permissions</label>
                                     <div name="permessions"  id="permissions"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " rows="10" required>
                                         @foreach ($permissions as $permission)
                                             <div class="flex items-center mb-1">

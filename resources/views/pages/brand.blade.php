@@ -53,7 +53,7 @@
                 <div class="w-full grid brand-div  gap-1">
                     <div>
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 ">
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <table class="w-full text-sm text-left text-gray-500 ">
                                 <thead class="text-xs text-gray uppercase table-bg ">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
@@ -134,9 +134,9 @@
     {{-- edit brand --}}
     <div id="form-marque" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="w-full hidden justify-center items-center z-50 h-screen fixed top-0 left-0 right-0 p-4 overflow-x-hidden  overflow-y-auto bg-black bg-opacity-50 ">
         <div class="relative md:w-[60%] sm:w-[90%] h-full  md:h-auto">
-            <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
-                <div class="flex justify-between p-4 border-b  dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            <div class="bg-white rounded-lg shadow  w-full">
+                <div class="flex justify-between p-4 border-b  ">
+                    <h3 class="text-xl font-semibold text-gray-900 ">
                         Modifié la marque
                     </h3>
                     <button id="close-marque" class="text-gray-500 font-medium cursor-pointer close-modal" id="close-deletedModal"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -150,7 +150,7 @@
                     <div class="mx-4 mt-6 ">
                         <input type="hidden" name="id" id="marque-id">
                         <div class="w-100">
-                            <label for="nom" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">nom du catégorie</label>
+                            <label for="nom" class="font-serif block mb-2 text-md font-bold text-gray-900 ">nom du marque</label>
                             <input type="text" name="nom"  id="nom-upmarque" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="nom du catégorie" required>
                         </div>
                         <div class="text-red-600 font-bold hidden nommarqueupdate-error">

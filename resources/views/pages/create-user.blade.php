@@ -11,9 +11,9 @@
             <section id="my-section">               
             <div id="add-User" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="w-full p-4 overflow-x-hidden overflow-y-auto  ">
                 <div class="relative w-full h-full  md:h-auto">
-                    <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full">
-                        <div class="flex justify-between p-4 border-b  dark:border-gray-600">
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <div class="bg-white rounded-lg shadow  w-full">
+                        <div class="flex justify-between p-4 border-b  ">
+                            <h3 class="text-xl font-semibold text-gray-900 ">
                                 Ajouté un Utilisateur
                             </h3>
                         </div>
@@ -21,21 +21,21 @@
                             @csrf
                             <div class="mx-4 mt-6 ">
                                 <div class="w-100">
-                                    <label for="name" class="font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">name of User</label>
+                                    <label for="name" class="font-serif block mb-2 text-md font-bold text-gray-900 ">nom d'utilisateur</label>
                                     <input type="text" name="name"  id="nameuser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name of user" required>
                                 </div>
                                 @error('name')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 <div class="w-100">
-                                    <label for="email" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">email of User</label>
+                                    <label for="email" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">l'email d'utilisateur</label>
                                     <input type="email" name="email"  id="emailuser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="email of user" required>
                                 </div>
                                 @error('email')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 <div class="w-100">
-                                    <label for="role" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 dark:text-white">User Role</label>
+                                    <label for="role" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Role d'utilisateur</label>
                                     <select name="role_name" id="role" class="w-full py-2 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer px-2">
                                         @foreach ($roles as $role)
                                         <option value="{{$role->name}}">{{$role->name}}</option>
@@ -43,15 +43,15 @@
                                     </select>
                                 </div>                         
                                 <div class="w-100">
-                                    <label for="password" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">password</label>
-                                    <input type="password" name="password"  id="passworduser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2 " placeholder="user password">
+                                    <label for="password" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Mot de passe</label>
+                                    <input type="password" name="password"  id="passworduser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2 " placeholder="*********">
                                 </div>   
                                 @error('password')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 <div class="w-100">
-                                    <label for="password" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Confirm password</label>
-                                    <input type="password" name="confirm_password"  id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2" placeholder="confirm password">
+                                    <label for="password" class="mt-2 font-serif block mb-2 text-md font-bold text-gray-900 ">Confirmer le mot de pass</label>
+                                    <input type="password" name="confirm_password"  id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full px-2.5 py-2" placeholder="*********">
                                 </div>   
                                 @error('confirm_password')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>

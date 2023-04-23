@@ -55,7 +55,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                         </svg>                          
                     </span>
-                    <input type="password" id="password" name="password"class="w-full py-4 text-gray-900 text-md font-bold  rounded-r-md block  px-2.5 outline-none focus:ring-blue-500 focus:border-2 focus:border-blue-500 " required placeholder="Entrer votre mot de pass">
+                    <input type="password" id="password" name="password"class="w-full py-4 text-gray-900 text-md font-bold  rounded-r-md block  px-2.5 outline-none focus:ring-blue-500 focus:border-2 focus:border-blue-500 " required placeholder="Entrer votre mot de passe">
                     @error('password')
                     <span class="text-red-700 font-bold">{{ $message }}</span>
                     @enderror
