@@ -112,7 +112,7 @@
                                     <div class="mx-4 mt-6 ">
                                         <div class="w-100">
                                             <label for="name_brand" class="font-serif block mb-2 text-md font-bold text-gray-900 ">Nom du Marque</label>
-                                            <input type="text" name="name_brand"  id="name_brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name of user" required>
+                                            <input type="text" name="name_brand"  id="name_brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Nom du marque" required>
                                         </div>
                                         @error('name_brand')
                                             <span class="text-red-500 text-sm">{{ $message }}</span>

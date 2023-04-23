@@ -9,7 +9,7 @@
         
         <main id="main-page"> 
             <section id="my-section ">     
-                <h1 class="mt-2 ml-2">Welcome <span class="text-blue-800 "> {{auth()->user()->name}} </span> in your space </h1>           
+                <h1 class="mt-2 ml-2">Bienvenue <span class="text-blue-800 "> {{auth()->user()->name}} </span> dans votre espace </h1>           
                 
                 <div class="insights">
                     <div class="sales">

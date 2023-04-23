@@ -17,7 +17,7 @@
                     </button>
                 </div>
                 <div>
-                    <h2 class="font-bold text-green">catégories</h2>
+                    <h2 class="font-bold text-green">Les catégories</h2>
                 </div>
                 @if(session('error'))                  
                 <div id="alert-border-3" class="flex mt-2 p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 " role="alert">

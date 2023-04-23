@@ -53,7 +53,7 @@
                                         id
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Name
+                                        Nom
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         permissions
