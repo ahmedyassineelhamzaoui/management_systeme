@@ -17,11 +17,49 @@ use App\Models\stockFeeding;
 class HomeController extends Controller
 {
 
-    
-
 
     public function showDashboard(){
         $commercials = User::role('commercial')->get();
+        $tendances = [];
+        $check_user = false;
+
+        $admintendancesProduct = [];
+        $auth_username = User::role('admin')->first();
+        if(auth()->user() == $auth_username){
+          $check_user = true;
+        }
+
+        foreach ($commercials as $i => $commercial) {
+            $product_tendance ='';
+
+            $stock = StockFeeding::where('user_id', $commercial->id)->get()->groupBy('product_id');
+            $products = [];
+            $number = 0;
+            foreach ($stock as $i => $feedings) {
+                $product = Product::findOrFail($i);
+                $quantity = $feedings->sum('quantity');
+                if($quantity>$number){
+                    $number = $quantity;
+                    $product_tendance = $product->nom;
+                }
+                $products[] = [
+                    'product' => $product,
+                    'quantity' => $quantity,
+                ];
+            }
+            $tendances[] =  $product_tendance;
+            $admintendancesProduct []=[
+                'name' => $product_tendance,
+                'quantity_number' => $number
+            ];
+        }
+        $max_quantity = 0;
+        foreach ($admintendancesProduct as $product) {
+            if ($product['quantity_number'] > $max_quantity) {
+                $max_quantity = $product['quantity_number'];
+                $max_product_name = $product['name'];
+            }
+        }
 
         $labels = ['Lundi', 'Mardi', 'Mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
         
@@ -70,7 +108,16 @@ class HomeController extends Controller
 
         $label_users = [];
         $price = [];
+        $commandes = [];
+        $stockProduct = [];
         foreach ($commercials as $commercial) {
+            $commande = Commande::where('user_name',$commercial->name)->get();
+            $stock = StockFeeding::where('user_id', $commercial->id)
+            ->select('product_id')
+            ->distinct()
+            ->get();
+            $stockProduct[]= count($stock);
+            $commandes[]=count($commande);
             $label_users[] = $commercial->name;
             $stock = StockFeeding::where('user_id', $commercial->id)->get();
             $total_price = 0;
@@ -97,7 +144,6 @@ class HomeController extends Controller
         ])
         ->options([]);
 
-
-        return view('pages.index',compact('total_product','total_commande','total_Price','total_permissions','chartjs','chartjs2'));
+        return view('pages.index',compact('total_product','total_commande','total_Price','total_permissions','chartjs','chartjs2','commercials','price','commandes','stockProduct','tendances','max_product_name','check_user'));
     }
 }
