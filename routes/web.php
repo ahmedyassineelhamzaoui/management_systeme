@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\HomeController;
 use App\models\User;
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,14 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/','index')->name('index');
     Route::get('/login','index')->name('login.page');
     Route::post('/login','login')->name('login');
-    Route::get('/index','showDashboard')->name('dashboard')->middleware('auth');
     Route::get('/logout','logout')->name('logout');
     Route::get('/forgot-password','forgotPassword');
     Route::post('/forgot-password','sendEmail')->name('reset');
     Route::get('/change-password/{token}','showChangePassword')->name('view-changePassword');
     Route::post('/change-password','changePassword')->name('change-password');
+});
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/index','showDashboard')->name('dashboard')->middleware('auth');
 });
 Route::controller(UserController::class)->group(function(){
     Route::get('users','index')->name('users');

@@ -16,8 +16,8 @@
                         <span class="material-icons-sharp">analytics</span>
                         <div class="middle">
                             <div class="left">
-                                <h3>Total Sales</h3>
-                                <h1>78,009$</h1>
+                                <h3>Total Produits</h3>
+                                <h1></h1>
                             </div>
                             <div class="progress">
                                 <svg>

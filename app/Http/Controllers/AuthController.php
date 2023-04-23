@@ -21,9 +21,6 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
-    public function showDashboard(){
-        return view('pages.index');
-    }
     public function login(Request $request)
     {
         $request->validate([
