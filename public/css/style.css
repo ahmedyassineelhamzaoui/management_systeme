@@ -487,6 +487,7 @@ main section{
 }
 .table-body-bg{
     background: var(--table-body-bg);
+    color: rgb(0, 0, 0);
 }
 .text-tablecolor{
     color:var(--table-textColor);
@@ -543,11 +544,12 @@ main section .insights >div span{
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    color:var(--color--white);
+    /* color:var(--color--white); */
     font-size: 2rem;
 }
 main section .insights >div.expenses span{
     background:var(--color-danger);
+    
 }
 main section .insights > div.expenses span{
     background:var(--color-danger);
@@ -577,7 +579,7 @@ main section .insights svg{
 }
 main section .insights svg circle{
     fill:none;
-    stroke:var(--color-primary);
+    stroke:var(--color-dark);
     stroke-width:14;
     stroke-linecap:round;
     transform:translate(5px,5px);
@@ -609,7 +611,6 @@ main section .insights .progress .number{
     -moz-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
-    /* background-color: rgba(38, 185, 154, 0.7); */
 }
 .brand-div{
     grid-template-columns: 2fr 1fr;

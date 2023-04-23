@@ -68,20 +68,36 @@ class HomeController extends Controller
         $total_Price = DB::table('products')->sum(DB::raw('prix * quantite'));
         $total_permissions =  Permission::count();
 
+        $label_users = [];
+        $price = [];
+        foreach ($commercials as $commercial) {
+            $label_users[] = $commercial->name;
+            $stock = StockFeeding::where('user_id', $commercial->id)->get();
+            $total_price = 0;
         
+            foreach ($stock as $item) {
+                $product = Product::find($item->product_id);
+                $total_price += $item->quantity * $product->prix;
+            }
+        
+            $price[] = $total_price;
+        }
+        $colors = ['rgba(38, 185, 153, 0.969)','rgb(220, 213, 3)','rgba(117, 0, 117, 0.969)'];
         $chartjs2 = app()->chartjs
         ->name('pieChartTest')
         ->type('pie')
         ->size(['width' => 400, 'height' => 200])
-        ->labels(['Label x', 'Label y'])
+        ->labels($label_users)
         ->datasets([
             [
-                'backgroundColor' => ['#FF6384', '#36A2EB'],
-                'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
-                'data' => [69, 59]
+                'backgroundColor' => $colors,
+                'hoverBackgroundColor' => $colors,
+                'data' => $price
             ]
         ])
         ->options([]);
+
+
         return view('pages.index',compact('total_product','total_commande','total_Price','total_permissions','chartjs','chartjs2'));
     }
 }

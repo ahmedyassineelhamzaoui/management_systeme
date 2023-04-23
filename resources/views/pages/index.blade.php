@@ -13,13 +13,13 @@
                 
                 <div class="insights ml-2">
                     <div class="sales">
-                        <span class="material-icons-sharp bg-gray-400">
+                        <span class="material-icons-sharp bg-gray-400 text-blue-800 ">
                             shopping_cart
                         </span>
                         <div class="middle">
                             <div class="left">
                                 <h3>Total Produits</h3>
-                                <h1>{{$total_product}}</h1>
+                                <h2 class="font-bold">{{$total_product}}</h2>
                             </div>
                             <div class="progress">
                                 <svg>
@@ -36,13 +36,13 @@
                     </div>
                     <!-- end of sales -->
                     <div class="expenses">
-                        <span class="material-icons-sharp">
+                        <span class="material-icons-sharp text-red-900 ">
                             receipt_long
                         </span>
                         <div class="middle">
                             <div class="left">
                                 <h3>Commandes</h3>
-                                <h1>{{$total_commande}}</h1>
+                                <h2 class="font-bold">{{$total_commande}}</h2>
                             </div>
                             <div class="progress">
                                 <svg>
@@ -58,13 +58,13 @@
                         </small>
                     </div>
                     <div class="sales">
-                        <span class="material-icons-sharp bg-yellow-500">
+                        <span class="material-icons-sharp bg-yellow-500 text-green-800">
                             payments
                         </span>
                         <div class="middle">
                             <div class="left ">
                                 <h3>Total Prix</h3>
-                                <h1>{{$total_Price}} dh</h1>
+                                <h2 class="font-bold">{{$total_Price}} dh</h2>
                             </div>
                             <div class="progress">
                                 <svg>
@@ -80,11 +80,11 @@
                         </small>
                     </div>
                     <div class="income">
-                        <span class="material-icons-sharp bg-blue-600">key</span>
+                        <span class="material-icons-sharp bg-blue-600 ">key</span>
                         <div class="middle">
                             <div class="left">
                                 <h3>Permissions</h3>
-                                <h1>{{$total_permissions}}</h1>
+                                <h2 class="font-bold">{{$total_permissions}}</h2>
                             </div>
                             <div class="progress">
                                 <svg>
@@ -101,12 +101,16 @@
                     </div>
                 </div>
                     <div class="flex flex-col md:flex-row gap-1 mt-4 mb-4 ml-2">
-                        <div class="w-full md:w-5/12 h-64 md:h-auto border-2  bg-white  ">
-                            <div style="width:80%">
+                        <div class="table-body-bg w-full md:w-5/12 h-64 md:h-auto border-2  bg-white  ">
+                           <h3 class="mt-2 ml-2 font-bold">le totale des ventes par commercial</h3>
+                           <div class="flex items-center justify-center">
+                            <div class="w-3/4 h-3/4 ">
                               {{ $chartjs2->render() }}
                             </div>
+                           </div>
                         </div>
-                        <div class="w-full md:w-7/12 h-64 md:h-auto border-2  bg-white ">
+                        <div class="table-body-bg w-full md:w-7/12 h-64 md:h-auto border-2  bg-white ">
+                            
                             {!! $chartjs->render() !!}
                         </div>
                     </div>
